@@ -49,7 +49,12 @@ User = Table(
     Column("Name", String(20), nullable=False),
     Column("Surname", String(20), nullable=False),
     Column("Patronymic", String(20), nullable=False),
-    Column("RoleId", Integer),
+    Column("RoleId", Integer, ForeignKey("Role.Id")),
     Column("LoginDate", DateTime),
     Column("RegistrationDate", DateTime),
+)
+Role = Table(
+    "Role", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Name", String, nullable=False)
 )
