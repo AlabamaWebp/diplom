@@ -58,3 +58,6 @@ Role = Table(
     Column("Id", Integer, primary_key=True, autoincrement=True),
     Column("Name", String, nullable=False)
 )
+
+def create_tables_if_not_exists():
+    meta.create_all()
