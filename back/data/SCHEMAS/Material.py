@@ -12,3 +12,6 @@ class MaterialModel(BaseModel):
     p_address: str = ""
     p_telephone: str = ""
 
+class TestMat(BaseModel):
+    Id: int
+    Name: str

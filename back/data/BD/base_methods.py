@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy import select
 
 from data.BD.base import MaterialType, engine
-from data.SCHEMAS.Material import MaterialModel
+from data.SCHEMAS.Material import MaterialModel, TestMat
 
 
 # def get_mat_list(mat: list) -> MaterialModel:
@@ -22,11 +22,6 @@ from data.SCHEMAS.Material import MaterialModel
 #     )
 
 
-class TestMat(BaseModel):
-    Id: int
-    Name: str
-
-
 def base_material() -> list[TestMat]:
     query = select(
         MaterialType.c.Id,
@@ -37,18 +32,9 @@ def base_material() -> list[TestMat]:
     out_values = []
 
     for item in values:
-        print(item)
         return_values = TestMat(
             Id=item[0],
             Name=item[1]
         )
         out_values.append(return_values)
     return out_values
-
-
-mat_router = APIRouter()
-
-
-@mat_router.get("/test/")
-async def test_get() -> list[TestMat]:
-    return base_material()
