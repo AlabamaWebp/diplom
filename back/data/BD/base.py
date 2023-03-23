@@ -43,23 +43,23 @@ MaterialType = Table(
 #     Column("MaterialID", Integer, ForeignKey("Material.ID"), nullable=False)
 # )
 #
-# User = Table(
-#     "User", meta,
-#     Column("ID", Integer, primary_key=True, autoincrement=True),
-#     Column("Login", String(20), nullable=False),
-#     Column("Password", String(20), nullable=False),
-#     Column("Name", String(20), nullable=False),
-#     Column("Surname", String(20), nullable=False),
-#     Column("Patronymic", String(20), nullable=False),
-#     Column("RoleId", Integer, ForeignKey("Role.Id")),
-#     Column("LoginDate", DateTime),
-#     Column("RegistrationDate", DateTime),
-# )
-# Role = Table(
-#     "Role", meta,
-#     Column("Id", Integer, primary_key=True, autoincrement=True),
-#     Column("Name", String, nullable=False)
-# )
+User = Table(
+    "User", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Login", String(20), nullable=False),
+    Column("Password", String(20), nullable=False),
+    Column("Name", String(20), nullable=False),
+    Column("Surname", String(20), nullable=False),
+    Column("Patronymic", String(20), nullable=False),
+    Column("RoleId", Integer, ForeignKey("Role.Id"), nullable=False),
+    Column("LoginDate", DateTime, nullable=False),
+    Column("RegistrationDate", DateTime, nullable=False),
+)
+Role = Table(
+    "Role", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Name", String, nullable=False)
+)
 #
 #
 # def create_tables_if_not_exists():

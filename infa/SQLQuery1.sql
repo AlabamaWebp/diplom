@@ -1,3 +1,6 @@
+--drop database [diplom1];
+--go
+
 create database [diplom1];
 go
 
@@ -63,7 +66,10 @@ create table [User]
 	Surname nvarchar(20),
 	Patronymic nvarchar(20),
 	RoleId int,
-	LoginDate DATETIME,
-	RegistrationDate DATETIME,
+	LoginDate DATETIME DEFAULT SYSDATETIME(),
+	RegistrationDate DATETIME DEFAULT SYSDATETIME(),
 	FOREIGN KEY (RoleId) REFERENCES [Role](Id)
 )
+insert into [Role] ([Name]) values ('Админ'),('Оператор')
+insert into [User]([Login],[Password],[Name],Surname,Patronymic,RoleId,LoginDate,RegistrationDate) 
+values ('admin', '123', 'admin', 'admin','adminovich',1,SYSDATETIME(),SYSDATETIME())
