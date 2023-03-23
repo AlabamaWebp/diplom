@@ -5,18 +5,18 @@ from ..settings import con_str
 
 
 engine = create_engine(con_str)
-# meta = MetaData(engine)
+meta = MetaData()
 
 
-Material = Table(
-    "Material", MaterialModel,
-    Column("ID", Integer, primary_key=True, autoincrement=True),
-    Column("Name", String(20), nullable=False),
-    Column("Purchased", Boolean, nullable=False),
-    Column("PostavshikId", Integer, ForeignKey("Postavshik.ID"), nullable=False),
-    Column("TypeId", Integer, ForeignKey("Type.ID"), nullable=False),
-    Column("count", Integer)
-)
+# Material = Table(
+#     "Material", meta,
+#     Column("ID", Integer, primary_key=True, autoincrement=True),
+#     Column("Name", String(20), nullable=False),
+#     Column("Purchased", Boolean, nullable=False),
+#     Column("PostavshikId", Integer, ForeignKey("Postavshik.ID"), nullable=False),
+#     Column("TypeId", Integer, ForeignKey("Type.ID"), nullable=False),
+#     Column("count", Integer)
+# )
 # Product = Table(
 #     "Product", meta,
 #     Column("ID", Integer, primary_key=True, autoincrement=True),
@@ -31,11 +31,11 @@ Material = Table(
 #     Column("telephone", String(11)),
 #     Column("address", String(30)),
 # )
-# MaterialType = Table(
-#     "MaterialType", meta,
-#     Column("Id", Integer, primary_key=True, autoincrement=True),
-#     Column("Name", String, nullable=False)
-# )
+MaterialType = Table(
+    "MaterialType", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Name", String, nullable=False)
+)
 # ProductMaterial = Table(
 #     "ProductMaterial", meta,
 #     Column("ID", Integer, primary_key=True, autoincrement=True),
