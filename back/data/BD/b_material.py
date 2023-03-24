@@ -30,13 +30,12 @@ def base_material() -> list[MaterialModel]:
         m.c.Name,
         m.c.Purchased,
         m.c.Count,
-        select(mt.c.Name).where(mt.c.Id == m.c.TypeId).label("Type"),
-        select(select(ct.c.Name).where(ct.c.Id == p.c.Type).label("ct"),
-               p.c.Name,
-               p.c.Email,
-               p.c.Telephone,
-               p.c.Address).where(
-            p.c.Id == m.c.PostavshikId).label("Prod")
+        select(mt.c.Name).where(m.c.TypeId == mt.c.Id).label("1"),
+        select(select(ct.c.Name).where(p.c.Type == ct.c.Id).label("2")).where(m.c.PostavshikId == p.c.Id).label("3"),
+        select(p.c.Name).where(m.c.PostavshikId == p.c.Id).label("3"),
+        select(p.c.Email).where(m.c.PostavshikId == p.c.Id).label("4"),
+        select(p.c.Telephone).where(m.c.PostavshikId == p.c.Id).label("5"),
+        select(p.c.Address).where(m.c.PostavshikId == p.c.Id).label("6"),
     )
 
     values = engine.connect().execute(query).fetchall()
