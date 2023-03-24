@@ -8,41 +8,48 @@ engine = create_engine(con_str)
 meta = MetaData()
 
 
-# Material = Table(
-#     "Material", meta,
-#     Column("ID", Integer, primary_key=True, autoincrement=True),
-#     Column("Name", String(20), nullable=False),
-#     Column("Purchased", Boolean, nullable=False),
-#     Column("PostavshikId", Integer, ForeignKey("Postavshik.ID"), nullable=False),
-#     Column("TypeId", Integer, ForeignKey("Type.ID"), nullable=False),
-#     Column("count", Integer)
-# )
-# Product = Table(
-#     "Product", meta,
-#     Column("ID", Integer, primary_key=True, autoincrement=True),
-#     Column("Name", String(20), nullable=False),
-#     Column("count", Integer, nullable=False)
-# )
-# Postavshik = Table(
-#     "Postavshik", meta,
-#     Column("ID", Integer, primary_key=True, autoincrement=True),
-#     Column("Name", String(20), nullable=False),
-#     Column("email", String(30)),
-#     Column("telephone", String(11)),
-#     Column("address", String(30)),
-# )
+Material = Table(
+    "Material", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Name", String(20), nullable=False),
+    Column("Purchased", Boolean, nullable=False),
+    Column("PostavshikId", Integer, ForeignKey("Postavshik.Id"), nullable=False),
+    Column("TypeId", Integer, ForeignKey("Type.Id"), nullable=False),
+    Column("Count", Integer)
+)
+Product = Table(
+    "Product", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Name", String(20), nullable=False),
+    Column("Count", Integer, nullable=False)
+)
+CompanyType = Table(
+    "CompanyType", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Name", String(20), nullable=False),
+)
+Postavshik = Table(
+    "Postavshik", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Type", Integer, ForeignKey("CompanyType.Id"), nullable=False),
+    Column("Name", String(20), nullable=False),
+    Column("Email", String(30)),
+    Column("Telephone", String(11)),
+    Column("Address", String(30)),
+)
+
 MaterialType = Table(
     "MaterialType", meta,
     Column("Id", Integer, primary_key=True, autoincrement=True),
     Column("Name", String, nullable=False)
 )
-# ProductMaterial = Table(
-#     "ProductMaterial", meta,
-#     Column("ID", Integer, primary_key=True, autoincrement=True),
-#     Column("ProductID", Integer, ForeignKey("Product.ID"), nullable=False),
-#     Column("MaterialID", Integer, ForeignKey("Material.ID"), nullable=False)
-# )
-#
+ProductMaterial = Table(
+    "ProductMaterial", meta,
+    Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("ProductID", Integer, ForeignKey("Product.Id"), nullable=False),
+    Column("MaterialID", Integer, ForeignKey("Material.Id"), nullable=False)
+)
+
 User = Table(
     "User", meta,
     Column("Id", Integer, primary_key=True, autoincrement=True),
