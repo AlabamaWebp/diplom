@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from pydantic.class_validators import Optional
 
 
 class MaterialModel(BaseModel):
@@ -7,12 +8,8 @@ class MaterialModel(BaseModel):
     mat_purchased: int = 0
     mat_count: int = 0
     mat_type: str = ""
-    p_name: str = ""
-    p_email: str = ""
-    p_address: str = ""
-    p_telephone: str = ""
-
-
-class TestMat(BaseModel):
-    Id: int
-    Name: str
+    ct_name: Optional[str] = ""
+    p_name: Optional[str] = ""
+    p_email: Optional[str] = ""
+    p_address: Optional[str] = ""
+    p_telephone: Optional[str] = ""
