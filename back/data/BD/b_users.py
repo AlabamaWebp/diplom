@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
 from data.BD.base import User, engine, Role
-from data.SCHEMAS.Users import UserModel
+from data.SCHEMAS.s_users import UserModel
 
 
 def get_users() -> list[UserModel]:

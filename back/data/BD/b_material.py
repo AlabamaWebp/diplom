@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy import select
 
 from data.BD.base import MaterialType, engine
-from data.SCHEMAS.Material import MaterialModel, TestMat
+from data.SCHEMAS.s_material import MaterialModel, TestMat
 
 
 # def get_mat_list(mat: list) -> MaterialModel:

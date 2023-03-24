@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from data.BD.base_methods import base_material
-from data.SCHEMAS.Material import TestMat
+from data.BD.b_material import base_material
+from data.SCHEMAS.s_material import TestMat
 
 material = APIRouter()
 material.prefix = "/mat/"

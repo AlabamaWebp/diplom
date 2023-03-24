@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean, ForeignKey, DateTime
 
-from ..SCHEMAS.Material import MaterialModel
+from ..SCHEMAS.s_material import MaterialModel
 from ..settings import con_str
 
 

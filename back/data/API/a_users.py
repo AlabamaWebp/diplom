@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from data.BD.b_users import get_users
-from data.SCHEMAS.Users import UserModel
+from data.SCHEMAS.s_users import UserModel
 
 users = APIRouter()
 users.prefix = "/users/"

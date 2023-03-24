@@ -12,7 +12,7 @@ create table Product
 (
 	Id INT PRIMARY KEY IDENTITY,
 	[Name] nvarchar(20),
-	[count] int
+	[Count] int
 )
 
 create table MaterialType
@@ -21,14 +21,23 @@ create table MaterialType
 	[Name] nvarchar(20)
 )
 
+create table CompanyType
+(
+	Id INT PRIMARY KEY IDENTITY,
+	Name varchar(20)
+)
+
 create table Postavshik
 (
 	Id INT PRIMARY KEY IDENTITY,
+	[Type] int,
 	[Name] nvarchar(20),
-	email varchar(30),
-	telephone char(11),
-	address nvarchar(30)
+	Email varchar(30),
+	Telephone char(11),
+	[Address] nvarchar(30)
+	FOREIGN KEY ([Type]) REFERENCES CompanyType(Id)
 )
+
 
 create table Material
 (
@@ -37,7 +46,7 @@ create table Material
 	Purchased bit default 0,
 	PostavshikId int NULL,
 	TypeId int,
-	[count] int,
+	[Count] int,
 	FOREIGN KEY (TypeId) REFERENCES MaterialType(Id),
 	FOREIGN KEY (PostavshikId) REFERENCES Postavshik(Id)
 )
@@ -70,6 +79,22 @@ create table [User]
 	RegistrationDate DATETIME DEFAULT SYSDATETIME(),
 	FOREIGN KEY (RoleId) REFERENCES [Role](Id)
 )
-insert into [Role] ([Name]) values ('Админ'),('Оператор')
+insert into [Role] ([Name]) values ('admin'),('operator')
 insert into [User]([Login],[Password],[Name],Surname,Patronymic,RoleId,LoginDate,RegistrationDate) 
 values ('admin', '123', 'admin', 'admin','adminovich',1,SYSDATETIME(),SYSDATETIME())
+
+insert into [MaterialType](Name) values ('Аллюминий'),('Сталь')
+
+insert into CompanyType(Name) values ('ООО'),('ОАО')
+
+insert into [Postavshik] (Name,Email,Telephone,[Address],[Type]) 
+values ('АгроСтой','agrosroy@mail.ru','88005553535','Йошкар-Ола',1),
+('СтройАгро','sroyagro@mail.ru','89132421351','Йошкар-Ола',1)
+
+insert into Material(Name, Purchased,PostavshikId,TypeId,[Count]) 
+values ('Гайка М8',1,1,1,3),
+('Гайка М3',1,null,2,5)
+
+insert into Product(Name,[Count]) values ('Танк', 500), ('Шпилька',228)
+
+insert into ProductMaterial(ProductId, MaterialId) values (1, 1), (1,2), (2,1)
