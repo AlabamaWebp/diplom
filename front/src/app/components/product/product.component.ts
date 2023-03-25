@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CorsService } from 'src/app/shared/crud/product/product.service';
+import { CorsService } from 'src/app/shared/crud/product/cors.service';
 
 @Component({
   selector: 'app-tables',
