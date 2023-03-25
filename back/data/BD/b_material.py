@@ -5,6 +5,7 @@ from sqlalchemy import select, and_
 from data.BD.base import engine, CompanyType as ct, MaterialType as mt
 from data.BD.base import Material as m
 from data.BD.base import Postavshik as p
+from data.BD.base import ProductMaterial as prm
 from data.SCHEMAS.s_material import MaterialModel
 
 
@@ -23,23 +24,24 @@ from data.SCHEMAS.s_material import MaterialModel
 #         p_telephone=mat[8],
 #     )
 
+# mat_id: int = -1
 
-def base_material(mat_id: int = -1) -> list[MaterialModel]:
+def base_material(pr_id: int = -1) -> list[MaterialModel]:
     query = select(
         m.c.Id,
         m.c.Name,
         m.c.Purchased,
         m.c.Count,
-        select(mt.c.Name).where(m.c.TypeId == mt.c.Id).label("1"),
+        mt.c.Name,
         ct.c.Name,
         p.c.Name,
         p.c.Email,
         p.c.Telephone,
         p.c.Address
-    ).where(and_(p.c.Id == m.c.Id), and_(p.c.Type == ct.c.Id))
+    ).where(and_(p.c.Id == m.c.Id), and_(p.c.Type == ct.c.Id), and_(m.c.TypeId == mt.c.Id))
 
-    if mat_id != -1:
-        query = query.where(mat_id == m.c.Id)
+    if pr_id != -1:
+        query = query.where(and_(pr_id == prm.c.ProductID), and_(m.c.Id == prm.c.MaterialID))
 
     values = engine.connect().execute(query).fetchall()
 
@@ -60,3 +62,4 @@ def base_material(mat_id: int = -1) -> list[MaterialModel]:
         )
         out_values.append(return_values)
     return out_values
+

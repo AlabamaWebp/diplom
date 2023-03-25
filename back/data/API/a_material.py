@@ -14,6 +14,6 @@ async def test() -> list[MaterialModel]:
 
 @material.get("one/")
 async def test(
-        mat_id: int = 1
+        pr_id: int = 1
 ) -> list[MaterialModel]:
-    return base_material(mat_id)
+    return base_material(pr_id)
