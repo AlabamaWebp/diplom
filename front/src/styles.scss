@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./app/shared/style/vars.scss";
+* {
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.button1 {
+    border: 1px solid $violet;
+    border-radius: 5px;
+    color: $violet;
+    font-size: 14px;
+    padding: 4px 5px 5px;
+    margin-right: 10px;
+}
+.flex {
+    display: flex;
+}
