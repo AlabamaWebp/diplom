@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import select, and_
 
 from data.BD.base import engine, CompanyType as ct, MaterialType as mt
 from data.BD.base import Material as m
@@ -31,15 +31,14 @@ def base_material(mat_id: int = -1) -> list[MaterialModel]:
         m.c.Purchased,
         m.c.Count,
         select(mt.c.Name).where(m.c.TypeId == mt.c.Id).label("1"),
-        select(select(ct.c.Name).where(p.c.Type == ct.c.Id).label("2")
-               ).where(m.c.PostavshikId == p.c.Id).label("3"),
-        select(p.c.Name).where(m.c.PostavshikId == p.c.Id).label("3"),
-        select(p.c.Email).where(m.c.PostavshikId == p.c.Id).label("4"),
-        select(p.c.Telephone).where(m.c.PostavshikId == p.c.Id).label("5"),
-        select(p.c.Address).where(m.c.PostavshikId == p.c.Id).label("6"),
-    )
+        ct.c.Name,
+        p.c.Name,
+        p.c.Email,
+        p.c.Telephone,
+        p.c.Address
+    ).where(and_(p.c.Id == m.c.Id), and_(p.c.Type == ct.c.Id))
 
-    if id != -1:
+    if mat_id != -1:
         query = query.where(mat_id == m.c.Id)
 
     values = engine.connect().execute(query).fetchall()
@@ -61,5 +60,3 @@ def base_material(mat_id: int = -1) -> list[MaterialModel]:
         )
         out_values.append(return_values)
     return out_values
-
-
