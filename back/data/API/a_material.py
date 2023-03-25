@@ -12,7 +12,7 @@ async def g_all() -> list[MaterialModel]:
     return base_material()
 
 
-@material.get("one/")
+@material.get("prod/")
 async def one(
         pr_id: int = 1
 ) -> list[MaterialModel]:

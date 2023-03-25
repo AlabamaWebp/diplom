@@ -7,6 +7,6 @@ users = APIRouter()
 users.prefix = "/users/"
 
 
-@users.get("test1/")
+@users.get("")
 async def api_users() -> list[UserModel]:
     return get_users()
