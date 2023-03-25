@@ -24,19 +24,23 @@ from data.SCHEMAS.s_material import MaterialModel
 #     )
 
 
-def base_material() -> list[MaterialModel]:
+def base_material(mat_id: int = -1) -> list[MaterialModel]:
     query = select(
         m.c.Id,
         m.c.Name,
         m.c.Purchased,
         m.c.Count,
         select(mt.c.Name).where(m.c.TypeId == mt.c.Id).label("1"),
-        select(select(ct.c.Name).where(p.c.Type == ct.c.Id).label("2")).where(m.c.PostavshikId == p.c.Id).label("3"),
+        select(select(ct.c.Name).where(p.c.Type == ct.c.Id).label("2")
+               ).where(m.c.PostavshikId == p.c.Id).label("3"),
         select(p.c.Name).where(m.c.PostavshikId == p.c.Id).label("3"),
         select(p.c.Email).where(m.c.PostavshikId == p.c.Id).label("4"),
         select(p.c.Telephone).where(m.c.PostavshikId == p.c.Id).label("5"),
         select(p.c.Address).where(m.c.PostavshikId == p.c.Id).label("6"),
     )
+
+    if id != -1:
+        query = query.where(mat_id == m.c.Id)
 
     values = engine.connect().execute(query).fetchall()
 
@@ -57,3 +61,5 @@ def base_material() -> list[MaterialModel]:
         )
         out_values.append(return_values)
     return out_values
+
+

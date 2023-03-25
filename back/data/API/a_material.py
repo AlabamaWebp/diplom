@@ -7,6 +7,13 @@ material = APIRouter()
 material.prefix = "/mat/"
 
 
-@material.get("")
+@material.get("all/")
 async def test() -> list[MaterialModel]:
     return base_material()
+
+
+@material.get("one/")
+async def test(
+        mat_id: int = 1
+) -> list[MaterialModel]:
+    return base_material(mat_id)
