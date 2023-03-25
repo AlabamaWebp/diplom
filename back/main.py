@@ -4,6 +4,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 # from data.BD.base import create_tables_if_not_exists as CTINE
 from data.API.a_material import material
+from data.API.a_product import product
 from data.API.a_users import users
 
 app = FastAPI()
@@ -30,6 +31,7 @@ async def main_page():
 
 app.include_router(material)
 app.include_router(users)
+app.include_router(product)
 
 
 # uvicorn --reload main:app --host 26.246.185.101 --port 8000

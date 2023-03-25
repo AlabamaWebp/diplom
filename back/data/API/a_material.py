@@ -8,12 +8,12 @@ material.prefix = "/mat/"
 
 
 @material.get("all/")
-async def test() -> list[MaterialModel]:
+async def g_all() -> list[MaterialModel]:
     return base_material()
 
 
 @material.get("one/")
-async def test(
+async def one(
         pr_id: int = 1
 ) -> list[MaterialModel]:
     return base_material(pr_id)
