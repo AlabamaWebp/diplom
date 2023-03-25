@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -9,7 +9,21 @@ export class TableComponent implements OnInit {
 
   constructor() { }
 
+  @Input() data: any = []
+  @Input() header: string[] = []
+  @Input() header_name: string[] = []
+  @Input() title: string = "";
+  @Input() clickable: boolean = false;
+  @Output() row_click = new EventEmitter()
+
+  selected: any;
+
   ngOnInit(): void {
+  }
+
+  clickRow(data: any) {
+    this.row_click.emit(data);
+    this.selected = data;
   }
 
 }

@@ -13,4 +13,10 @@ export class CorsService {
   matAll() {
     return this.http.get(this.url + "mat/all/");
   }
+  matProd(id: number) {
+    return this.http.get(this.url + "mat/prod/?pr_id="+id);
+  }
+  prodAll() {
+    return this.http.get(this.url + "prod/all/");
+  }
 }

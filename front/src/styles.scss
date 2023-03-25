@@ -7,15 +7,20 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow: hidden;
 }
 .button1 {
     border: 1px solid $violet;
     border-radius: 5px;
-    color: $violet;
+    // color: $violet;
     font-size: 14px;
     padding: 4px 5px 5px;
     margin-right: 10px;
+    cursor: pointer;
 }
 .flex {
     display: flex;
+}
+.clickable {
+    cursor: pointer;
 }

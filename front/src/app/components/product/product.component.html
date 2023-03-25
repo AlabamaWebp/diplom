@@ -1,11 +1,23 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="!isLoad">
     <div class="product">
-        <div class="item"
-        *ngFor="let item of material">
-            {{item.mat_name}}
-        </div>
+        <app-table
+        [data]="product"
+        [header]="prod_header"
+        [header_name]="prod_header_name"
+        [title]="'Продукт'"
+        [clickable]="true"
+        (row_click)="select_row($event)"
+        ></app-table>
     </div>
     <div class="material">
-
+        <app-table
+        [data]="material"
+        [header]="mat_header"
+        [header_name]="mat_header_name"
+        [title]="'Материал'"
+        ></app-table>
     </div>
+</div>
+<div class="center" *ngIf="isLoad">
+    Загрузка...
 </div>

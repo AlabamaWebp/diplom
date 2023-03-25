@@ -1,0 +1,36 @@
+@import "../../shared/style/vars.scss";
+.table_container, table {
+    width: 100%;
+}
+table {
+    tr {
+        transition: .2s;
+    }
+    border-collapse: collapse;
+    caption {
+        background-color: $violet;
+        // border: 1px solid $violet;
+        padding: 5px;
+        font-weight: bold;
+        border-bottom: 1px solid $container;
+    }
+    th, td {
+        padding: 5px 10px;
+    }
+    th {
+        border-right: 1px solid $container;
+        background-color: $violet;
+        &:first-of-type {
+            border-left: 1px solid $violet;
+        }
+        &:last-of-type {
+            border-right: 1px solid $violet;
+        }
+    }
+    td {
+        border: 1px solid $violet;
+    }
+}
+.selected {
+    background-color: #a9a8dd;
+}
