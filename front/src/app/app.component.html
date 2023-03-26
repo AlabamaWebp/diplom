@@ -27,7 +27,7 @@
           </button>
         </div>
         <div class="flex">
-          <button class="button1">
+          <button class="button1" (click)="modal = true">
             Создать
           </button>
           <button class="button1">
@@ -47,4 +47,5 @@
     </div>
   </div>
 </div>
-<div class="backdrop" (click)="modal = false"></div>
+<div class="backdrop" *ngIf="modal" (click)="modal = false"></div>
+<create *ngIf="modal" (close)="modal = false"></create>

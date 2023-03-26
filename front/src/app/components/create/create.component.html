@@ -1,4 +1,25 @@
 
 <div class="wrapper">
-
+    <h3>Создание</h3>
+    <div class="vibor" *ngIf="active == ''">
+        <div class="button1"
+        *ngFor="let item of actions"
+        (click)="create(item)">
+            {{item}}
+        </div>
+    </div>
+    <div class="material">
+        
+    </div>
+    <div class="footer">
+        <div class="button1" 
+        *ngIf="active != ''"
+        (click)="goBack()">
+            Назад
+        </div>
+        <div class="button1" 
+        (click)="close.emit()">
+            Закрыть
+        </div>
+    </div>
 </div>

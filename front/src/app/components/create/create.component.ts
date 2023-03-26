@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'create',
@@ -9,8 +9,26 @@ export class CreateComponent implements OnInit {
 
   constructor() { }
 
+  @Output() close = new EventEmitter();
+
   ngOnInit(): void {
     
+  }
+
+  actions = [
+    "Материал",
+    "Продукт",
+    "Пользователь",
+  ]
+
+  active = "";
+
+  create(str: string) {
+    this.active = str;
+  }
+
+  goBack() {
+    this.active = "";
   }
 
 }
