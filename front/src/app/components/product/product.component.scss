@@ -1,11 +1,15 @@
+@import "../../shared/style/vars.scss";
 .wrapper {
     display: flex;
     height: 100%;
     width: 100%;
+    justify-content: space-between;
     .product {
-
+       margin-right: 5px;
+       width: 300px;
     }
     .material {
-
+        width: 100%;
+        overflow: auto;
     }
 }

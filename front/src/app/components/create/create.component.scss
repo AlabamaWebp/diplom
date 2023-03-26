@@ -1,0 +1,9 @@
+@import "../../shared/style/vars.scss";
+.backdrop {
+    position: fixed;
+    top: 0;bottom: 0;right: 0;left: 0;
+    background-color: #00000030;
+}
+.wrapper {
+    background-color: $container;
+}

@@ -1,0 +1,15 @@
+<div class="wrapper" *ngIf="!isLoad">
+    <div class="table">
+        <app-table
+        [data]="data"
+        [header]="header"
+        [header_name]="hname"
+        [clickable]="true"
+        (row_click)="SelectRow($event)"
+        [date_col]="date_col"
+        ></app-table>
+    </div>
+</div>
+<div class="center" *ngIf="isLoad">
+    Загрузка...
+</div>

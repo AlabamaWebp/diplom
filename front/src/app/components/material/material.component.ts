@@ -3,22 +3,19 @@ import { delay, retry } from 'rxjs';
 import { CorsService } from 'src/app/shared/crud/product/cors.service';
 
 @Component({
-  selector: 'app-tables',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-material',
+  templateUrl: './material.component.html',
+  styleUrls: ['./material.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class MaterialComponent implements OnInit {
 
   constructor(private cors: CorsService) { }
 
   ngOnInit(): void {
     this.fetchData();
-    console.log(this.material);
-
   }
-
-  material: any
-  mat_header = [
+  data: any;
+  header = [
     "mat_id",
     "mat_name",
     "mat_purchased",
@@ -29,7 +26,7 @@ export class ProductComponent implements OnInit {
     "p_address",
     "p_telephone"
   ]
-  mat_header_name = [
+  hname = [
     "id",
     "Название материала",
     "Покупной",
@@ -40,35 +37,16 @@ export class ProductComponent implements OnInit {
     "Адрес компании",
     "Телефон компании"
   ]
-  product: any
-  prod_header = [
-    "id",
-    "name",
-    "count"
-  ]
-  prod_header_name = [
-    "id",
-    "Название",
-    "Кол-во"
-  ]
   isLoad= false;
   fetchData() {
     this.isLoad = true;
-    this.cors.prodAll().pipe(retry(5),delay(1500)).subscribe((data) => {
-      this.product = data;
+    this.cors.matAll().pipe(retry(5),delay(1500)).subscribe((data) => {
+      this.data = data;
       this.isLoad = false;
     });
+  }
+  SelectRow(data: any) {
 
   }
-  prodSelectRow(data_1: any) {
-    this.isLoad = true;
-    console.log(data_1.id);
-    this.cors.matProd(data_1.id).pipe(retry(5),delay(1500)).subscribe((data) => {
-      this.material = data;
-      this.isLoad = false;
-    });
-  }
-  matSelectRow(data: any) {
-    
-  }
+
 }
