@@ -7,6 +7,7 @@ import { HttpClientModule }   from '@angular/common/http';
 import { TableComponent } from './components/table/table.component';
 import { MaterialComponent } from './components/material/material.component';
 import { UserComponent } from './components/user/user.component';
+import { CreateComponent } from './components/create/create.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { UserComponent } from './components/user/user.component';
     ProductComponent,
     TableComponent,
     MaterialComponent,
-    UserComponent
+    UserComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,

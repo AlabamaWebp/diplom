@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="!isLoad">
+<div class="wrapper" [class.displayOff]="isLoad">
     <div class="product">
         <app-table
         [data]="product"

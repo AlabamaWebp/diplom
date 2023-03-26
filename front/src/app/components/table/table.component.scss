@@ -13,11 +13,13 @@ table {
         padding: 5px;
         font-weight: bold;
         border-bottom: 1px solid $container;
+        color: rgb(228, 228, 228);
     }
     th, td {
         padding: 5px 10px;
     }
     th {
+        color: rgb(228, 228, 228);
         border-right: 1px solid $container;
         background-color: $violet;
         &:first-of-type {
