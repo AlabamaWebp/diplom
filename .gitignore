@@ -2,5 +2,5 @@
 /back/__pycache__
 /front/.angular
 /back/data/settings.py
-/back/env
+/back/venv
 /back/data/*.py
