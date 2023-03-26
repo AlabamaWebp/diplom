@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CorsService } from 'src/app/shared/crud/product/cors.service';
 
 @Component({
   selector: 'create',
@@ -7,7 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cors: CorsService) { }
 
   @Output() close = new EventEmitter();
 
@@ -23,7 +24,7 @@ export class CreateComponent implements OnInit {
 
   active = "";
 
-  create(str: string) {
+  actionClick(str: string) {
     this.active = str;
   }
 
@@ -31,4 +32,17 @@ export class CreateComponent implements OnInit {
     this.active = "";
   }
 
+  create() {
+    if (this.active = this.actions[0]) {
+      this.cors.createPostavshik(
+        {
+          type: 1,
+          name: "1",
+          email: "2",
+          telephone: "3",
+          address: "4"
+        }
+      ).subscribe();
+    }
+  }
 }

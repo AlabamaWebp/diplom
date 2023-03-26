@@ -4,14 +4,31 @@
     <div class="vibor" *ngIf="active == ''">
         <div class="button1"
         *ngFor="let item of actions"
-        (click)="create(item)">
+        (click)="actionClick(item)">
             {{item}}
         </div>
     </div>
-    <div class="material">
+    <div class="material" *ngIf="active == actions[0]">
+        <div class="input">
+            <input type="text" id="mat_name"><span>Название</span>
+        </div>
+        <div class="input">
+            <input type="text" id="email"><span>email</span>
+        </div>
+        <div class="input">
+            <input type="text" id="tel"><span>телефон</span>
+        </div>
+        <div class="input">
+            <input type="text" id="address"><span>address</span>
+        </div>
         
     </div>
     <div class="footer">
+        <div class="button1" 
+        *ngIf="active != ''"
+        (click)="create()">
+            Создать
+        </div>
         <div class="button1" 
         *ngIf="active != ''"
         (click)="goBack()">

@@ -22,4 +22,10 @@ export class CorsService {
   getUsers() {
     return this.http.get(this.url + "users/");
   }
+  getPost() {
+    return this.http.get(this.url + "postavshik/all/");
+  }
+  createPostavshik(data: any) {
+    return this.http.post(this.url + "postavshik/create/", data);
+  }
 }
