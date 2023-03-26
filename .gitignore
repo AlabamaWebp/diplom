@@ -3,3 +3,4 @@
 /front/.angular
 /back/data/settings.py
 /back/env
+/back/data/*.py
