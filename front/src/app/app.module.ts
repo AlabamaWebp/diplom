@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule }   from '@angular/common/http';
 import { TableComponent } from './components/table/table.component';
+import { MaterialComponent } from './components/material/material.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
-    TableComponent
+    TableComponent,
+    MaterialComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

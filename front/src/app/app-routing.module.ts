@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialComponent } from './components/material/material.component';
 import { ProductComponent } from './components/product/product.component';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
-  { path: 'tables', component: ProductComponent },
-  { path: '**', redirectTo: "/tables" }
+  { path: 'product', component: ProductComponent },
+  { path: 'material', component: MaterialComponent },
+  { path: 'user', component: UserComponent },
+  { path: '**', redirectTo: "/product" }
 ];
 
 @NgModule({

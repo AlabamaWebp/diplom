@@ -6,7 +6,7 @@
         [header_name]="prod_header_name"
         [title]="'Продукт'"
         [clickable]="true"
-        (row_click)="select_row($event)"
+        (row_click)="prodSelectRow($event)"
         ></app-table>
     </div>
     <div class="material">
@@ -14,8 +14,10 @@
         [data]="material"
         [header]="mat_header"
         [header_name]="mat_header_name"
-        [title]="'Материал'"
+        [title]="'Материал относящийся к продукту'"
         ></app-table>
+        <!-- [clickable]="true"
+        (row_click)="matSelectRow($event)" -->
     </div>
 </div>
 <div class="center" *ngIf="isLoad">

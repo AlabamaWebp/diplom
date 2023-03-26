@@ -19,4 +19,7 @@ export class CorsService {
   prodAll() {
     return this.http.get(this.url + "prod/all/");
   }
+  getUsers() {
+    return this.http.get(this.url + "users/");
+  }
 }

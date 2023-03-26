@@ -1,8 +1,13 @@
 <div class="wrapper">
   <div class="header">
     <div class="left">
-      ИС Предприятия
+      <span>
+        ИС Предприятия
+      </span>
     </div>
+    <span class="left">
+      Таблица {{title}}
+    </span>
     <div class="right">
       Елисеев Д.А.
     </div>
@@ -11,13 +16,13 @@
     <div class="placeholder">
       <div class="top_line">
         <div class="flex">
-          <button class="button1">
+          <button class="button1" routerLink="/product" (click)="title = 'продуктов'">
             Продукты
           </button>
-          <button class="button1">
+          <button class="button1" routerLink="/material" (click)="title = 'материалов'">
             Материал
           </button>
-          <button class="button1">
+          <button class="button1" routerLink="/user" (click)="title = 'пользователей'">
             Пользователи
           </button>
         </div>

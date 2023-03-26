@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   @Input() header_name: string[] = []
   @Input() title: string = "";
   @Input() clickable: boolean = false;
+  @Input() date_col: string[] = []
   @Output() row_click = new EventEmitter()
 
   selected: any;

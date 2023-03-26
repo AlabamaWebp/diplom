@@ -16,8 +16,11 @@
             (click)="clickable? clickRow(item) : 0"
             [class.selected]="item == selected">
                 <td *ngFor="let head of header">
-                    <div class="text">
+                    <div class="text" *ngIf="!date_col.includes(head)">
                         {{item[head]}}
+                    </div>
+                    <div class="text" *ngIf="date_col.includes(head)">
+                        {{item[head] | date:"d.MM.yyyy hh:mm"}}
                     </div>
                 </td>
             </tr>
