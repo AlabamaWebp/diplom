@@ -4,7 +4,7 @@ from ..SCHEMAS.s_material import MaterialModel
 from ..settings import con_str
 
 
-engine = create_engine(con_str)
+engine = create_engine(con_str).connect()
 meta = MetaData()
 
 
@@ -31,7 +31,7 @@ CompanyType = Table(
 Postavshik = Table(
     "Postavshik", meta,
     Column("Id", Integer, primary_key=True, autoincrement=True),
-    Column("Type", Integer, ForeignKey("CompanyType.Id"), nullable=False),
+    Column("Type", Integer, ForeignKey("CompanyType.Id")),
     Column("Name", String(20), nullable=False),
     Column("Email", String(30)),
     Column("Telephone", String(11)),

@@ -43,7 +43,7 @@ def base_material(pr_id: int = -1) -> list[MaterialModel]:
     if pr_id != -1:
         query = query.where(and_(pr_id == prm.c.ProductID), and_(m.c.Id == prm.c.MaterialID))
 
-    values = engine.connect().execute(query).fetchall()
+    values = engine.execute(query).fetchall()
 
     out_values = []
 

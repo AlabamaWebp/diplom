@@ -14,7 +14,7 @@ def get_users() -> list[UserModel]:
         User.c.RegistrationDate,
         select(Role.c.Name).where(Role.c.Id == User.c.RoleId).label("role")
     )
-    values = engine.connect().execute(query).fetchall()
+    values = engine.execute(query).fetchall()
 
     out_values = []
 

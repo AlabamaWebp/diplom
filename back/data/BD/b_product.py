@@ -10,7 +10,7 @@ def get_prod():
         pr.c.Name,
         pr.c.Count
     )
-    values = engine.connect().execute(query).fetchall()
+    values = engine.execute(query).fetchall()
 
     out_values = []
 

@@ -12,7 +12,7 @@ def get_post():
         p.c.Address,
         ct.c.Name
     ).where(ct.c.Id == p.c.Type)
-    values = engine.connect().execute(query).fetchall()
+    values = engine.execute(query).fetchall()
 
     out_values = []
 
@@ -29,14 +29,20 @@ def get_post():
 
 
 def create_post(data: PostavshikInsert):
-    query = insert(Postavshik).values(
+    query = Postavshik.insert().values(
         Type=data.type,
         Name=data.name,
         Email=data.email,
         Telephone=data.telephone,
-        Address=data.address
+        Address=data.address,
     )
-    value = engine.connect().execute(query)
+    print(data.type,
+            data.name,
+            data.email,
+            data.telephone,
+            data.address)
+    value = engine.execute(query).fetchall()
+    engine.commit()
     return value
 
 
@@ -45,7 +51,7 @@ def get_type():
         ct.c.Id,
         ct.c.Name
     )
-    values = engine.connect().execute(query).fetchall()
+    values = engine.execute(query).fetchall()
 
     out_values = []
 

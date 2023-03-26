@@ -20,5 +20,6 @@ async def types_all() -> list[OnlyTypes]:
 @postavshik.post("create/")
 async def postavshik_all(
     data: PostavshikInsert
-) -> list[PostavshikInsert]:
-    return create_post(data)
+):
+    create_post(data)
+    return "ok"
