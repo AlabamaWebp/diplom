@@ -1,4 +1,3 @@
-
 <div class="wrapper">
     <h3>Создание</h3>
     <div class="vibor" *ngIf="active == ''">
@@ -10,16 +9,29 @@
     </div>
     <div class="material" *ngIf="active == actions[0]">
         <div class="input">
-            <input type="text" id="mat_name"><span>Название</span>
+            <span>Тип:</span>
+            <div class="hover_cont">
+                <span>{{currentPostType.name}}</span>
+                <div class="hover_menu" *ngIf="currentPostType.name != 'Загрузка...'">
+                    <div class="hover_item"
+                    *ngFor="let item of postTypes"
+                    (click)="currentPostType = item">
+                        <span>{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="input">
-            <input type="text" id="email"><span>email</span>
+            <span class="span">Название</span><input type="text" id="prod_name">
         </div>
         <div class="input">
-            <input type="text" id="tel"><span>телефон</span>
+            <span class="span">email</span><input type="text" id="email">
         </div>
         <div class="input">
-            <input type="text" id="address"><span>address</span>
+            <span class="span">телефон</span><input type="text" id="tel">
+        </div>
+        <div class="input">
+            <span class="span">address</span><input type="text" id="address">
         </div>
         
     </div>

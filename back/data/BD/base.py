@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean, ForeignKey, DateTime
 
 from ..SCHEMAS.s_material import MaterialModel
@@ -71,3 +72,9 @@ Role = Table(
 #
 # def create_tables_if_not_exists():
 #     meta.create_all()
+
+
+class UniversalModel(BaseModel):
+    id: int = 0
+    name: str = ""
+

@@ -1,5 +1,5 @@
 from sqlalchemy import select, insert
-from data.BD.base import Postavshik as p, engine, CompanyType as ct, Postavshik
+from data.BD.base import Postavshik as p, engine, CompanyType as ct, Postavshik, UniversalModel
 from data.SCHEMAS.s_postavshik import PostavhikModel, PostavshikInsert, OnlyTypes
 
 
@@ -36,11 +36,6 @@ def create_post(data: PostavshikInsert):
         Telephone=data.telephone,
         Address=data.address,
     )
-    print(data.type,
-            data.name,
-            data.email,
-            data.telephone,
-            data.address)
     value = engine.execute(query).fetchall()
     engine.commit()
     return value
@@ -59,6 +54,25 @@ def get_type():
         return_values = OnlyTypes(
             id=item[0],
             name=item[1]
+        )
+        out_values.append(return_values)
+    return out_values
+
+
+def get_names():
+    query = select(
+        p.c.Id,
+        p.c.Name,
+        ct.c.Name
+    ).where(ct.c.Id == p.c.Type)
+    values = engine.execute(query).fetchall()
+
+    out_values = []
+
+    for item in values:
+        return_values = UniversalModel(
+            id=item[0],
+            name=item[2] + " " + item[1],
         )
         out_values.append(return_values)
     return out_values

@@ -1,30 +1,13 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy import select, and_
+from sqlalchemy import select, and_, insert
 
-from data.BD.base import engine, CompanyType as ct, MaterialType as mt
+from data.BD.base import engine, CompanyType as ct, MaterialType as mt, Material, UniversalModel
 from data.BD.base import Material as m
 from data.BD.base import Postavshik as p
 from data.BD.base import ProductMaterial as prm
-from data.SCHEMAS.s_material import MaterialModel
+from data.SCHEMAS.s_material import MaterialModel, MaterialCreateModel
 
-
-# def get_mat_list(mat: list) -> MaterialModel:
-#     if mat is None:
-#         return None
-#     return MaterialModel(
-#         mat_id=mat[0],
-#         mat_name=mat[1],
-#         mat_purchased=mat[2],
-#         mat_count=mat[3],
-#         mat_type=mat[4],
-#         p_name=mat[5],
-#         p_email=mat[6],
-#         p_address=mat[7],
-#         p_telephone=mat[8],
-#     )
-
-# mat_id: int = -1
 
 def base_material(pr_id: int = -1) -> list[MaterialModel]:
     query = select(
@@ -62,3 +45,33 @@ def base_material(pr_id: int = -1) -> list[MaterialModel]:
         out_values.append(return_values)
     return out_values
 
+
+def create_mat(data: MaterialCreateModel):
+    query = Material.insert().values(
+        Name=data.Name,
+        Purchased=data.Purchased,
+        PostavshikId=data.PostavshikId,
+        TypeId=data.TypeId,
+        Count=data.Count
+    )
+    value = engine.execute(query).fetchall()
+    engine.commit()
+
+
+def mt_names() -> list[UniversalModel]:
+    query = select(
+        mt.c.Id,
+        mt.c.Name,
+    )
+
+    values = engine.execute(query).fetchall()
+
+    out_values = []
+
+    for item in values:
+        return_values = UniversalModel(
+            id=item[0],
+            name=item[1]
+        )
+        out_values.append(return_values)
+    return out_values

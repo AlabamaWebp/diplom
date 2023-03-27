@@ -38,3 +38,45 @@ html, body {
 .displayOff {
     display: none !important;
 }
+.hover_cont {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    border-radius: 10px;
+    border: 1px solid $violet;
+    padding: 5px 0px;
+    cursor: default;
+    background-color: #fff;
+    &:hover {
+        .hover_menu {
+            pointer-events: all;
+            opacity: 1;
+        }
+    }
+    .hover_menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border: 1px solid $violet;
+        pointer-events: none;
+        opacity: 0;
+        min-width: inherit;
+        border-radius: 10px;
+        background-color: #fff;
+        transition: .5s;
+    }
+    .hover_item {
+        border-bottom: 1px solid $violet;
+        padding: 5px;
+        cursor: pointer;
+        // background-color: #fff;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        &:hover {
+            background-color: #00000030;
+        }
+    }
+}

@@ -12,3 +12,13 @@ class MaterialModel(BaseModel):
     p_email: Optional[str] = ""
     p_address: Optional[str] = ""
     p_telephone: Optional[str] = ""
+
+
+class MaterialCreateModel(BaseModel):
+    Name: str = ""
+    Purchased: int = 0
+    PostavshikId: int = 0
+    TypeId: int = 0
+    Count: int = 0
+
+
