@@ -8,7 +8,6 @@ import { TableComponent } from './components/table/table.component';
 import { MaterialComponent } from './components/material/material.component';
 import { UserComponent } from './components/user/user.component';
 import { CreateComponent } from './components/create/create.component';
-import { PostavshikComponent } from './components/postavshik/postavshik.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { PostavshikComponent } from './components/postavshik/postavshik.componen
     MaterialComponent,
     UserComponent,
     CreateComponent,
-    PostavshikComponent
   ],
   imports: [
     BrowserModule,

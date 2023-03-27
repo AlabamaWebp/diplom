@@ -14,7 +14,7 @@ Material = Table(
     Column("Id", Integer, primary_key=True, autoincrement=True),
     Column("Name", String(20), nullable=False),
     Column("Purchased", Boolean, nullable=False),
-    Column("PostavshikId", Integer, ForeignKey("Postavshik.Id"), nullable=False),
+    # Column("PostavshikId", Integer, ForeignKey("Postavshik.Id"), nullable=False),
     Column("TypeId", Integer, ForeignKey("Type.Id"), nullable=False),
     Column("Count", Integer)
 )
@@ -24,20 +24,20 @@ Product = Table(
     Column("Name", String(20), nullable=False),
     Column("Count", Integer, nullable=False)
 )
-CompanyType = Table(
-    "CompanyType", meta,
-    Column("Id", Integer, primary_key=True, autoincrement=True),
-    Column("Name", String(20), nullable=False),
-)
-Postavshik = Table(
-    "Postavshik", meta,
-    Column("Id", Integer, primary_key=True, autoincrement=True),
-    Column("Type", Integer, ForeignKey("CompanyType.Id")),
-    Column("Name", String(20), nullable=False),
-    Column("Email", String(30)),
-    Column("Telephone", String(11)),
-    Column("Address", String(30)),
-)
+# CompanyType = Table(
+#     "CompanyType", meta,
+#     Column("Id", Integer, primary_key=True, autoincrement=True),
+#     Column("Name", String(20), nullable=False),
+# )
+# Postavshik = Table(
+#     "Postavshik", meta,
+#     Column("Id", Integer, primary_key=True, autoincrement=True),
+#     Column("Type", Integer, ForeignKey("CompanyType.Id")),
+#     Column("Name", String(20), nullable=False),
+#     Column("Email", String(30)),
+#     Column("Telephone", String(11)),
+#     Column("Address", String(30)),
+# )
 
 MaterialType = Table(
     "MaterialType", meta,

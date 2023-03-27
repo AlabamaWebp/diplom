@@ -11,11 +11,11 @@
         <div class="input">
             <span>Тип:</span>
             <div class="hover_cont">
-                <span>{{currentPostType.name}}</span>
-                <div class="hover_menu" *ngIf="currentPostType.name != 'Загрузка...'">
+                <span>{{currentMatTypes.name}}</span>
+                <div class="hover_menu" *ngIf="currentMatTypes.name != 'Загрузка...'">
                     <div class="hover_item"
-                    *ngFor="let item of postTypes"
-                    (click)="currentPostType = item">
+                    *ngFor="let item of matTypes"
+                    (click)="currentMatTypes = item">
                         <span>{{item.name}}</span>
                     </div>
                 </div>

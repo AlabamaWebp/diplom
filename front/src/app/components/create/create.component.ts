@@ -17,25 +17,7 @@ export class CreateComponent implements OnInit {
     
   }
 
-  // postavshik
-  postTypes: any;
-  currentPostType = {
-    id: 1,
-    name: "Загрузка..."
-  }
-
-  fetchPostType() {
-    this.cors.getPostTypes().pipe(retry(5),delay(1500)).subscribe((data) => {
-      this.postTypes = data;
-      this.currentPostType = this.postTypes[0];
-    });
-  }
   // material
-  postNames: any;
-  currentPostNames = {
-    id: 1,
-    name: "Загрузка..."
-  }
   matTypes: any;
   currentMatTypes = {
     id: 1,
@@ -44,13 +26,6 @@ export class CreateComponent implements OnInit {
 
   purchased = 0;
   fetchMatData() {
-    this.cors.getPostNames().pipe(retry(5),delay(1500)).subscribe((data) => {
-      this.postNames = data;
-      this.currentPostNames = {
-        id: 0,
-        name: "Без поставщика"
-      }
-    });
     this.cors.matTypes().pipe(retry(5),delay(1500)).subscribe((data) => {
       this.matTypes = data;
       this.currentMatTypes = this.matTypes[0];
@@ -59,7 +34,6 @@ export class CreateComponent implements OnInit {
 
   // osnova
   actions = [
-    "Поставщик",
     "Материал",
     "Продукт",
     "Пользователь",
@@ -69,9 +43,6 @@ export class CreateComponent implements OnInit {
 
   actionClick(str: string) {
     this.active = str;
-    if (this.active == this.actions[0]) {
-      this.fetchPostType();
-    }
   }
 
   goBack() {
@@ -79,23 +50,6 @@ export class CreateComponent implements OnInit {
   }
 
   create(data: any = {}) {
-    if (this.active = this.actions[0]) {
-      this.cors.createPostavshik(
-        {
-          type: this.currentPostType.id,
-          //@ts-ignore
-          name: document.getElementById("prod_name")?.value,
-          //@ts-ignore
-          email: document.getElementById("email")?.value,
-          //@ts-ignore
-          telephone: document.getElementById("tel")?.value,
-          //@ts-ignore
-          address: document.getElementById("address")?.value
-        }
-      ).subscribe(() => {
-        this.goBack();
-      });
-    }
     if (this.active = this.actions[1]) {
       this.cors.matCreate(
         {

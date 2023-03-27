@@ -37,16 +37,16 @@ export class CorsService {
 
 
   // postavshik
-  getPost() {
-    return this.http.get(this.url + "postavshik/all/");
-  }
-  createPostavshik(data: any) {
-    return this.http.post(this.url + "postavshik/create/", data);
-  }
-  getPostTypes() {
-    return this.http.get(this.url + "postavshik/types/")
-  }
-  getPostNames() {
-    return this.http.get(this.url + "postavshik/names/")
-  }
+  // getPost() {
+  //   return this.http.get(this.url + "postavshik/all/");
+  // }
+  // createPostavshik(data: any) {
+  //   return this.http.post(this.url + "postavshik/create/", data);
+  // }
+  // getPostTypes() {
+  //   return this.http.get(this.url + "postavshik/types/")
+  // }
+  // getPostNames() {
+  //   return this.http.get(this.url + "postavshik/names/")
+  // }
 }
