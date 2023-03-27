@@ -11,14 +11,14 @@ go
 create table Product 
 (
 	Id INT PRIMARY KEY IDENTITY,
-	[Name] nvarchar(20),
+	[Name] nvarchar(100),
 	[Count] int
 )
 
 create table MaterialType
 (
 	Id INT PRIMARY KEY IDENTITY,
-	[Name] nvarchar(20)
+	[Name] nvarchar(100
 )
 
 create table CompanyType
@@ -31,7 +31,7 @@ create table Postavshik
 (
 	Id INT PRIMARY KEY IDENTITY,
 	[Type] int,
-	[Name] nvarchar(20),
+	[Name] nvarchar(100),
 	Email varchar(30),
 	Telephone char(11),
 	[Address] nvarchar(30)
@@ -42,7 +42,7 @@ create table Postavshik
 create table Material
 (
 	Id INT PRIMARY KEY IDENTITY, 
-	[Name] nvarchar(20),
+	[Name] nvarchar(100),
 	Purchased bit default 0,
 	PostavshikId int NULL,
 	TypeId int,

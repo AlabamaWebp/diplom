@@ -78,7 +78,7 @@ export class CreateComponent implements OnInit {
     this.active = "";
   }
 
-  create() {
+  create(data: any = {}) {
     if (this.active = this.actions[0]) {
       this.cors.createPostavshik(
         {

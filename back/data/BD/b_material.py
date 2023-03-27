@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy import select, and_, insert
+from sqlalchemy import select, and_, insert, case, or_
 
 from data.BD.base import engine, CompanyType as ct, MaterialType as mt, Material, UniversalModel
 from data.BD.base import Material as m
@@ -10,18 +10,51 @@ from data.SCHEMAS.s_material import MaterialModel, MaterialCreateModel
 
 
 def base_material(pr_id: int = -1) -> list[MaterialModel]:
+    # post = select(
+    #     ct.c.Name,
+    #     p.c.Name,
+    #     p.c.Email,
+    #     p.c.Telephone,
+    #     p.c.Address
+    # ).where(p.c.Id == m.c.PostavshikId,
+    #         p.c.Type == ct.c.Id).alias("post")
     query = select(
         m.c.Id,
         m.c.Name,
         m.c.Purchased,
         m.c.Count,
         mt.c.Name,
-        ct.c.Name,
-        p.c.Name,
-        p.c.Email,
-        p.c.Telephone,
-        p.c.Address
-    ).where(and_(p.c.Id == m.c.Id), and_(p.c.Type == ct.c.Id), and_(m.c.TypeId == mt.c.Id))
+        case(
+            (m.c.PostavshikId == None, ""),
+            else_=ct.c.Name
+        ).label("post1"),
+        case(
+            (m.c.PostavshikId == None, ""),
+            else_=p.c.Name
+        ).label("Name1"),
+        case(
+            (m.c.PostavshikId == None, ""),
+            else_=p.c.Email
+        ).label("Name2"),
+        case(
+            (m.c.PostavshikId == None, ""),
+            else_=p.c.Telephone
+        ).label("Name3"),
+        case(
+            (m.c.PostavshikId == None, ""),
+            else_=p.c.Address
+        ).label("Name4"),
+        # ct.c.Name,
+        # p.c.Name,
+        # p.c.Email,
+        # p.c.Telephone,
+        # p.c.Address
+    ).where(
+        or_(p.c.Id == m.c.PostavshikId,
+         m.c.PostavshikId == None),
+        and_(p.c.Type == ct.c.Id,
+             mt.c.Id == m.c.TypeId)
+    )
 
     if pr_id != -1:
         query = query.where(and_(pr_id == prm.c.ProductID), and_(m.c.Id == prm.c.MaterialID))

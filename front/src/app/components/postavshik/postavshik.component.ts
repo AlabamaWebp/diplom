@@ -26,8 +26,8 @@ export class PostavshikComponent implements OnInit {
     "id",
     "Название компании",
     "Емаил компании",
-    "Адрес компании",
-    "Телефон компании"
+    "Телефон компании",
+    "Город компании"
   ]
   isLoad= false;
   fetchData() {
