@@ -22,6 +22,9 @@ export class CorsService {
   matCreate(data: any) {
     return this.http.post(this.url + "mat/create/", data);
   }
+  matDel(id: number) {
+    return this.http.post(this.url + "mat/delete/?id="+id, undefined);
+  }
 
 
   // prod

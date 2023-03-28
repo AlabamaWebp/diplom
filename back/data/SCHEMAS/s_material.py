@@ -17,7 +17,6 @@ class MaterialModel(BaseModel):
 class MaterialCreateModel(BaseModel):
     Name: str = ""
     Purchased: int = 0
-    PostavshikId: int = 0
     TypeId: int = 0
     Count: int = 0
 

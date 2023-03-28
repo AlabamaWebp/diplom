@@ -43,8 +43,12 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    span {
+        padding: 0 10px;
+        margin: 0 !important;
+    }
     min-width: 100px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     border: 1px solid $violet;
     padding: 5px 0px;
     cursor: default;
@@ -58,19 +62,23 @@ html, body {
     .hover_menu {
         position: absolute;
         top: 100%;
-        left: 0;
+        left: -1px;
         border: 1px solid $violet;
         pointer-events: none;
         opacity: 0;
         min-width: inherit;
-        border-radius: 10px;
+        // border-radius: 10px;
         background-color: #fff;
         transition: .5s;
     }
     .hover_item {
         border-bottom: 1px solid $violet;
-        padding: 5px;
+        // border-radius: 10px;
         cursor: pointer;
+        span {
+            padding: 5px 10px;
+            margin: 0 !important;
+        }
         // background-color: #fff;
         display: flex;
         justify-content: center;

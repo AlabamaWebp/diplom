@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { delay, retry } from 'rxjs';
 import { CorsService } from 'src/app/shared/crud/product/cors.service';
+import { RowsService } from 'src/app/shared/rows/rows.service';
 
 @Component({
   selector: 'create',
@@ -9,7 +10,7 @@ import { CorsService } from 'src/app/shared/crud/product/cors.service';
 })
 export class CreateComponent implements OnInit {
 
-  constructor(private cors: CorsService) { }
+  constructor(private cors: CorsService, private sel_row: RowsService) { }
 
   @Output() close = new EventEmitter();
 
@@ -43,29 +44,30 @@ export class CreateComponent implements OnInit {
 
   actionClick(str: string) {
     this.active = str;
+    if (this.active == "Материал")
+      this.fetchMatData();
   }
 
   goBack() {
     this.active = "";
   }
 
-  create(data: any = {}) {
+  create() {
     if (this.active = "Материал") {
-      this.cors.matCreate(
-        {
-          //@ts-ignore
-          Name: document.getElementById("mat_name")?.value,
-          //@ts-ignore
-          Purchased: document.getElementById("email")?.value,
-          //@ts-ignore
-          PostavshikId: this.currentPostNames.id == 0 ? null : this.currentPostNames.id,
-          //@ts-ignore
-          TypeId: currentMatTypes.id,
-          //@ts-ignore
-          Count: document.getElementById("count")?.value,
-        }
-      ).subscribe(() => {
+      const data =  {
+        //@ts-ignore
+        Name: document.getElementById("mat_name")?.value,
+        //@ts-ignore
+        Purchased: document.getElementById("pok")?.checked,
+
+        TypeId: this.currentMatTypes.id,
+        //@ts-ignore
+        Count: document.getElementById("colvo")?.value,
+      }
+      console.log(data);
+      this.cors.matCreate(data).subscribe(() => {
         this.goBack();
+        this.sel_row.fetch();
       });
     }
   }

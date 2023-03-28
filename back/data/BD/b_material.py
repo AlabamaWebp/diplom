@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from sqlalchemy import select, and_, insert, case, or_
+from sqlalchemy import select, and_, insert, case, or_, delete
 
 from data.BD.base import engine, MaterialType as mt, Material, UniversalModel
 from data.BD.base import Material as m
@@ -58,7 +58,6 @@ def create_mat(data: MaterialCreateModel):
     query = Material.insert().values(
         Name=data.Name,
         Purchased=data.Purchased,
-        PostavshikId=data.PostavshikId,
         TypeId=data.TypeId,
         Count=data.Count
     )
@@ -83,3 +82,10 @@ def mt_names() -> list[UniversalModel]:
         )
         out_values.append(return_values)
     return out_values
+
+
+def mat_del(id):
+    query = Material.delete().where(Material.c.Id == id)
+    engine.execute(query)
+    engine.commit()
+
