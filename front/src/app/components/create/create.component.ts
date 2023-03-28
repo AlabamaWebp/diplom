@@ -50,7 +50,7 @@ export class CreateComponent implements OnInit {
   }
 
   create(data: any = {}) {
-    if (this.active = this.actions[1]) {
+    if (this.active = "Материал") {
       this.cors.matCreate(
         {
           //@ts-ignore

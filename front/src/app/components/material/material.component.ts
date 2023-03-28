@@ -21,10 +21,6 @@ export class MaterialComponent implements OnInit {
     "mat_purchased",
     "mat_count",
     "mat_type",
-    "p_name",
-    "p_email",
-    "p_address",
-    "p_telephone"
   ]
   hname = [
     "id",
@@ -32,10 +28,6 @@ export class MaterialComponent implements OnInit {
     "Покупной",
     "Кол-во",
     "Тип материала",
-    "Название компании",
-    "Емаил компании",
-    "Адрес компании",
-    "Телефон компании"
   ]
   isLoad= false;
   fetchData() {

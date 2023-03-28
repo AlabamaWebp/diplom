@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean, ForeignKey, DateTime
-
-from ..SCHEMAS.s_material import MaterialModel
 from ..settings import con_str
 
 
@@ -50,7 +48,6 @@ ProductMaterial = Table(
     Column("ProductID", Integer, ForeignKey("Product.Id"), nullable=False),
     Column("MaterialID", Integer, ForeignKey("Material.Id"), nullable=False)
 )
-
 User = Table(
     "User", meta,
     Column("Id", Integer, primary_key=True, autoincrement=True),

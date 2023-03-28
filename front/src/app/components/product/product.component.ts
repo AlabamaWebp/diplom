@@ -23,11 +23,7 @@ export class ProductComponent implements OnInit {
     "mat_name",
     "mat_purchased",
     "mat_count",
-    "mat_type",
-    "p_name",
-    "p_email",
-    "p_address",
-    "p_telephone"
+    "mat_type"
   ]
   mat_header_name = [
     "id",
@@ -35,10 +31,6 @@ export class ProductComponent implements OnInit {
     "Покупной",
     "Кол-во",
     "Тип материала",
-    "Название компании",
-    "Емаил компании",
-    "Адрес компании",
-    "Телефон компании"
   ]
   product: any
   prod_header = [

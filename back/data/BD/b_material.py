@@ -2,9 +2,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from sqlalchemy import select, and_, insert, case, or_
 
-from data.BD.base import engine, CompanyType as ct, MaterialType as mt, Material, UniversalModel
+from data.BD.base import engine, MaterialType as mt, Material, UniversalModel
 from data.BD.base import Material as m
-from data.BD.base import Postavshik as p
 from data.BD.base import ProductMaterial as prm
 from data.SCHEMAS.s_material import MaterialModel, MaterialCreateModel
 
@@ -23,41 +22,17 @@ def base_material(pr_id: int = -1) -> list[MaterialModel]:
         m.c.Name,
         m.c.Purchased,
         m.c.Count,
-        mt.c.Name,
-        case(
-            (m.c.PostavshikId == None, ""),
-            else_=ct.c.Name
-        ).label("post1"),
-        case(
-            (m.c.PostavshikId == None, ""),
-            else_=p.c.Name
-        ).label("Name1"),
-        case(
-            (m.c.PostavshikId == None, ""),
-            else_=p.c.Email
-        ).label("Name2"),
-        case(
-            (m.c.PostavshikId == None, ""),
-            else_=p.c.Telephone
-        ).label("Name3"),
-        case(
-            (m.c.PostavshikId == None, ""),
-            else_=p.c.Address
-        ).label("Name4"),
+        mt.c.Name
         # ct.c.Name,
         # p.c.Name,
         # p.c.Email,
         # p.c.Telephone,
         # p.c.Address
-    ).where(
-        or_(p.c.Id == m.c.PostavshikId,
-         m.c.PostavshikId == None),
-        and_(p.c.Type == ct.c.Id,
-             mt.c.Id == m.c.TypeId)
-    )
+    ).where(mt.c.Id == m.c.TypeId)
 
     if pr_id != -1:
-        query = query.where(and_(pr_id == prm.c.ProductID), and_(m.c.Id == prm.c.MaterialID))
+        query = query.where(and_(pr_id == prm.c.ProductID),
+                            and_(m.c.Id == prm.c.MaterialID))
 
     values = engine.execute(query).fetchall()
 
@@ -70,10 +45,10 @@ def base_material(pr_id: int = -1) -> list[MaterialModel]:
             mat_purchased=item[2],
             mat_count=item[3],
             mat_type=item[4],
-            p_name=item[5] + " " + item[6],
-            p_email=item[7],
-            p_telephone=item[8],
-            p_address=item[9],
+            # p_name=item[5] + " " + item[6],
+            # p_email=item[7],
+            # p_telephone=item[8],
+            # p_address=item[9],
         )
         out_values.append(return_values)
     return out_values
