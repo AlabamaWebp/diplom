@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from data.BD.base import Product as pr, engine
+from data.BD.base import Product as pr, engine, Product
 from data.SCHEMAS.s_product import ProductModel
 
 
@@ -23,3 +23,20 @@ def get_prod():
         )
         out_values.append(return_values)
     return out_values
+
+
+def prod_del(id):
+    query = Product.delete().where(Product.c.Id == id)
+    engine.execute(query)
+    engine.commit()
+
+
+def create_prod(data: Product):
+    query = Product.insert().values(
+        Name=data.Name,
+        Count=data.Count
+    )
+    engine.execute(query).fetchall()
+    engine.commit()
+
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, retry } from 'rxjs';
+import { delay, retry, Subscription } from 'rxjs';
 import { CorsService } from 'src/app/shared/crud/product/cors.service';
+import { RowsService } from 'src/app/shared/rows/rows.service';
 
 @Component({
   selector: 'app-tables',
@@ -9,12 +10,15 @@ import { CorsService } from 'src/app/shared/crud/product/cors.service';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private cors: CorsService) { }
+  private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {this.fetchData()});
+
+  constructor(private cors: CorsService, private sel_row: RowsService) { }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.fetchData();
-    console.log(this.material);
-
   }
 
   material: any
@@ -61,6 +65,7 @@ export class ProductComponent implements OnInit {
     });
   }
   matSelectRow(data: any) {
-    
+    const res = ["prod", data.mat_id]
+    this.sel_row.setRow(res);
   }
 }

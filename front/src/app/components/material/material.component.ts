@@ -13,12 +13,11 @@ export class MaterialComponent implements OnInit {;
   private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {this.fetchData()});
 
   constructor(private cors: CorsService, private sel_row: RowsService) { }
-  ngOnInit(): void {
-    this.fetchData();
-    // this.sel_row.fetchData$.subscribe(() => {this.fetchData()})
-  }
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.fetchData();
   }
   data: any;
   header = [
@@ -37,7 +36,6 @@ export class MaterialComponent implements OnInit {;
   ]
   isLoad = false;
   fetchData() {
-    console.log("fd");
     this.isLoad = true;
     this.cors.matAll().pipe(retry(5),delay(1500)).subscribe((data) => {
       this.data = data;

@@ -61,7 +61,7 @@ def create_mat(data: MaterialCreateModel):
         TypeId=data.TypeId,
         Count=data.Count
     )
-    value = engine.execute(query).fetchall()
+    engine.execute(query).fetchall()
     engine.commit()
 
 

@@ -20,8 +20,7 @@ export class AppComponent implements OnInit{
     const data = this.sel_row.getRow()
     if (data) {
       if (data[0] = "material") {
-        this.cors.matDel(data[1]).subscribe((data: any) => {
-          alert(data);
+        this.cors.matDel(data[1]).subscribe(() => {
           this.sel_row.fetch()
         })
       }
