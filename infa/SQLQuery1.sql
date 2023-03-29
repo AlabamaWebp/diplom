@@ -1,5 +1,5 @@
-drop database [diplom1];
-go
+--drop database [diplom1];
+--go
 
 create database [diplom1];
 go
@@ -83,7 +83,7 @@ insert into [Role] ([Name]) values ('admin'),('operator')
 insert into [User]([Login],[Password],[Name],Surname,Patronymic,RoleId,LoginDate,RegistrationDate) 
 values ('admin', '123', 'admin', 'admin','adminovich',1,SYSDATETIME(),SYSDATETIME())
 
-insert into [MaterialType](Name) values ('Аллюминий'),('Железо'),('Сталь'),('Пластик'),('Карбон'),('Резина');
+insert into [MaterialType](Name) values ('Алюминий'),('Железо'),('Сталь'),('Пластик'),('Карбон'),('Резина');
 
 --insert into CompanyType(Name) values ('ООО'),('ОАО')
 

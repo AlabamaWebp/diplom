@@ -21,24 +21,25 @@ async def one(
 
 
 @material.post("create/")
-async def g_all(data: MaterialCreateModel):
+async def c_all(data: MaterialCreateModel):
     create_mat(data)
     return "ok"
 
+
 @material.post("update/")
-async def g_all(id: int, data: MaterialCreateModel):
-    update_mat(id, data)
+async def u_all(id1: int, data: MaterialCreateModel):
+    update_mat(id1, data)
     return "ok"
 
 
 
 @material.get("types/")
-async def g_all() -> list[UniversalModel]:
+async def g_t() -> list[UniversalModel]:
     return mt_names()
 
 
 @material.post("delete/")
-async def g_all(id: int):
+async def g_d(id: int):
     mat_del(id)
     return "ok"
 

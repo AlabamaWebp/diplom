@@ -19,7 +19,6 @@ def get_prod():
             id=item[0],
             name=item[1],
             count=item[2],
-
         )
         out_values.append(return_values)
     return out_values
@@ -36,7 +35,15 @@ def create_prod(data: Product):
         Name=data.Name,
         Count=data.Count
     )
-    engine.execute(query).fetchall()
+    engine.execute(query)
     engine.commit()
 
+
+def update_prod(id1: int, data: Product):
+    query = Product.update().values(
+        Name=data.Name,
+        Count=data.Count
+    ).where(Product.c.Id == id1)
+    engine.execute(query)
+    engine.commit()
 

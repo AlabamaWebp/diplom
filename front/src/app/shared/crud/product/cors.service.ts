@@ -27,7 +27,9 @@ export class CorsService {
     return this.http.post(this.url + "mat/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
   }
   matEdit(id: number, data: mat_data) {
-    return this.http.post(this.url + "mat/update/?id="+id, data).pipe(retry(5),delay(1500));
+    console.log(data);
+    
+    return this.http.post(this.url + "mat/update/?id1="+id, data).pipe(retry(5),delay(1500));
 
   }
 
