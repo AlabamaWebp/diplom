@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { delay, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,17 +20,27 @@ export class CorsService {
   matTypes() {
     return this.http.get(this.url + "mat/types/");
   }
-  matCreate(data: any) {
-    return this.http.post(this.url + "mat/create/", data);
+  matCreate(data: mat_data) {
+    return this.http.post(this.url + "mat/create/", data).pipe(retry(5),delay(1500));
   }
   matDel(id: number) {
-    return this.http.post(this.url + "mat/delete/?id="+id, undefined);
+    return this.http.post(this.url + "mat/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
+  }
+  matEdit(id: number, data: mat_data) {
+    return this.http.post(this.url + "mat/update/?id="+id, data).pipe(retry(5),delay(1500));
+
   }
 
 
   // prod
   prodAll() {
     return this.http.get(this.url + "prod/all/");
+  }
+  prodCreate(data: any) {
+    return this.http.post(this.url + "prod/create/", data).pipe(retry(5),delay(1500));
+  }
+  prodDel(id: number) {
+    return this.http.post(this.url + "prod/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
   }
 
 
@@ -52,4 +63,10 @@ export class CorsService {
   // getPostNames() {
   //   return this.http.get(this.url + "postavshik/names/")
   // }
+}
+export class mat_data {
+  "Name": string = ""
+  "Purchased": number = 0
+  "TypeId": number = 1
+  "Count": number = 0
 }

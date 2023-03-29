@@ -65,6 +65,17 @@ def create_mat(data: MaterialCreateModel):
     engine.commit()
 
 
+def update_mat(id: int, data: MaterialCreateModel):
+    query = Material.update().values(
+        Name=data.Name,
+        Purchased=data.Purchased,
+        TypeId=data.TypeId,
+        Count=data.Count
+    ).where(Material.c.Id == id)
+    engine.execute(query).fetchall()
+    engine.commit()
+
+
 def mt_names() -> list[UniversalModel]:
     query = select(
         mt.c.Id,

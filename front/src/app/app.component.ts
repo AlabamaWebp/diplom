@@ -9,7 +9,7 @@ import { RowsService } from './shared/rows/rows.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  constructor(private cors: CorsService, private sel_row: RowsService){}
+  constructor(private cors: CorsService, public sel_row: RowsService){}
   title = "продуктов";
   ngOnInit(): void {
     window.location.pathname == '/user'? this.title = "продуктов" : 0;
@@ -18,13 +18,37 @@ export class AppComponent implements OnInit{
   }
   delete() {
     const data = this.sel_row.getRow()
+    
     if (data) {
-      if (data[0] = "material") {
+      this.active_modal = "";
+      this.is_edit = false;
+      console.log(data);
+      if (data[0] == "material") {
         this.cors.matDel(data[1]).subscribe(() => {
+          this.sel_row.fetch()
+        })
+      }
+      else if (data[0] == "prod") {
+        this.cors.prodDel(data[1]).subscribe(() => {
           this.sel_row.fetch()
         })
       }
     }
   }
+
+  edit() {
+    const data = this.sel_row.getRow()
+    
+    if (data) {
+      console.log(data);
+      if (data[0] == "material") {
+        this.active_modal = "Материал";
+        this.is_edit = true;
+        this.modal = true;
+      }
+    }
+  }
+  is_edit = false;
+  active_modal = "";
   modal = false;
 }

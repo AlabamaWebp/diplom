@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <h3>Создание</h3>
+    <h3>{{title}}</h3>
     <div class="vibor" *ngIf="active == ''">
         <div class="button1"
         *ngFor="let item of actions"
@@ -34,12 +34,17 @@
     </div>
     <div class="footer">
         <div class="button1" 
-        *ngIf="active != ''"
+        *ngIf="active != '' && !is_edit"
         (click)="create()">
             Создать
         </div>
         <div class="button1" 
-        *ngIf="active != ''"
+        *ngIf="active != '' && is_edit"
+        (click)="edit()">
+            Редактировать
+        </div>
+        <div class="button1" 
+        *ngIf="active != '' && !is_edit"
         (click)="goBack()">
             Назад
         </div>

@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
   constructor(private cors: CorsService, private sel_row: RowsService) { }
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    this.sel_row.setRow(undefined);
   }
 
   ngOnInit(): void {
@@ -47,7 +48,7 @@ export class ProductComponent implements OnInit {
     "Название",
     "Кол-во"
   ]
-  isLoad= false;
+  isLoad = false;
   fetchData() {
     this.isLoad = true;
     this.cors.prodAll().pipe(retry(5),delay(1500)).subscribe((data) => {
@@ -58,14 +59,11 @@ export class ProductComponent implements OnInit {
   }
   prodSelectRow(data_1: any) {
     this.isLoad = true;
-    console.log(data_1.id);
+    const res = ["prod", data_1.id]
+    this.sel_row.setRow(res);
     this.cors.matProd(data_1.id).pipe(retry(5),delay(1500)).subscribe((data) => {
       this.material = data;
       this.isLoad = false;
     });
-  }
-  matSelectRow(data: any) {
-    const res = ["prod", data.mat_id]
-    this.sel_row.setRow(res);
   }
 }

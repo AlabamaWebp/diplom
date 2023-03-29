@@ -15,6 +15,7 @@ export class MaterialComponent implements OnInit {;
   constructor(private cors: CorsService, private sel_row: RowsService) { }
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    this.sel_row.setRow(undefined);
   }
   ngOnInit(): void {
     this.fetchData();

@@ -1,5 +1,5 @@
---drop database [diplom1];
---go
+drop database [diplom1];
+go
 
 create database [diplom1];
 go
@@ -47,7 +47,7 @@ create table Material
 	--PostavshikId int NULL,
 	TypeId int,
 	[Count] int,
-	FOREIGN KEY (TypeId) REFERENCES MaterialType(Id)
+	FOREIGN KEY (TypeId) REFERENCES MaterialType(Id) ON DELETE CASCADE
 	--FOREIGN KEY (PostavshikId) REFERENCES Postavshik(Id)
 )
 
@@ -56,8 +56,8 @@ create table ProductMaterial
 	Id INT PRIMARY KEY IDENTITY,
 	ProductId int,
 	MaterialId int,
-	FOREIGN KEY (ProductId) REFERENCES Product(Id),
-	FOREIGN KEY (MaterialId) REFERENCES Material(Id)
+	FOREIGN KEY (ProductId) REFERENCES Product(Id) ON DELETE CASCADE, 
+	FOREIGN KEY (MaterialId) REFERENCES Material(Id) ON DELETE CASCADE
 )
 
 create table [Role]
@@ -77,7 +77,7 @@ create table [User]
 	RoleId int,
 	LoginDate DATETIME DEFAULT SYSDATETIME(),
 	RegistrationDate DATETIME DEFAULT SYSDATETIME(),
-	FOREIGN KEY (RoleId) REFERENCES [Role](Id)
+	FOREIGN KEY (RoleId) REFERENCES [Role](Id) ON DELETE CASCADE
 )
 insert into [Role] ([Name]) values ('admin'),('operator')
 insert into [User]([Login],[Password],[Name],Surname,Patronymic,RoleId,LoginDate,RegistrationDate) 

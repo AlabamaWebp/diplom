@@ -13,6 +13,7 @@ export class RowsService {
     return this.row;
   }
   setRow(data:any) {
+    console.log(data);
     this.row = data;
   }
   public fetchData$ = new Subject;
