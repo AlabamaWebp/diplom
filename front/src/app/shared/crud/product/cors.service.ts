@@ -38,8 +38,11 @@ export class CorsService {
   prodAll() {
     return this.http.get(this.url + "prod/all/");
   }
-  prodCreate(data: any) {
+  prodCreate(data: prod_data) {
     return this.http.post(this.url + "prod/create/", data).pipe(retry(5),delay(1500));
+  }
+  prodUpdate(id: number, data: prod_data) {
+    return this.http.post(this.url + "prod/update/?id1="+id, data).pipe(retry(5),delay(1500));
   }
   prodDel(id: number) {
     return this.http.post(this.url + "prod/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
@@ -70,5 +73,9 @@ export class mat_data {
   "Name": string = ""
   "Purchased": number = 0
   "TypeId": number = 1
+  "Count": number = 0
+}
+export class prod_data {
+  "Name": string = ""
   "Count": number = 0
 }

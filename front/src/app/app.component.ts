@@ -22,9 +22,8 @@ export class AppComponent implements OnInit{
     if (data) {
       this.active_modal = "";
       this.is_edit = false;
-      console.log(data);
       if (data[0] == "material") {
-        this.cors.matDel(data[1]).subscribe(() => {
+        this.cors.matDel(data[1].mat_id).subscribe(() => {
           this.sel_row.fetch()
         })
       }

@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit {
   }
   prodSelectRow(data_1: any) {
     this.isLoad = true;
-    const res = ["prod", data_1.id]
+    const res = ["prod", data_1]
     this.sel_row.setRow(res);
     this.cors.matProd(data_1.id).pipe(retry(5),delay(1500)).subscribe((data) => {
       this.material = data;

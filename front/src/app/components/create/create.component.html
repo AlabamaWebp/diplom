@@ -22,15 +22,22 @@
             </div>
         </div>
         <div class="input">
-            <span class="span">Название</span><input type="text" id="mat_name">
+            <span class="span">Название</span><input type="text" id="mat_name" [value]="name">
         </div>
         <div class="input">
-            <span class="span">Покупной</span><input type="checkbox" id="pok">
+            <span class="span">Покупной</span><input type="checkbox" id="pok" [checked]="pok">
         </div>
         <div class="input">
-            <span class="span">Количество</span><input type="text" id="colvo">
+            <span class="span">Количество</span><input type="text" id="colvo" [value]="count">
         </div>
-        
+    </div>
+    <div class="product" *ngIf="active == actions[1]">
+        <div class="input">
+            <span class="span">Название</span><input type="text" id="name" [value]="name">
+        </div>
+        <div class="input">
+            <span class="span">Количество</span><input type="text" id="colvo" [value]="count">
+        </div>
     </div>
     <div class="footer">
         <div class="button1" 

@@ -43,9 +43,17 @@ export class MaterialComponent implements OnInit {;
       this.isLoad = false;
     });
   }
-  SelectRow(data: any) {
-    const res = ["material", data.mat_id]
+  SelectRow(data: response_mat) {
+    const res = ["material", data]
     this.sel_row.setRow(res);
   }
 
+}
+
+export class response_mat{
+  mat_id: number = 0
+  mat_name: string = ""
+  mat_purchased: number = 0
+  mat_count: number = 0
+  mat_type: string = ""
 }
