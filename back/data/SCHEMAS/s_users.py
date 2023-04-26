@@ -8,5 +8,5 @@ class UserModel(BaseModel):
     u_surname: str = ""
     u_patronymic: str = ""
     u_role: str = ""
-    u_login: datetime = ""
-    u_registration: datetime = ""
+    u_login: datetime
+    u_registration: datetime

@@ -68,8 +68,8 @@ create table [User]
 	Surname nvarchar(20),
 	Patronymic nvarchar(20),
 	RoleId INTEGER,
-	LoginDate DATETIME DEFAULT datetime,
-	RegistrationDate DATETIME DEFAULT datetime,
+	LoginDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+	RegistrationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (RoleId) REFERENCES [Role](Id) ON DELETE CASCADE
 );
 insert into [Role] ([Name]) values ('admin'),('operator');
