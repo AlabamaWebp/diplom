@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
     
     if (data) {
       this.modal = -1;
-      this.is_edit = false;
+      // this.is_edit = false;
       if (data[0] == "material") {
         this.cors.matDel(data[1].mat_id).subscribe(() => {
           // this.sel_row.fetch()
@@ -42,12 +42,12 @@ export class AppComponent implements OnInit{
       console.log(data);
       if (data[0] == "material") {
         // this.active_modal = 1;
-        this.is_edit = true;
-        this.modal = 1;
+        // this.is_edit = true;
+        this.modal = 2;
       }
     }
   }
-  is_edit = false;
+  // is_edit = false;
   // active_modal = -1;
   modal = -1;
   changeModal(num: any) {

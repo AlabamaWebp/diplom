@@ -61,7 +61,6 @@ export class MaterialComponent2 implements OnInit {
     });
   }
   create() {
-    
     // material
     const data = {
       //@ts-ignore
@@ -76,6 +75,8 @@ export class MaterialComponent2 implements OnInit {
     console.log(data);
     this.cors.matCreate(data).subscribe(() => {
       this.sel_row.fetch();
+    }, (e) => {
+      alert(e);
     });
   }
   edit() {
@@ -89,9 +90,11 @@ export class MaterialComponent2 implements OnInit {
       //@ts-ignore
       Count: document.getElementById("colvo")?.value,
     }
-
     this.cors.matEdit(this.sel_row.getRow()[1].mat_id, data).subscribe(() => {
       this.sel_row.fetch();
+      this.close.emit();
+    }, (e) => {
+      alert(e);
     });
   }
 }
