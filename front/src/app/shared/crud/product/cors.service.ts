@@ -18,7 +18,7 @@ export class CorsService {
     return this.http.get(this.url + "mat/prod/?pr_id="+id);
   }
   matTypes() {
-    return this.http.get(this.url + "mat/types/");
+    return this.http.get(this.url + "mat/types/").pipe(retry(5),delay(1500));
   }
   matCreate(data: mat_data) {
     return this.http.post(this.url + "mat/create/", data).pipe(retry(5),delay(1500));

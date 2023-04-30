@@ -30,7 +30,7 @@
           <button class="button1" (click)="sel_row.fetch()">
             Обновить
           </button>
-          <button class="button1" (click)="modal = true">
+          <button class="button1" (click)="is_edit = false; modal = 0">
             Создать
           </button>
           <button class="button1" *ngIf="sel_row.getRow()" (click)="edit()">
@@ -50,6 +50,8 @@
     </div>
   </div>
 </div>
-<div class="backdrop" *ngIf="modal" (click)="modal = false"></div>
-<create *ngIf="modal" (close)="modal = false"
-active="{{active_modal}}" [is_edit]="is_edit"></create>
+<div class="backdrop" *ngIf="modal != -1" (click)="modal = -1"></div>
+<div class="modal_wrapper" [ngSwitch]="modal" (click)="test(modal)">
+  <create *ngSwitchCase="0" (close)="modal = -1" (mchange)="changeModal($event)"></create>
+  <create-material *ngSwitchCase="1" [is_edit]="is_edit" (close)="modal = -1" (mchange)="changeModal($event)"></create-material>
+</div>

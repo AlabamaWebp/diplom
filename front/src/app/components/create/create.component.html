@@ -1,13 +1,13 @@
-<div class="wrapper">
-    <h3>{{title}}</h3>
-    <div class="vibor" *ngIf="active == ''">
+<div class="">
+    <h3>Создание</h3>
+    <div class="vibor">
         <div class="button1"
         *ngFor="let item of actions"
         (click)="actionClick(item)">
             {{item}}
         </div>
     </div>
-    <div class="material" *ngIf="active == actions[0]">
+    <!-- <div class="material" *ngIf="active == actions[0]">
         <div class="input">
             <span>Тип:</span>
             <div class="hover_cont">
@@ -30,17 +30,17 @@
         <div class="input">
             <span class="span">Количество</span><input type="text" id="colvo" [value]="count">
         </div>
-    </div>
-    <div class="product" *ngIf="active == actions[1]">
+    </div> -->
+    <!-- <div class="product" *ngIf="active == actions[1]">
         <div class="input">
             <span class="span">Название</span><input type="text" id="name" [value]="name">
         </div>
         <div class="input">
             <span class="span">Количество</span><input type="text" id="colvo" [value]="count">
         </div>
-    </div>
+    </div> -->
     <div class="footer">
-        <div class="button1" 
+        <!-- <div class="button1" 
         *ngIf="active != '' && !is_edit"
         (click)="create()">
             Создать
@@ -54,7 +54,7 @@
         *ngIf="active != '' && !is_edit"
         (click)="goBack()">
             Назад
-        </div>
+        </div> -->
         <div class="button1" 
         (click)="close.emit()">
             Закрыть

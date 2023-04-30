@@ -20,19 +20,19 @@ export class AppComponent implements OnInit{
     const data = this.sel_row.getRow()
     
     if (data) {
-      this.active_modal = "";
+      this.modal = -1;
       this.is_edit = false;
       if (data[0] == "material") {
         this.cors.matDel(data[1].mat_id).subscribe(() => {
-          this.sel_row.fetch()
+          // this.sel_row.fetch()
         })
       }
       else if (data[0] == "prod") {
         this.cors.prodDel(data[1]).subscribe(() => {
-          this.sel_row.fetch()
         })
       }
     }
+    this.sel_row.fetch()
   }
 
   edit() {
@@ -41,13 +41,19 @@ export class AppComponent implements OnInit{
     if (data) {
       console.log(data);
       if (data[0] == "material") {
-        this.active_modal = "Материал";
+        // this.active_modal = 1;
         this.is_edit = true;
-        this.modal = true;
+        this.modal = 1;
       }
     }
   }
   is_edit = false;
-  active_modal = "";
-  modal = false;
+  // active_modal = -1;
+  modal = -1;
+  changeModal(num: any) {
+    this.modal = num;
+  }
+  test(el: any) {
+    console.log(el);
+  }
 }

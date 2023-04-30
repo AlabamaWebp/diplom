@@ -1,0 +1,48 @@
+<div class="">
+
+  <div class="material">
+    <div class="input">
+      <span>Тип:</span>
+      <div class="hover_cont">
+        <span>{{currentMatTypes.name}}</span>
+        <div class="hover_menu" *ngIf="currentMatTypes.name != 'Загрузка...'">
+          <div class="hover_item" *ngFor="let item of matTypes" (click)="currentMatTypes = item">
+            <span>{{item.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input">
+      <span class="span">Название</span><input type="text" id="mat_name">
+    </div>
+    <div class="input">
+      <span class="span">Покупной</span><input type="checkbox" id="pok">
+    </div>
+    <div class="input">
+      <span class="span">Количество</span><input type="text" id="colvo">
+    </div>
+  </div>
+  <div class="footer">
+    <div class="button1" 
+    *ngIf="!is_edit"
+    (click)="create()">
+        Создать
+    </div>
+    <div class="button1" 
+    *ngIf="is_edit"
+    (click)="edit()">
+        Редактировать
+    </div>
+    <div class="button1" 
+    *ngIf="!is_edit"
+    (click)="goBack()"
+    >
+        Назад
+    </div>
+    <div class="button1" 
+    (click)="close.emit()"
+    >
+        Закрыть
+    </div>
+  </div>
+</div>
