@@ -10,7 +10,11 @@ import { RowsService } from 'src/app/shared/rows/rows.service';
 })
 export class ProductComponent implements OnInit {
 
-  private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {this.fetchData()});
+  private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {
+    this.fetchData(); 
+    this.material = undefined;
+
+  });
 
   constructor(private cors: CorsService, private sel_row: RowsService) { }
   ngOnDestroy(): void {

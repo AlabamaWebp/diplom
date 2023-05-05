@@ -9,15 +9,15 @@
         (row_click)="prodSelectRow($event)"
         ></app-table>
     </div>
-    <div class="material" [ngSwitch]="isLoad2">
+    <div class="material">
         <app-table
-        *ngSwitchCase="false"
+        [class.displayOff]="isLoad2"
         [data]="material"
         [header]="mat_header"
         [header_name]="mat_header_name"
         [title]="'Материал относящийся к продукту'"
         ></app-table>
-        <div class="center" *ngSwitchCase="true">
+        <div class="center" [class.displayOff]="!isLoad2">
             Загрузка...
         </div>
         <!-- [clickable]="true"

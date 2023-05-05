@@ -14,6 +14,13 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     window.location.pathname == '/user'? this.title = "пользователей" : 0;
     window.location.pathname == '/material'? this.title = "материалов" : 0;
+
+    this.cors.matAll().subscribe((d) => {
+      this.sel_row.setProdMaterials(d);
+    }, (e) => {
+      console.log(e);
+    })
+
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
   delete() {

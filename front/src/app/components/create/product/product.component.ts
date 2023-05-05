@@ -24,6 +24,7 @@ export class ProductComponent2 implements OnInit {
       //@ts-ignore
       document.getElementById("colvo").value = data.count;
     }
+
     this.fetchMat()
   }
   goBack() {
@@ -73,24 +74,35 @@ export class ProductComponent2 implements OnInit {
   selected_items: string[] = []
   data: any;
   fetchMat() {
-    
-    this.sel_row.loadOn();
-    this.cors.matAll().subscribe((d) => {
-      this.data = d;
-      this.cors.matProd(this.sel_row.getRow()[1].id).subscribe((d2: any) => {
-        for (let i = 0; i < d2.length; i++) {
-          this.selected_items.push(d2[i]["mat_id"]);
-        }
-        this.sel_row.loadOff();
+    if (this.sel_row.getProdMaterials()) {
+      this.data = this.sel_row.getProdMaterials();
+      this.getCheckedRows();
+    }
+    else {
+      this.sel_row.loadOn();
+      this.cors.matAll().subscribe((d) => {
+        this.data = d;
+        this.sel_row.setProdMaterials(d);
+        this.getCheckedRows();
       }, (e) => {
         console.log(e);
         this.sel_row.loadOff();
       })
+    }
+  }
+
+  getCheckedRows() {
+    this.cors.matProd(this.sel_row.getRow()[1].id).subscribe((d2: any) => {
+      for (let i = 0; i < d2.length; i++) {
+        this.selected_items.push(d2[i]["mat_id"]);
+      }
+      this.sel_row.loadOff();
     }, (e) => {
       console.log(e);
       this.sel_row.loadOff();
     })
   }
+
   checkboxes: any[] = [];
   checkBoxClick(cbox: HTMLInputElement, data: any) {
     console.log(this.checkboxes, "sel:", this.selected_items);

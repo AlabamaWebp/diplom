@@ -29,4 +29,12 @@ export class RowsService {
   fetch() {
     this.fetchData$.next(undefined);
   }
+
+  private only_product: any
+  getProdMaterials() {
+    return this.only_product;
+  }
+  setProdMaterials(value: any) {
+    this.only_product = value;
+  }
 }
