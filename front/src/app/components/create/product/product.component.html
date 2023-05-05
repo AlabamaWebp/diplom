@@ -15,7 +15,7 @@
       <div class="spisok">
         <div class="item" *ngFor="let data of data" (click)="checkBoxClick(inp, data)">
           <span>
-            <input type="checkbox" style="pointer-events: none;" #inp>
+            <input type="checkbox" style="pointer-events: none;" #inp [checked]="selected_items.includes(data.mat_id)">
           </span>
           <span>
             {{data["mat_name"]}}

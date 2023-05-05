@@ -20,13 +20,13 @@ def get_users() -> list[UserModel]:
 
     for item in values:
         return_values = UserModel(
-            u_id=item[0],
-            u_name=item[1],
-            u_surname=item[2],
-            u_patronymic=item[3],
-            u_login=item[4],
-            u_registration=item[5],
-            u_role=item[6]
+            id=item[0],
+            name=item[1],
+            surname=item[2],
+            patronymic=item[3],
+            login=item[4],
+            registration=item[5],
+            role=item[6]
         )
         out_values.append(return_values)
     return out_values
