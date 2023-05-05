@@ -74,6 +74,8 @@ html, body {
         // border-radius: 10px;
         background-color: #fff;
         transition: .5s;
+        max-height: 200px;
+        overflow: hidden auto;
     }
     .hover_item {
         border-bottom: 1px solid $violet;
