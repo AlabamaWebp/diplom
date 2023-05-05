@@ -1,7 +1,7 @@
-from sqlalchemy import select
+from sqlalchemy import select, func, and_
 
-from data.BD.base import Product as pr, engine, Product
-from data.SCHEMAS.s_product import ProductModel
+from data.BD.base import Product as pr, engine, Product, ProductMaterial
+from data.SCHEMAS.s_product import ProductModel, ProdCreate
 
 
 def get_prod():
@@ -30,20 +30,40 @@ def prod_del(id):
     engine.commit()
 
 
-def create_prod(data: Product):
+def create_prod(data: ProdCreate):
     query = Product.insert().values(
-        Name=data.Name,
-        Count=data.Count
+        Name=data.name,
+        Count=data.count
     )
     engine.execute(query)
+    q2 = engine.execute(select(func.max(Product.c.Id))).fetchone()
+    for i in data.checked:
+        query = ProductMaterial.insert().values(
+            ProductID=q2[0],
+            MaterialID=i["mat_id"]
+        )
+        engine.execute(query)
     engine.commit()
 
 
-def update_prod(id1: int, data: Product):
+def update_prod(id1: int, data: ProdCreate):
     query = Product.update().values(
-        Name=data.Name,
-        Count=data.Count
+        Name=data.name,
+        Count=data.count
     ).where(Product.c.Id == id1)
     engine.execute(query)
+    for i in data.checked:
+        print(i["checked"])
+        if i["checked"]:
+            query = ProductMaterial.insert().values(
+                ProductID=id1,
+                MaterialID=i["mat_id"]
+            )
+        else:
+            query = ProductMaterial.delete().where(
+                ProductMaterial.c.MaterialID == i["mat_id"],
+                and_(ProductMaterial.c.ProductID == id1)
+            )
+        engine.execute(query)
     engine.commit()
 

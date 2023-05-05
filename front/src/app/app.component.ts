@@ -28,7 +28,7 @@ export class AppComponent implements OnInit{
         })
       }
       else if (data[0] == "prod") {
-        this.cors.prodDel(data[1]).subscribe(() => {
+        this.cors.prodDel(data[1].id).subscribe(() => {
         })
       }
     }

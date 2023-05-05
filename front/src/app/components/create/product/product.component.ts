@@ -38,6 +38,7 @@ export class ProductComponent2 implements OnInit {
       name: document.getElementById("mat_name")?.value,
       //@ts-ignore
       count: document.getElementById("colvo")?.value,
+      checked: this.checkboxes
     }
     this.cors.prodCreate(data).subscribe(() => {
       this.sel_row.loadOff();
@@ -55,6 +56,7 @@ export class ProductComponent2 implements OnInit {
       name: document.getElementById("mat_name").value,
       //@ts-ignore
       count: document.getElementById("colvo").value,
+      checked: this.checkboxes
     }
     
     //@ts-ignore
@@ -102,7 +104,9 @@ export class ProductComponent2 implements OnInit {
         return
       }
     }
-    this.checkboxes.push({"mat_id": data.mat_id, "mat_name": data.mat_name, "checked": check});
+    this.checkboxes.push({"mat_id": data.mat_id, 
+    // "mat_name": data.mat_name, 
+    "checked": check});
     console.log(this.checkboxes);
    }
 }

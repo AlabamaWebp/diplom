@@ -36,10 +36,10 @@ export class CorsService {
   prodAll() {
     return this.http.get(this.url + "prod/all/");
   }
-  prodCreate(data: prod_data) {
+  prodCreate(data: any) {
     return this.http.post(this.url + "prod/create/", data).pipe(retry(5),delay(1500));
   }
-  prodUpdate(id: number, data: prod_data) {
+  prodUpdate(id: number, data: any) {
     return this.http.post(this.url + "prod/update/?id1="+id, data).pipe(retry(5),delay(1500));
   }
   prodDel(id: number) {

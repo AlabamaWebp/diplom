@@ -49,6 +49,7 @@ export class ProductComponent implements OnInit {
     "Кол-во"
   ]
   isLoad = false;
+  isLoad2 = false;
   fetchData() {
     this.isLoad = true;
     this.cors.prodAll().pipe(retry(5),delay(1500)).subscribe((data) => {
@@ -58,12 +59,12 @@ export class ProductComponent implements OnInit {
 
   }
   prodSelectRow(data_1: any) {
-    this.isLoad = true;
+    this.isLoad2 = true;
     const res = ["prod", data_1]
     this.sel_row.setRow(res);
     this.cors.matProd(data_1.id).pipe(retry(5),delay(1500)).subscribe((data) => {
       this.material = data;
-      this.isLoad = false;
+      this.isLoad2 = false;
     });
   }
 }

@@ -7,4 +7,5 @@ class ProductModel(BaseModel):
     count: int = 0
 
 
-# class ProdCreate(ProductModel):
+class ProdCreate(ProductModel):
+    checked = []
