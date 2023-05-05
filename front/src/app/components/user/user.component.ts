@@ -23,13 +23,13 @@ export class UserComponent implements OnInit {
   // "u_login": "",
   // "u_registration": ""
   header = [
-    "u_id",
-    "u_name",
-    "u_surname",
-    "u_patronymic",
-    "u_role",
-    "u_login",
-    "u_registration"
+    "id",
+    "name",
+    "surname",
+    "patronymic",
+    "role",
+    "login",
+    "registration"
   ]
   hname = [
     "id",

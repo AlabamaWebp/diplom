@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
   ]
 
   actionClick(str: string) {
-    this.mchange.emit(this.actions.indexOf(str)+1);
+    this.mchange.emit((this.actions.indexOf(str)+1)*2-1);
     
   }
 

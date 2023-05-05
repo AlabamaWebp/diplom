@@ -9,6 +9,10 @@ html, body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     overflow: hidden;
 }
+.off {
+    pointer-events: none;
+    opacity: 0;
+}
 .button1 {
     border: 1px solid $violet;
     border-radius: 5px;
@@ -109,8 +113,26 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
+    max-height: 80%;
     transform: translate(-50%, -50%);
-    padding: 20px 30px;
+    padding: 15px 30px 20px;
     border-radius: 10px;
     min-width: 300px;
+}
+.modal1 {
+    .footer {
+        margin: 10px 0 0;
+        display: flex;
+        justify-content: end;
+    }
+    .input {
+        height: 34px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 10px;
+        align-items: center;
+    span {
+        margin: 0 10px 0 0;
+    }
+    }
 }

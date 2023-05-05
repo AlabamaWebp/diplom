@@ -12,9 +12,9 @@ export class AppComponent implements OnInit{
   constructor(private cors: CorsService, public sel_row: RowsService){}
   title = "продуктов";
   ngOnInit(): void {
-    window.location.pathname == '/user'? this.title = "продуктов" : 0;
+    window.location.pathname == '/user'? this.title = "пользователей" : 0;
     window.location.pathname == '/material'? this.title = "материалов" : 0;
-    window.location.pathname == '/post'? this.title = "поставщиков" : 0;
+    // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
   delete() {
     const data = this.sel_row.getRow()
@@ -44,6 +44,9 @@ export class AppComponent implements OnInit{
         // this.active_modal = 1;
         // this.is_edit = true;
         this.modal = 2;
+      }
+      else if (data[0] == "prod") {
+        this.modal = 4;
       }
     }
   }

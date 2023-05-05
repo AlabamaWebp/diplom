@@ -1,5 +1,5 @@
 <div class="wrapper1" *ngIf="!isLoad">
-    <div class="table">
+    <!-- <div class="table">
         <app-table
         [data]="data"
         [header]="header"
@@ -7,6 +7,30 @@
         [clickable]="true"
         (row_click)="SelectRow($event)"
         ></app-table>
+    </div> -->
+    <div class="spisok">
+        <div class="item" *ngFor="let data of data">
+            <span class="name span_container">
+                <span>
+                    Название:
+                </span>
+                <span>
+                    {{data["mat_name"]}}
+                </span>
+            </span>
+            <!-- <input type="checkbox" [checked]="data['mat_purchased']" disabled> -->
+            <span class="colvo span_container">
+                <span>Количество:</span>
+                {{data["mat_count"]}}
+            </span>
+            <span class="type span_container">
+                <span>Материал:</span>
+                {{data["mat_type"]}}
+            </span>
+            <span class="pok span_container">
+                {{data['mat_purchased'] == 1 ? 'Покупной' : ''}}
+            </span>
+        </div>
     </div>
 </div>
 <div class="center" *ngIf="isLoad">

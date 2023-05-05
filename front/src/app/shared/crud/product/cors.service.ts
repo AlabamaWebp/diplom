@@ -12,7 +12,7 @@ export class CorsService {
   url = "http://127.0.0.1:8000/"
   // mat
   matAll() {
-    return this.http.get(this.url + "mat/all/");
+    return this.http.get(this.url + "mat/all/").pipe(retry(5),delay(1500));
   }
   matProd(id: number) {
     return this.http.get(this.url + "mat/prod/?pr_id="+id);
@@ -27,8 +27,6 @@ export class CorsService {
     return this.http.post(this.url + "mat/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
   }
   matEdit(id: number, data: mat_data) {
-    console.log(data);
-    
     return this.http.post(this.url + "mat/update/?id1="+id, data).pipe(retry(5),delay(1500));
 
   }
@@ -76,6 +74,6 @@ export class mat_data {
   "Count": number = 0
 }
 export class prod_data {
-  "Name": string = ""
-  "Count": number = 0
+  "name": string = ""
+  "count": number = 0
 }

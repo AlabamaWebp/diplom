@@ -45,6 +45,7 @@ export class MaterialComponent2 implements OnInit {
 
   purchased = 0;
   fetchMatData(mat: any = "") {
+    this.sel_row.loadOn()
     this.cors.matTypes().subscribe((data) => {
       this.matTypes = data;
       if (this.is_edit) {
@@ -58,10 +59,12 @@ export class MaterialComponent2 implements OnInit {
       else {
         this.currentMatTypes = this.matTypes[0];
       }
+      this.sel_row.loadOff()
     });
   }
   create() {
     // material
+    this.sel_row.loadOn();
     const data = {
       //@ts-ignore
       Name: document.getElementById("mat_name")?.value,
@@ -74,12 +77,16 @@ export class MaterialComponent2 implements OnInit {
     }
     console.log(data);
     this.cors.matCreate(data).subscribe(() => {
+      this.sel_row.loadOff();
       this.sel_row.fetch();
     }, (e) => {
       alert(e);
+      this.sel_row.loadOff();
     });
   }
   edit() {
+    this.sel_row.loadOn();
+
     const data = {
       //@ts-ignore
       Name: document.getElementById("mat_name")?.value,
@@ -91,10 +98,12 @@ export class MaterialComponent2 implements OnInit {
       Count: document.getElementById("colvo")?.value,
     }
     this.cors.matEdit(this.sel_row.getRow()[1].mat_id, data).subscribe(() => {
+      this.sel_row.loadOff();
       this.sel_row.fetch();
       this.close.emit();
     }, (e) => {
       alert(e);
+      this.sel_row.loadOff();
     });
   }
 }

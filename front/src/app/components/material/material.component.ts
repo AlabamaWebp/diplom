@@ -21,24 +21,24 @@ export class MaterialComponent implements OnInit {;
     this.fetchData();
   }
   data: any;
-  header = [
-    "mat_id",
-    "mat_name",
-    "mat_purchased",
-    "mat_count",
-    "mat_type",
-  ]
-  hname = [
-    "id",
-    "Название материала",
-    "Покупной",
-    "Кол-во",
-    "Тип материала",
-  ]
+  // header = [
+  //   // "mat_id",
+  //   "mat_name",
+  //   "mat_purchased",
+  //   "mat_count",
+  //   "mat_type",
+  // ]
+  // hname = [
+  //   // "id",
+  //   "Название материала",
+  //   "Покупной",
+  //   "Кол-во",
+  //   "Тип материала",
+  // ]
   isLoad = false;
   fetchData() {
     this.isLoad = true;
-    this.cors.matAll().pipe(retry(5),delay(1500)).subscribe((data) => {
+    this.cors.matAll().subscribe((data) => {
       this.data = data;
       this.isLoad = false;
     });

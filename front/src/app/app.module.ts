@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProductComponent2 } from './components/create/product/product.component';
 import { HttpClientModule }   from '@angular/common/http';
 import { TableComponent } from './components/table/table.component';
 import { MaterialComponent } from './components/material/material.component';
@@ -19,7 +20,8 @@ import { MaterialComponent2 } from './components/create/material/material.compon
     MaterialComponent,
     UserComponent,
     CreateComponent,
-    MaterialComponent2
+    MaterialComponent2,
+    ProductComponent2
   ],
   imports: [
     BrowserModule,
