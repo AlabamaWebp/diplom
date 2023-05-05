@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {
     this.fetchData(); 
     this.material = undefined;
-
+    this.prodSelectRow(this.data_select_row);
   });
 
   constructor(private cors: CorsService, private sel_row: RowsService) { }
@@ -60,9 +60,10 @@ export class ProductComponent implements OnInit {
       this.product = data;
       this.isLoad = false;
     });
-
   }
+  data_select_row: any
   prodSelectRow(data_1: any) {
+    this.data_select_row = data_1;
     this.isLoad2 = true;
     const res = ["prod", data_1]
     this.sel_row.setRow(res);
