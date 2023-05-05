@@ -9,7 +9,6 @@ import { RowsService } from 'src/app/shared/rows/rows.service';
 })
 export class ProductComponent2 implements OnInit {
 
-
   @Input() is_edit = false;
   @Output() close = new EventEmitter();
   @Output() mchange = new EventEmitter();
@@ -19,7 +18,6 @@ export class ProductComponent2 implements OnInit {
     if (this.is_edit) {
       this.title = "Изменение";
       const data = this.sel_row.getRow()[1];
-      console.log(data);
       
       //@ts-ignore
       document.getElementById("mat_name").value = data.name;
@@ -41,7 +39,6 @@ export class ProductComponent2 implements OnInit {
       //@ts-ignore
       count: document.getElementById("colvo")?.value,
     }
-    console.log(data);
     this.cors.prodCreate(data).subscribe(() => {
       this.sel_row.loadOff();
       this.sel_row.fetch();
@@ -59,7 +56,6 @@ export class ProductComponent2 implements OnInit {
       //@ts-ignore
       count: document.getElementById("colvo").value,
     }
-    console.log(data);
     
     //@ts-ignore
     this.cors.prodUpdate(this.sel_row.getRow()[1].id, data).subscribe(() => {
@@ -82,8 +78,6 @@ export class ProductComponent2 implements OnInit {
       this.cors.matProd(this.sel_row.getRow()[1].id).subscribe((d2: any) => {
         for (let i = 0; i < d2.length; i++) {
           this.selected_items.push(d2[i]["mat_id"]);
-          console.log(this.selected_items, d2);
-          
         }
         this.sel_row.loadOff();
       }, (e) => {
@@ -97,6 +91,8 @@ export class ProductComponent2 implements OnInit {
   }
   checkboxes: any[] = [];
   checkBoxClick(cbox: HTMLInputElement, data: any) {
+    console.log(this.checkboxes, this.selected_items);
+    
     cbox.checked = !cbox.checked;
     const check = cbox.checked;
     // console.log(data); // mat_id, mat_name, cbox.checked

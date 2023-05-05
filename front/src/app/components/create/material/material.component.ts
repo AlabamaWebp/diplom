@@ -75,7 +75,6 @@ export class MaterialComponent2 implements OnInit {
       //@ts-ignore
       Count: document.getElementById("colvo")?.value,
     }
-    console.log(data);
     this.cors.matCreate(data).subscribe(() => {
       this.sel_row.loadOff();
       this.sel_row.fetch();

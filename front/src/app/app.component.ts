@@ -39,7 +39,6 @@ export class AppComponent implements OnInit{
     const data = this.sel_row.getRow()
     
     if (data) {
-      console.log(data);
       if (data[0] == "material") {
         // this.active_modal = 1;
         // this.is_edit = true;

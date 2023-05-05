@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -23,7 +23,6 @@ export class RowsService {
     return this.is_load;
   }
   setRow(data:any) {
-    console.log(data);
     this.row = data;
   }
   public fetchData$ = new Subject;
