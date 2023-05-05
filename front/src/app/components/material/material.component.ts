@@ -46,8 +46,9 @@ export class MaterialComponent implements OnInit {;
   SelectRow(data: response_mat) {
     const res = ["material", data]
     this.sel_row.setRow(res);
+    this.current_data = data
   }
-
+  current_data: any;
 }
 
 export class response_mat{

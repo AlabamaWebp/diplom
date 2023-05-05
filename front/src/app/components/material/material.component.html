@@ -9,7 +9,7 @@
         ></app-table>
     </div> -->
     <div class="spisok">
-        <div class="item" *ngFor="let data of data">
+        <div class="item" *ngFor="let data of data" (click)="SelectRow(data)" [class.selected]="data == current_data">
             <span class="name span_container">
                 <span>
                     Название:
