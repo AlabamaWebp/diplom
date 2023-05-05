@@ -91,7 +91,7 @@ export class ProductComponent2 implements OnInit {
   }
   checkboxes: any[] = [];
   checkBoxClick(cbox: HTMLInputElement, data: any) {
-    console.log(this.checkboxes, this.selected_items);
+    console.log(this.checkboxes, "sel:", this.selected_items);
     
     cbox.checked = !cbox.checked;
     const check = cbox.checked;
