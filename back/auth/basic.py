@@ -1,34 +1,11 @@
-import uvicorn
-# from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import RedirectResponse
-# from data.BD.base import create_tables_if_not_exists as CTINE
-from data.API.a_material import material
-from data.API.a_product import product
-from data.API.a_users import users
-
-# jwt
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi_jwt_auth import AuthJWT
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from pydantic import BaseModel
-# jwt
 
 app = FastAPI()
 
-origins = ["*"]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-# jwt
 class User(BaseModel):
     username: str
     password: str
@@ -43,6 +20,8 @@ class Settings(BaseModel):
 def get_config():
     return Settings()
 
+# exception handler for authjwt
+# in production, you can tweak performance using orjson response
 @app.exception_handler(AuthJWTException)
 def authjwt_exception_handler(request: Request, exc: AuthJWTException):
     return JSONResponse(
@@ -56,7 +35,7 @@ def authjwt_exception_handler(request: Request, exc: AuthJWTException):
 @app.post('/login')
 def login(user: User, Authorize: AuthJWT = Depends()):
     if user.username != "test" or user.password != "test":
-        raise HTTPException(status_code=401, detail="Bad username or password")
+        raise HTTPException(status_code=401,detail="Bad username or password")
 
     # subject identifier for who this token is for example id or username from database
     access_token = Authorize.create_access_token(subject=user.username)
@@ -70,18 +49,3 @@ def user(Authorize: AuthJWT = Depends()):
 
     current_user = Authorize.get_jwt_subject()
     return {"user": current_user}
-# jwt
-
-
-@app.get("/")
-async def main_page():
-    return RedirectResponse(url="/docs/", status_code=307)
-
-app.include_router(material)
-app.include_router(users)
-app.include_router(product)
-
-
-# uvicorn --reload main:app --host 26.246.185.101 --port 8000
-if __name__ == '__main__':
-    uvicorn.run("main:app", reload=True)
