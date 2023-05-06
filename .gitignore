@@ -19,3 +19,4 @@ front/coding_rules
 front/proxy.conf.json
 front/src/custom-theme.css
 front/src/custom-theme.scss
+back/auth/__pycache__/basic.cpython-310.pyc
