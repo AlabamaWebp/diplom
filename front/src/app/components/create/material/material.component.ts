@@ -19,7 +19,6 @@ export class MaterialComponent2 implements OnInit {
   ngOnInit(): void {
     if (this.is_edit) {
       this.title = "Изменение";
-      console.log(this.sel_row.getRow())
       const data = this.sel_row.getRow()[1];
       //@ts-ignore
       document.getElementById("mat_name").value = data.mat_name;
@@ -43,24 +42,32 @@ export class MaterialComponent2 implements OnInit {
     name: "Загрузка..."
   }
 
-  purchased = 0;
   fetchMatData(mat: any = "") {
+
+    if (this.sel_row.getMatTypes()) {
+      this.matTypes = this.sel_row.getMatTypes()
+      this.checkCurrentTypes(mat)
+    }
+
     this.sel_row.loadOn()
     this.cors.matTypes().subscribe((data) => {
       this.matTypes = data;
       if (this.is_edit) {
-        for (let i = 0; i < this.matTypes.length; i++) {
-          if (this.matTypes[i].name == mat) {
-            this.currentMatTypes = this.matTypes[i]
-            break;
-          }
-        }
+        this.checkCurrentTypes(mat)
       }
       else {
         this.currentMatTypes = this.matTypes[0];
       }
       this.sel_row.loadOff()
     });
+  }
+  checkCurrentTypes(mat: any) {
+    for (let i = 0; i < this.matTypes.length; i++) {
+      if (this.matTypes[i].name == mat) {
+        this.currentMatTypes = this.matTypes[i]
+        break;
+      }
+    }
   }
   create() {
     // material

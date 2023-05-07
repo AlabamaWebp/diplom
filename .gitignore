@@ -23,3 +23,7 @@ back/auth/__pycache__/basic.cpython-310.pyc
 /back/data/BD/__pycache__/base_methods.cpython-310.pyc
 /back/data/SCHEMAS/__pycache__/Material.cpython-310.pyc
 /back/data/SCHEMAS/__pycache__/Users.cpython-310.pyc
+/back/data/BD/__pycache__/base_methods.cpython-310.pyc
+/back/data/SCHEMAS/__pycache__/Material.cpython-310.pyc
+/back/data/SCHEMAS/__pycache__/Users.cpython-310.pyc
+/back/auth/__pycache__/*.pyc

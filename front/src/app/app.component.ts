@@ -17,8 +17,12 @@ export class AppComponent implements OnInit{
 
     this.cors.matAll().subscribe((d) => {
       this.sel_row.setProdMaterials(d);
-    }, (e) => {
-      console.log(e);
+    })
+    this.cors.matTypes().subscribe((d) => {
+      this.sel_row.setMatTypes(d);
+    })
+    this.cors.getRoles().subscribe((d) => {
+      this.sel_row.setRoles(d);
     })
 
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
@@ -38,6 +42,10 @@ export class AppComponent implements OnInit{
         this.cors.prodDel(data[1].id).subscribe(() => {
         })
       }
+      else if (data[0] == "user") {
+        this.cors.deleteUser(data[1].id).subscribe(() => {
+        })
+      }
     }
     this.sel_row.fetch()
   }
@@ -53,6 +61,9 @@ export class AppComponent implements OnInit{
       }
       else if (data[0] == "prod") {
         this.modal = 4;
+      }
+      else if (data[0] == "user") {
+        this.modal = 6;
       }
     }
   }

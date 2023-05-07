@@ -1,1 +1,43 @@
-<p>user works!</p>
+<div class="modal1">
+    <h3>{{title}} пользователя</h3>
+    <div class="input">
+        <span>Роль:</span>
+        <div class="hover_cont">
+          <span>{{current_role.name}}</span>
+          <div class="hover_menu" *ngIf="current_role.name != 'Загрузка...'">
+            <div class="hover_item" *ngFor="let item of roles" (click)="current_role = item">
+              <span>{{item.name}}</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="input">
+      <span class="span">Имя</span><input type="text" id="name">
+    </div>
+    <div class="input">
+      <span class="span">Фамилия</span><input type="text" id="surname">
+    </div>
+    <div class="input">
+      <span class="span">Отчество</span><input type="text" id="patr">
+    </div>
+    <div class="input">
+        <span class="span">Логин</span><input type="text" id="login">
+    </div>
+    <div class="input">
+        <span class="span">Пароль</span><input type="text" id="password">
+    </div>
+    <div class="footer">
+      <div class="button1" *ngIf="!is_edit" (click)="create()">
+        Создать
+      </div>
+      <div class="button1" *ngIf="is_edit" (click)="edit()">
+        Редактировать
+      </div>
+      <div class="button1" *ngIf="!is_edit" (click)="goBack()">
+        Назад
+      </div>
+      <div class="button1" (click)="close.emit()">
+        Закрыть
+      </div>
+    </div>
+  </div>

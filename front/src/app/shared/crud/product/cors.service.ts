@@ -49,7 +49,19 @@ export class CorsService {
 
   // users
   getUsers() {
-    return this.http.get(this.url + "users/");
+    return this.http.get(this.url + "users/").pipe(retry(5),delay(1500));
+  }
+  getRoles() {
+    return this.http.get(this.url + "users/roles/").pipe(retry(5),delay(1500));
+  }
+  createUser(data: user_data) {
+    return this.http.post(this.url + "users/create/", data).pipe(retry(5),delay(1500));
+  }
+  updateUser(id: number, data: user_data) {
+    return this.http.post(this.url + "users/update/?id=" + id, data).pipe(retry(5),delay(1500));
+  }
+  deleteUser(id: number) {
+    return this.http.post(this.url + "users/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
   }
 
 
@@ -76,4 +88,12 @@ export class mat_data {
 export class prod_data {
   "name": string = ""
   "count": number = 0
+}
+export class user_data {
+  "name": string = ""
+  "surname": string = ""
+  "patronymic": string = ""
+  "login": string = ""
+  "password": string = ""
+  "role": number = 0
 }

@@ -57,10 +57,12 @@
   <span class="tri">.</span>
 </div>
 <div class="backdrop" *ngIf="modal != -1" (click)="modal = -1" [class.load_block]="sel_row.checkLoad()"></div>
-<div class="modal_wrapper" [ngSwitch]="modal" (click)="test(modal)" [class.load_block]="sel_row.checkLoad()" *ngIf="modal != -1">
+<div class="modal_wrapper" [ngSwitch]="modal" [class.load_block]="sel_row.checkLoad()" *ngIf="modal != -1">
   <create *ngSwitchCase="0" (close)="modal = -1" (mchange)="changeModal($event)"></create>
   <create-material *ngSwitchCase="1" (close)="modal = -1" (mchange)="changeModal($event)"></create-material>
   <create-material *ngSwitchCase="2" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-material>
   <create-product *ngSwitchCase="3" (close)="modal = -1" (mchange)="changeModal($event)"></create-product>
   <create-product *ngSwitchCase="4" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-product>
+  <create-user *ngSwitchCase="5" (close)="modal = -1" (mchange)="changeModal($event)"></create-user>
+  <create-user *ngSwitchCase="6" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-user>
 </div>

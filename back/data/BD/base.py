@@ -59,6 +59,7 @@ User = Table(
     Column("RoleId", Integer, ForeignKey("Role.Id"), nullable=False),
     Column("LoginDate", DateTime, nullable=False),
     Column("RegistrationDate", DateTime, nullable=False),
+    Column("ChangePassword", Boolean, nullable=False),
 )
 Role = Table(
     "Role", meta,

@@ -8,6 +8,7 @@ import { HttpClientModule }   from '@angular/common/http';
 import { TableComponent } from './components/table/table.component';
 import { MaterialComponent } from './components/material/material.component';
 import { UserComponent } from './components/user/user.component';
+import { UserComponent2 } from './components/create/user/user.component';
 import { CreateComponent } from './components/create/create.component';
 import { RowsService } from './shared/rows/rows.service';
 import { MaterialComponent2 } from './components/create/material/material.component';
@@ -21,7 +22,8 @@ import { MaterialComponent2 } from './components/create/material/material.compon
     UserComponent,
     CreateComponent,
     MaterialComponent2,
-    ProductComponent2
+    ProductComponent2,
+    UserComponent2
   ],
   imports: [
     BrowserModule,
