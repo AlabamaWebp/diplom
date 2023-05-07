@@ -19,7 +19,6 @@ export class MaterialComponent2 implements OnInit {
   ngOnInit(): void {
     if (this.is_edit) {
       this.title = "Изменение";
-      console.log(this.sel_row.getRow())
       const data = this.sel_row.getRow()[1];
       //@ts-ignore
       document.getElementById("mat_name").value = data.mat_name;

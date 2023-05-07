@@ -65,7 +65,7 @@ def create_user(data: UserCreateModel):
 
 
 def update_user(id: int, data: UserCreateModel):
-    query = User.insert().values(
+    query = User.update().values(
         Name=data.name,
         Surname=data.surname,
         Patronymic=data.patronymic,

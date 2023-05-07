@@ -21,17 +21,63 @@ export class UserComponent2 implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.is_edit) {
+      this.title = "Изменение";
+      const data = this.sel_row.getRow()[1];
+      //@ts-ignore
+      document.getElementById("name").value = data.name;
+      //@ts-ignore
+      document.getElementById("surname").value = data.surname;
+      //@ts-ignore
+      document.getElementById("patr").value = data.patronymic;
+      // //@ts-ignore
+      // document.getElementById("login").value = data.login;
+      // //@ts-ignore
+      // document.getElementById("password").value = data.password;
+    }
+    this.fetchRoles();
+  }
+
+  roles: any
+  current_role = {id: 0, name: "Загрузка..."}
+  fetchRoles() {
+    this.sel_row.loadOn()
+    this.cors.getRoles().subscribe((data) => {
+      
+      this.roles = data;
+      if (this.is_edit) {
+        //@ts-ignore
+        for (let i = 0; i < data.length; i++) {
+          if (this.roles[i].name == this.sel_row.getRow()[1].role) {
+            this.current_role = this.roles[i]
+            break;
+          }
+        }
+      }
+      else {
+        this.current_role = this.roles[0];
+      }
+      this.sel_row.loadOff()
+    }, (e) => {
+      console.log(e);
+      this.sel_row.loadOff()
+    })
   }
 
   create() {
     this.sel_row.loadOn();
     const data = {
-      // name = document.getElementById("").value
-      // surname = document.getElementById("").value
-      // patronymic = document.getElementById("").value
-      // login = document.getElementById("").value
-      // password = document.getElementById("").value
-      // role = document.getElementById("").value
+        //@ts-ignore
+      name: document.getElementById("name").value,
+        //@ts-ignore
+      surname: document.getElementById("surname").value,
+        //@ts-ignore
+      patronymic: document.getElementById("patr").value,
+        //@ts-ignore
+      login: document.getElementById("login").value,
+        //@ts-ignore
+      password: document.getElementById("password").value,
+      role: this.current_role.id
     }
     this.cors.createUser(data).subscribe(() => {
       this.sel_row.loadOff();
@@ -46,15 +92,18 @@ export class UserComponent2 implements OnInit {
 
     const data = {
       //@ts-ignore
-      Name: document.getElementById("mat_name")?.value,
+    name: document.getElementById("name").value,
       //@ts-ignore
-      Purchased: document.getElementById("pok")?.checked,
-
-      TypeId: this.currentMatTypes.id,
+    surname: document.getElementById("surname").value,
       //@ts-ignore
-      Count: document.getElementById("colvo")?.value,
-    }
-    this.cors.matEdit(this.sel_row.getRow()[1].mat_id, data).subscribe(() => {
+    patronymic: document.getElementById("patr").value,
+      //@ts-ignore
+    login: document.getElementById("login").value,
+      //@ts-ignore
+    password: document.getElementById("password").value,
+    role: this.current_role.id
+  }
+    this.cors.updateUser(this.sel_row.getRow()[1].id, data).subscribe(() => {
       this.sel_row.loadOff();
       this.sel_row.fetch();
       this.close.emit();

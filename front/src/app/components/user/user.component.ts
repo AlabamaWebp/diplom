@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, retry } from 'rxjs';
+import { Subscription, delay, retry } from 'rxjs';
 import { CorsService } from 'src/app/shared/crud/product/cors.service';
+import { RowsService } from 'src/app/shared/rows/rows.service';
 
 @Component({
   selector: 'app-user',
@@ -9,7 +10,9 @@ import { CorsService } from 'src/app/shared/crud/product/cors.service';
 })
 export class UserComponent implements OnInit {
 
-  constructor(private cors: CorsService) { }
+  private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {this.fetchData()});
+
+  constructor(private cors: CorsService, private sel_row: RowsService) { }
 
   ngOnInit(): void {
     this.fetchData();
@@ -53,6 +56,13 @@ export class UserComponent implements OnInit {
     });
   }
   SelectRow(data: any) {
-
+    const res = ["user", data]
+    this.sel_row.setRow(res);
+    this.current_data = data
   }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    this.sel_row.setRow(undefined);
+  }
+  current_data: any
 }

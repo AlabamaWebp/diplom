@@ -38,6 +38,10 @@ export class AppComponent implements OnInit{
         this.cors.prodDel(data[1].id).subscribe(() => {
         })
       }
+      else if (data[0] == "user") {
+        this.cors.deleteUser(data[1].id).subscribe(() => {
+        })
+      }
     }
     this.sel_row.fetch()
   }
@@ -53,6 +57,9 @@ export class AppComponent implements OnInit{
       }
       else if (data[0] == "prod") {
         this.modal = 4;
+      }
+      else if (data[0] == "user") {
+        this.modal = 6;
       }
     }
   }

@@ -57,11 +57,11 @@ export class CorsService {
   createUser(data: user_data) {
     return this.http.post(this.url + "users/create/", data).pipe(retry(5),delay(1500));
   }
-  updateUser(data: user_data) {
-    return this.http.post(this.url + "users/update/", data).pipe(retry(5),delay(1500));
+  updateUser(id: number, data: user_data) {
+    return this.http.post(this.url + "users/update/?id=" + id, data).pipe(retry(5),delay(1500));
   }
-  deleteUser(data: user_data) {
-    return this.http.post(this.url + "users/delete/", undefined).pipe(retry(5),delay(1500));
+  deleteUser(id: number) {
+    return this.http.post(this.url + "users/delete/?id="+id, undefined).pipe(retry(5),delay(1500));
   }
 
 

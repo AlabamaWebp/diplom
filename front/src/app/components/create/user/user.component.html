@@ -1,24 +1,30 @@
 <div class="modal1">
-    <h3>{{title}} материала</h3>
+    <h3>{{title}} пользователя</h3>
     <div class="input">
-        <span>Тип:</span>
+        <span>Роль:</span>
         <div class="hover_cont">
-          <span>{{currentMatTypes.name}}</span>
-          <div class="hover_menu" *ngIf="currentMatTypes.name != 'Загрузка...'">
-            <div class="hover_item" *ngFor="let item of matTypes" (click)="currentMatTypes = item">
+          <span>{{current_role.name}}</span>
+          <div class="hover_menu" *ngIf="current_role.name != 'Загрузка...'">
+            <div class="hover_item" *ngFor="let item of roles" (click)="current_role = item">
               <span>{{item.name}}</span>
             </div>
           </div>
         </div>
     </div>
     <div class="input">
-      <span class="span">Название</span><input type="text" id="mat_name">
+      <span class="span">Имя</span><input type="text" id="name">
     </div>
     <div class="input">
-      <span class="span">Покупной</span><input type="checkbox" id="pok">
+      <span class="span">Фамилия</span><input type="text" id="surname">
     </div>
     <div class="input">
-      <span class="span">Количество</span><input type="text" id="colvo">
+      <span class="span">Отчество</span><input type="text" id="patr">
+    </div>
+    <div class="input">
+        <span class="span">Логин</span><input type="text" id="login">
+    </div>
+    <div class="input">
+        <span class="span">Пароль</span><input type="text" id="password">
     </div>
     <div class="footer">
       <div class="button1" *ngIf="!is_edit" (click)="create()">
