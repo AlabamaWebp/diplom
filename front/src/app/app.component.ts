@@ -11,10 +11,17 @@ import { RowsService } from './shared/rows/rows.service';
 export class AppComponent implements OnInit{
   constructor(private cors: CorsService, public sel_row: RowsService){}
   title = "продуктов";
+  login = false;
   ngOnInit(): void {
     window.location.pathname == '/user'? this.title = "пользователей" : 0;
     window.location.pathname == '/material'? this.title = "материалов" : 0;
-
+    if (!localStorage.getItem('ac')) {
+      this.login = true;
+    }
+    this.fetchaAll();
+    // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
+  }
+  fetchaAll() {
     this.cors.matAll().subscribe((d) => {
       this.sel_row.setProdMaterials(d);
     })
@@ -24,8 +31,6 @@ export class AppComponent implements OnInit{
     this.cors.getRoles().subscribe((d) => {
       this.sel_row.setRoles(d);
     })
-
-    // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
   delete() {
     const data = this.sel_row.getRow()
