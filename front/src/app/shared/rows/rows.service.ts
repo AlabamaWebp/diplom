@@ -37,4 +37,21 @@ export class RowsService {
   setProdMaterials(value: any) {
     this.only_product = value;
   }
+
+  private only_roles: any
+  getRoles() {
+    return this.only_roles;
+  }
+  setRoles(value: any) {
+    this.only_roles = value;
+  }
+
+  private only_mat_types: any
+  getMatTypes() {
+    return this.only_mat_types;
+  }
+  setMatTypes(value: any) {
+    this.only_mat_types = value;
+  }
+  
 }

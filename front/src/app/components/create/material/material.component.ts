@@ -43,22 +43,31 @@ export class MaterialComponent2 implements OnInit {
   }
 
   fetchMatData(mat: any = "") {
+
+    if (this.sel_row.getMatTypes()) {
+      this.matTypes = this.sel_row.getMatTypes()
+      this.checkCurrentTypes(mat)
+    }
+
     this.sel_row.loadOn()
     this.cors.matTypes().subscribe((data) => {
       this.matTypes = data;
       if (this.is_edit) {
-        for (let i = 0; i < this.matTypes.length; i++) {
-          if (this.matTypes[i].name == mat) {
-            this.currentMatTypes = this.matTypes[i]
-            break;
-          }
-        }
+        this.checkCurrentTypes(mat)
       }
       else {
         this.currentMatTypes = this.matTypes[0];
       }
       this.sel_row.loadOff()
     });
+  }
+  checkCurrentTypes(mat: any) {
+    for (let i = 0; i < this.matTypes.length; i++) {
+      if (this.matTypes[i].name == mat) {
+        this.currentMatTypes = this.matTypes[i]
+        break;
+      }
+    }
   }
   create() {
     // material

@@ -20,6 +20,16 @@ export class AppComponent implements OnInit{
     }, (e) => {
       console.log(e);
     })
+    this.cors.matTypes().subscribe((d) => {
+      this.sel_row.setMatTypes(d);
+    }, (e) => {
+      console.log(e);
+    })
+    this.cors.getRoles().subscribe((d) => {
+      this.sel_row.setRoles(d);
+    }, (e) => {
+      console.log(e);
+    })
 
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
