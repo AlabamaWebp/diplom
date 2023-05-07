@@ -41,8 +41,8 @@ export class UserComponent implements OnInit {
     "Дата регистрации"
   ]
   date_col = [
-    "u_login",
-    "u_registration"
+    "login",
+    "registration"
   ]
   isLoad= false;
   fetchData() {
