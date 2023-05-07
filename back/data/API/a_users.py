@@ -13,7 +13,7 @@ async def get_all_users() -> list[UserModel]:
     return get_users()
 
 
-@users.get("roles")
+@users.get("roles/")
 async def get_all_users() -> list[UniversalModel]:
     return get_roles()
 

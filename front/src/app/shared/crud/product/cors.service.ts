@@ -49,10 +49,19 @@ export class CorsService {
 
   // users
   getUsers() {
-    return this.http.get(this.url + "users/");
+    return this.http.get(this.url + "users/").pipe(retry(5),delay(1500));
+  }
+  getRoles() {
+    return this.http.get(this.url + "users/roles/").pipe(retry(5),delay(1500));
   }
   createUser(data: user_data) {
-    return this.http.post(this.url + "users/create", data);
+    return this.http.post(this.url + "users/create/", data).pipe(retry(5),delay(1500));
+  }
+  updateUser(data: user_data) {
+    return this.http.post(this.url + "users/update/", data).pipe(retry(5),delay(1500));
+  }
+  deleteUser(data: user_data) {
+    return this.http.post(this.url + "users/delete/", undefined).pipe(retry(5),delay(1500));
   }
 
 
