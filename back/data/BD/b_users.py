@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
 from data.BD.base import User, engine, Role
-from data.SCHEMAS.s_users import UserModel
+from data.SCHEMAS.s_users import UserModel, UserCreateModel
 
 
 def get_users() -> list[UserModel]:
@@ -30,3 +30,35 @@ def get_users() -> list[UserModel]:
         )
         out_values.append(return_values)
     return out_values
+
+
+def create_user(data: UserCreateModel):
+    query = User.insert().values(
+        Name=data.name,
+        Surname=data.surname,
+        Patronymic=data.patronymic,
+        Login=data.login,
+        Password=data.password,
+        RoleId=data.role
+    )
+    engine.execute(query)
+    engine.commit()
+
+
+def update_user(id: int, data: UserCreateModel):
+    query = User.insert().values(
+        Name=data.name,
+        Surname=data.surname,
+        Patronymic=data.patronymic,
+        Login=data.login,
+        Password=data.password,
+        RoleId=data.role
+    ).where(User.c.Id == id)
+    engine.execute(query)
+    engine.commit()
+
+
+def del_user(id: int):
+    query = User.delete().where(User.c.Id == id)
+    engine.execute(query)
+    engine.commit()
