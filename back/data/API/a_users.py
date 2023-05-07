@@ -16,23 +16,27 @@ async def api_users(Authorize: AuthJWT = Depends()) -> list[UserModel]:
 
 
 @users.get("roles/")
-async def get_all_users() -> list[UniversalModel]:
+async def get_all_users(Authorize: AuthJWT = Depends()) -> list[UniversalModel]:
+    Authorize.jwt_required()
     return get_roles()
 
 
 @users.post("create/")
-async def c_u(data: UserCreateModel):
+async def c_u(data: UserCreateModel, Authorize: AuthJWT = Depends()):
+    Authorize.jwt_required()
     create_user(data)
     return "ok"
 
 
 @users.post("update/")
-async def u_u(id: int, data: UserCreateModel):
+async def u_u(id: int, data: UserCreateModel, Authorize: AuthJWT = Depends()):
+    Authorize.jwt_required()
     update_user(id, data)
     return "ok"
 
 
 @users.post("delete/")
-async def d_u(id: int):
+async def d_u(id: int, Authorize: AuthJWT = Depends()):
+    Authorize.jwt_required()
     del_user(id)
     return "ok"
