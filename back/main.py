@@ -1,11 +1,13 @@
 import uvicorn
 # from fastapi import FastAPI
+from sqlalchemy import select
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 # from data.BD.base import create_tables_if_not_exists as CTINE
 from data.API.a_material import material
 from data.API.a_product import product
 from data.API.a_users import users
+from data.BD.base import User as bdUser, engine
 
 # jwt
 from fastapi import FastAPI, HTTPException, Depends, Request
@@ -61,7 +63,12 @@ def authjwt_exception_handler(request: Request, exc: AuthJWTException):
 
 @app.post('/login')
 def login(user: User, Authorize: AuthJWT = Depends()):
-    if user.username != "test" or user.password != "test":
+    query = select(
+        bdUser.c.Login,
+        bdUser.c.Password,
+    ).where(bdUser.c.Login == user.username)
+    values = engine.execute(query).fetchone()
+    if user.username != values.Login or user.password != values.Password:
         raise HTTPException(status_code=401, detail="Bad username or password")
 
     # subject identifier for who this token is for example id or username from database

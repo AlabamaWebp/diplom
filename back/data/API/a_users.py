@@ -12,3 +12,10 @@ users.prefix = "/users/"
 async def api_users(Authorize: AuthJWT = Depends()) -> list[UserModel]:
     Authorize.jwt_required()
     return get_users()
+
+
+# @users.post("create/")
+# async def c_all(data: MaterialCreateModel, Authorize: AuthJWT = Depends()):
+#     Authorize.jwt_required()
+#     create_mat(data)
+#     return "ok"
