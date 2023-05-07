@@ -51,6 +51,9 @@ export class CorsService {
   getUsers() {
     return this.http.get(this.url + "users/");
   }
+  createUser(data: user_data) {
+    return this.http.post(this.url + "users/create", data);
+  }
 
 
   // postavshik
@@ -76,4 +79,12 @@ export class mat_data {
 export class prod_data {
   "name": string = ""
   "count": number = 0
+}
+export class user_data {
+  "name": string = ""
+  "surname": string = ""
+  "patronymic": string = ""
+  "login": string = ""
+  "password": string = ""
+  "role": number = 0
 }

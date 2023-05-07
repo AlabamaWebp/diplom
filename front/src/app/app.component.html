@@ -63,4 +63,6 @@
   <create-material *ngSwitchCase="2" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-material>
   <create-product *ngSwitchCase="3" (close)="modal = -1" (mchange)="changeModal($event)"></create-product>
   <create-product *ngSwitchCase="4" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-product>
+  <create-user *ngSwitchCase="5" (close)="modal = -1" (mchange)="changeModal($event)"></create-user>
+  <create-user *ngSwitchCase="6" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-user>
 </div>

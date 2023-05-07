@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from data.BD.base import User, engine, Role
+from data.BD.base import User, engine, Role, UniversalModel
 from data.SCHEMAS.s_users import UserModel, UserCreateModel
 
 
@@ -30,6 +30,25 @@ def get_users() -> list[UserModel]:
         )
         out_values.append(return_values)
     return out_values
+
+
+def get_roles() -> list[UniversalModel]:
+    query = select(
+        Role.c.Id,
+        Role.c.Name,
+    )
+    values = engine.execute(query).fetchall()
+
+    out_values = []
+
+    for item in values:
+        return_values = UniversalModel(
+            id=item[0],
+            name=item[1],
+        )
+        out_values.append(return_values)
+    return out_values
+
 
 
 def create_user(data: UserCreateModel):

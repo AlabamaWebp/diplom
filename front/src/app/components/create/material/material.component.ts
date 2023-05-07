@@ -43,7 +43,6 @@ export class MaterialComponent2 implements OnInit {
     name: "Загрузка..."
   }
 
-  purchased = 0;
   fetchMatData(mat: any = "") {
     this.sel_row.loadOn()
     this.cors.matTypes().subscribe((data) => {
