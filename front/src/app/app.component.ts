@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialComponent } from './components/material/material.component';
 import { CorsService } from './shared/crud/product/cors.service';
 import { RowsService } from './shared/rows/rows.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +10,28 @@ import { RowsService } from './shared/rows/rows.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+
   constructor(private cors: CorsService, public sel_row: RowsService){}
+
+  private subs: Subscription = this.cors.is_login$.subscribe(() => {
+    this.ngOnInit();
+  });
   title = "продуктов";
   login = false;
+  changeLogin() {
+    this.login = false
+  }
   ngOnInit(): void {
     window.location.pathname == '/user'? this.title = "пользователей" : 0;
     window.location.pathname == '/material'? this.title = "материалов" : 0;
-    if (!localStorage.getItem('ac')) {
-      this.login = true;
-    }
+    localStorage.getItem('ac') ? this.login = false : this.login = true;
     this.fetchaAll();
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
+  clickLogin(data: {username: string, password: string}) {
+    this.cors.login(data);
+  }
+
   fetchaAll() {
     this.cors.matAll().subscribe((d) => {
       this.sel_row.setProdMaterials(d);

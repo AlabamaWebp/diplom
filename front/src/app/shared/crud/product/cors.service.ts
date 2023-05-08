@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, retry } from 'rxjs';
+import { Subject, delay, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class CorsService {
   constructor(private http: HttpClient) { }
 
   // headers = new HttpHeaders();
-  headers = {};
+  headers = {'Authorization': 'Bearer ' + localStorage.getItem("ac")};
 
   setHeader(token: string) {
     // this.headers = new HttpHeaders({
@@ -29,8 +29,15 @@ export class CorsService {
       localStorage.setItem('ac', d.access_token);
       //@ts-ignore
       localStorage.setItem('rf', d.refresh_token);
+      this.fetchLogin();
     });
   }
+
+  public is_login$ = new Subject;
+  fetchLogin() {
+    this.is_login$.next(undefined);
+  }
+
   refresh() {
     if (localStorage.getItem('rf')) {
       //@ts-ignore

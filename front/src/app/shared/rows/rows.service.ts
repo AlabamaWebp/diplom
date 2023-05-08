@@ -29,7 +29,7 @@ export class RowsService {
   fetch() {
     this.fetchData$.next(undefined);
   }
-
+  // fetch data zaranee
   private only_product: any
   getProdMaterials() {
     return this.only_product;
@@ -53,5 +53,6 @@ export class RowsService {
   setMatTypes(value: any) {
     this.only_mat_types = value;
   }
-  
+  // fetch data zaranee
+
 }
