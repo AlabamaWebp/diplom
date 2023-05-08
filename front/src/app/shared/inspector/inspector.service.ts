@@ -13,18 +13,22 @@ export class InspectorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const d = this.cors.getTokens();
     let authObj
-    if (localStorage.getItem('ac')) {
-      if (!req.url.includes("refresh")) {
+    if (d.access_token != undefined) {
+
+      if (req.url.includes("refresh")) {
         authObj = req.clone({
-          headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('rf')),
+          headers: req.headers.set('Authorization', 'Bearer ' + d.refresh_token)
         })
+        alert("refresh")
       }
       else {
         authObj = req.clone({
-          headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('ac')),
+          headers: req.headers.set('Authorization', 'Bearer ' + d.access_token)
         })
       }
+
     }
     const authReq = authObj ? authObj : req.clone();
     return next.handle(authReq).pipe(

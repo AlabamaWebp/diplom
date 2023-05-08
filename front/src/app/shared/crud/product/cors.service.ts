@@ -20,8 +20,7 @@ export class CorsService {
       localStorage.setItem('ac', d.access_token);
       //@ts-ignore
       localStorage.setItem('rf', d.refresh_token);
-      console.log(d);
-
+      this.tokens = d
       this.fetchLogin();
     });
   }
@@ -31,6 +30,11 @@ export class CorsService {
     this.is_login$.next(undefined);
   }
 
+  tokens: any = { access_token: localStorage.getItem("ac"), refresh_token: localStorage.getItem("rf") }
+  getTokens() {
+    return this.tokens;
+  }
+
   refresh() {
     if (localStorage.getItem('rf')) {
       this.http.post(this.url + "refresh/", undefined).subscribe((d) => {
@@ -38,6 +42,7 @@ export class CorsService {
         localStorage.setItem('ac', d.access_token);
         //@ts-ignore
         localStorage.setItem('rf', d.refresh_token);
+        this.tokens = d;
       })
     }
   }
