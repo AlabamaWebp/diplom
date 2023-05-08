@@ -28,6 +28,9 @@ export class AppComponent implements OnInit{
     this.fetchaAll();
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
   clickLogin(data: {username: string, password: string}) {
     this.cors.login(data);
   }
