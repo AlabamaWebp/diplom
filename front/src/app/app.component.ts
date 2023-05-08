@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
-  constructor(private cors: CorsService, public sel_row: RowsService){}
+  constructor(private cors: CorsService, public sel_row: RowsService) { }
 
   private subs: Subscription = this.cors.is_login$.subscribe(() => {
     this.ngOnInit();
@@ -22,16 +22,22 @@ export class AppComponent implements OnInit{
     this.login = false
   }
   ngOnInit(): void {
-    window.location.pathname == '/user'? this.title = "пользователей" : 0;
-    window.location.pathname == '/material'? this.title = "материалов" : 0;
-    localStorage.getItem('ac') ? this.login = false : this.login = true;
+    if (localStorage.getItem('ac')) {
+      this.login = false;
+    }
+    else {
+      this.login = true;
+      return
+    }
+    window.location.pathname == '/user' ? this.title = "пользователей" : 0;
+    window.location.pathname == '/material' ? this.title = "материалов" : 0;
     this.fetchaAll();
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
-  clickLogin(data: {username: string, password: string}) {
+  clickLogin(data: { username: string, password: string }) {
     this.cors.login(data);
   }
 
@@ -48,7 +54,7 @@ export class AppComponent implements OnInit{
   }
   delete() {
     const data = this.sel_row.getRow()
-    
+
     if (data) {
       this.modal = -1;
       // this.is_edit = false;
@@ -71,7 +77,7 @@ export class AppComponent implements OnInit{
 
   edit() {
     const data = this.sel_row.getRow()
-    
+
     if (data) {
       if (data[0] == "material") {
         // this.active_modal = 1;

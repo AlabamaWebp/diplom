@@ -11,7 +11,7 @@ import { RowsService } from 'src/app/shared/rows/rows.service';
 export class ProductComponent implements OnInit {
 
   private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {
-    this.fetchData(); 
+    this.fetchData();
     this.material = undefined;
     this.prodSelectRow(this.data_select_row);
   });
@@ -56,7 +56,7 @@ export class ProductComponent implements OnInit {
   isLoad2 = false;
   fetchData() {
     this.isLoad = true;
-    this.cors.prodAll().pipe(retry(5),delay(1500)).subscribe((data) => {
+    this.cors.prodAll().subscribe((data) => {
       this.product = data;
       this.isLoad = false;
     });
@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
     this.isLoad2 = true;
     const res = ["prod", data_1]
     this.sel_row.setRow(res);
-    this.cors.matProd(data_1.id).pipe(retry(5),delay(1500)).subscribe((data) => {
+    this.cors.matProd(data_1.id).subscribe((data) => {
       this.material = data;
       this.isLoad2 = false;
     });

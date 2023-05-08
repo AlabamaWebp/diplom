@@ -13,7 +13,7 @@ export class UserComponent2 implements OnInit {
   @Output() close = new EventEmitter();
   @Output() mchange = new EventEmitter();
   title = "Создание";
-  
+
   constructor(private cors: CorsService, private sel_row: RowsService) { }
 
   goBack() {
@@ -39,16 +39,16 @@ export class UserComponent2 implements OnInit {
   }
 
   roles: any
-  current_role = {id: 0, name: "Загрузка..."}
+  current_role = { id: 0, name: "Загрузка..." }
   fetchRoles() {
-    if (this.sel_row.getRoles()) {
+    if (this.sel_row.getRoles() != undefined && this.sel_row.getRoles()) {
       this.roles = this.sel_row.getRoles();
-      this.checkCurrentRoles();
+      this.current_role = this.roles[0];
     }
     else {
       this.sel_row.loadOn()
       this.cors.getRoles().subscribe((data) => {
-        
+
         this.roles = data;
         if (this.is_edit) {
           this.checkCurrentRoles();
@@ -62,6 +62,8 @@ export class UserComponent2 implements OnInit {
         this.sel_row.loadOff()
       })
     }
+    console.log(this.roles);
+
   }
   checkCurrentRoles() {
     for (let i = 0; i < this.roles.length; i++) {
@@ -75,15 +77,15 @@ export class UserComponent2 implements OnInit {
   create() {
     this.sel_row.loadOn();
     const data = {
-        //@ts-ignore
+      //@ts-ignore
       name: document.getElementById("name").value,
-        //@ts-ignore
+      //@ts-ignore
       surname: document.getElementById("surname").value,
-        //@ts-ignore
+      //@ts-ignore
       patronymic: document.getElementById("patr").value,
-        //@ts-ignore
+      //@ts-ignore
       login: document.getElementById("login").value,
-        //@ts-ignore
+      //@ts-ignore
       password: document.getElementById("password").value,
       role: this.current_role.id
     }
@@ -100,17 +102,17 @@ export class UserComponent2 implements OnInit {
 
     const data = {
       //@ts-ignore
-    name: document.getElementById("name").value,
+      name: document.getElementById("name").value,
       //@ts-ignore
-    surname: document.getElementById("surname").value,
+      surname: document.getElementById("surname").value,
       //@ts-ignore
-    patronymic: document.getElementById("patr").value,
+      patronymic: document.getElementById("patr").value,
       //@ts-ignore
-    login: document.getElementById("login").value,
+      login: document.getElementById("login").value,
       //@ts-ignore
-    password: document.getElementById("password").value,
-    role: this.current_role.id
-  }
+      password: document.getElementById("password").value,
+      role: this.current_role.id
+    }
     this.cors.updateUser(this.sel_row.getRow()[1].id, data).subscribe(() => {
       this.sel_row.loadOff();
       this.sel_row.fetch();

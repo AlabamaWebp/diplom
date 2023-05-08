@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductComponent2 } from './components/create/product/product.component';
-import { HttpClientModule }   from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TableComponent } from './components/table/table.component';
 import { MaterialComponent } from './components/material/material.component';
 import { UserComponent } from './components/user/user.component';
@@ -12,6 +12,7 @@ import { UserComponent2 } from './components/create/user/user.component';
 import { CreateComponent } from './components/create/create.component';
 import { RowsService } from './shared/rows/rows.service';
 import { MaterialComponent2 } from './components/create/material/material.component';
+import { InspectorService } from './shared/inspector/inspector.service';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,21 @@ import { MaterialComponent2 } from './components/create/material/material.compon
     CreateComponent,
     MaterialComponent2,
     ProductComponent2,
-    UserComponent2
+    UserComponent2,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [RowsService],
+  providers: [
+    RowsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InspectorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

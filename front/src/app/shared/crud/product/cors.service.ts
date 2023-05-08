@@ -9,26 +9,19 @@ export class CorsService {
 
   constructor(private http: HttpClient) { }
 
+  // .pipe(retry(5),delay(1500))
+
   // headers = new HttpHeaders();
-  headers = {'Authorization': 'Bearer ' + localStorage.getItem("ac")};
+  // headers = { 'Authorization': 'Bearer ' + localStorage.getItem("ac") };
 
-  setHeader(token: string) {
-    // this.headers = new HttpHeaders({
-
-    // })
-    this.headers = {
-      'Authorization': 'Bearer ' + token,
-    }
-  }
-
-  login(data: {username: string, password: string}) {
-    this.http.post(this.url + "login/", data).pipe(retry(5),delay(1500)).subscribe((d) => {
-      //@ts-ignore
-      this.setHeader(d.access_token)
+  login(data: { username: string, password: string }) {
+    this.http.post(this.url + "login/", data).subscribe((d) => {
       //@ts-ignore
       localStorage.setItem('ac', d.access_token);
       //@ts-ignore
       localStorage.setItem('rf', d.refresh_token);
+      console.log(d);
+
       this.fetchLogin();
     });
   }
@@ -40,13 +33,7 @@ export class CorsService {
 
   refresh() {
     if (localStorage.getItem('rf')) {
-      //@ts-ignore
-      this.setHeader(localStorage.getItem('rf'))
-      this.http.post(this.url + "refresh/", {
-        headers: this.headers
-      }).pipe(retry(5),delay(1500)).subscribe((d) => {
-        //@ts-ignore
-        this.setHeader(d.access_token)
+      this.http.post(this.url + "refresh/", undefined).subscribe((d) => {
         //@ts-ignore
         localStorage.setItem('ac', d.access_token);
         //@ts-ignore
@@ -58,86 +45,56 @@ export class CorsService {
   url = "http://127.0.0.1:8000/"
   // mat
   matAll() {
-    return this.http.get(this.url + "mat/all/", {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.get(this.url + "mat/all/");
   }
   matProd(id: number) {
-    return this.http.get(this.url + "mat/prod/?pr_id="+id, {
-      headers: this.headers
-    });
+    return this.http.get(this.url + "mat/prod/?pr_id=" + id);
   }
   matTypes() {
-    return this.http.get(this.url + "mat/types/", {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.get(this.url + "mat/types/");
   }
   matCreate(data: mat_data) {
-    return this.http.post(this.url + "mat/create/", data, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "mat/create/", data);
   }
   matDel(id: number) {
-    return this.http.post(this.url + "mat/delete/?id="+id, undefined, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "mat/delete/?id=" + id, undefined);
   }
   matEdit(id: number, data: mat_data) {
-    return this.http.post(this.url + "mat/update/?id1="+id, data, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "mat/update/?id1=" + id, data);
 
   }
 
 
   // prod
   prodAll() {
-    return this.http.get(this.url + "prod/all/", {
-      headers: this.headers
-    });
+    return this.http.get(this.url + "prod/all/");
   }
   prodCreate(data: any) {
-    return this.http.post(this.url + "prod/create/", data, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "prod/create/", data);
   }
   prodUpdate(id: number, data: any) {
-    return this.http.post(this.url + "prod/update/?id1="+id, data, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "prod/update/?id1=" + id, data);
   }
   prodDel(id: number) {
-    return this.http.post(this.url + "prod/delete/?id="+id, undefined, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "prod/delete/?id=" + id, undefined);
   }
 
 
   // users
   getUsers() {
-    return this.http.get(this.url + "users/", {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.get(this.url + "users/");
   }
   getRoles() {
-    return this.http.get(this.url + "users/roles/", {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.get(this.url + "users/roles/");
   }
   createUser(data: user_data) {
-    return this.http.post(this.url + "users/create/", data, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "users/create/", data);
   }
   updateUser(id: number, data: user_data) {
-    return this.http.post(this.url + "users/update/?id=" + id, data, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "users/update/?id=" + id, data);
   }
   deleteUser(id: number) {
-    return this.http.post(this.url + "users/delete/?id="+id, undefined, {
-      headers: this.headers
-    }).pipe(retry(5),delay(1500));
+    return this.http.post(this.url + "users/delete/?id=" + id, undefined);
   }
 
 

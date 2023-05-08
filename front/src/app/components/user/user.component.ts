@@ -10,7 +10,7 @@ import { RowsService } from 'src/app/shared/rows/rows.service';
 })
 export class UserComponent implements OnInit {
 
-  private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {this.fetchData()});
+  private subs: Subscription = this.sel_row.fetchData$.subscribe(() => { this.fetchData() });
 
   constructor(private cors: CorsService, private sel_row: RowsService) { }
 
@@ -47,10 +47,10 @@ export class UserComponent implements OnInit {
     "login",
     "registration"
   ]
-  isLoad= false;
+  isLoad = false;
   fetchData() {
     this.isLoad = true;
-    this.cors.getUsers().pipe(retry(5),delay(1500)).subscribe((data) => {
+    this.cors.getUsers().subscribe((data) => {
       this.data = data;
       this.isLoad = false;
     });
