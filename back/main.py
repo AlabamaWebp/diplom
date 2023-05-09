@@ -43,6 +43,7 @@ class User(BaseModel):
 
 class Settings(BaseModel):
     authjwt_secret_key: str = "secret1"
+    authjwt_access_token_expires: int = 5
 
 
 # callback to get your configuration
