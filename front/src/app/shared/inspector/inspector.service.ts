@@ -75,11 +75,8 @@ export class InspectorService implements HttpInterceptor {
         }
         else if (err.error.detail == "Only access tokens are allowed") {
           this.logout()
-          return throwError(() => err)
         }
-        else {
-          return throwError(() => err)
-        }
+        return throwError(() => err)
       }
       else {
         return throwError(() => err)

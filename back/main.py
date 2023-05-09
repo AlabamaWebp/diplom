@@ -37,9 +37,6 @@ class User(BaseModel):
     username: str
     password: str
 
-# in production you can use Settings management
-# from pydantic to get secret key from .env
-
 
 class Settings(BaseModel):
     authjwt_secret_key: str = "secret1"
@@ -54,18 +51,10 @@ def get_config():
 
 @app.exception_handler(AuthJWTException)
 def authjwt_exception_handler(request: Request, exc: AuthJWTException):
-    # return JSONResponse(
-    #     status_code=exc.status_code,
-    #     content={"detail": exc.message}
-    # )
     return JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.message}
     )
-
-# provide a method to create access tokens. The create_access_token()
-# function is used to actually generate the token to use authorization
-# later in endpoint protected
 
 
 @app.post('/login')
@@ -90,16 +79,8 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     return {"access_token": access_token, "refresh_token": refresh_token}
 
 
-# protect endpoint with function jwt_required(), which requires
-# a valid access token in the request headers to access.
 @app.post('/refresh')
 def refresh(Authorize: AuthJWT = Depends()):
-    """
-    The jwt_refresh_token_required() function insures a valid refresh
-    token is present in the request before running any code below that function.
-    we can use the get_jwt_subject() function to get the subject of the refresh
-    token, and use the create_access_token() function again to make a new access token
-    """
     Authorize.jwt_refresh_token_required()
 
     current_user = Authorize.get_jwt_subject()
@@ -123,7 +104,6 @@ def protected(Authorize: AuthJWT = Depends()):
     for i in values:
         return_values.append(i)
     return {"user": current_user, "info": return_values}
-
 # jwt
 
 

@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       this.cors.protect().subscribe((d) => {
         //@ts-ignore
         const data = d.info
-        this.username = data[0] + " " + data[1].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
+        this.username = data[1] + " " + data[0].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
       });
       // data1 = data[0] + " " + data[1].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
     }

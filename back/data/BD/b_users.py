@@ -61,9 +61,7 @@ def create_user(data: UserCreateModel):
         Patronymic=data.patronymic,
         Login=data.login,
         Password=data.password,
-        RoleId=data.role,
-        LoginDate=datetime,
-        RegistrationDate=datetime
+        RoleId=data.role
     )
     engine.execute(query)
     engine.commit()
