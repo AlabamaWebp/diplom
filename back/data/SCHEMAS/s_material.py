@@ -8,6 +8,7 @@ class MaterialModel(BaseModel):
     mat_purchased: int = 0
     mat_count: int = 0
     mat_type: str = ""
+    count: int = -1
 
 
 class MaterialCreateModel(BaseModel):

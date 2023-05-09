@@ -49,6 +49,7 @@ create table ProductMaterial
 	Id INTEGER PRIMARY KEY AUTOINCREMENT,
 	ProductId INTEGER,
 	MaterialId INTEGER,
+	Count INTEGER,
 	FOREIGN KEY (ProductId) REFERENCES Product(Id) ON DELETE CASCADE, 
 	FOREIGN KEY (MaterialId) REFERENCES Material(Id) ON DELETE CASCADE
 );
@@ -90,4 +91,4 @@ values ('Руль корокий',1,3,3),
 
 insert into Product(Name,[Count]) values ('Велосипед Горный', 78), ('Велосипед Шоссейный',56);
 
-insert into ProductMaterial(ProductId, MaterialId) values (1, 1), (1,2), (2,1)
+insert into ProductMaterial(ProductId, MaterialId, Count) values (1, 1,73), (1,2,59), (2,1,43)

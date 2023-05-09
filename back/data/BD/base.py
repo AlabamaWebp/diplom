@@ -45,6 +45,7 @@ MaterialType = Table(
 ProductMaterial = Table(
     "ProductMaterial", meta,
     Column("Id", Integer, primary_key=True, autoincrement=True),
+    Column("Count", Integer, nullable=False),
     Column("ProductID", Integer, ForeignKey("Product.Id"), nullable=False),
     Column("MaterialID", Integer, ForeignKey("Material.Id"), nullable=False)
 )

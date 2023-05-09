@@ -40,7 +40,8 @@ def create_prod(data: ProdCreate):
     for i in data.checked:
         query = ProductMaterial.insert().values(
             ProductID=q2[0],
-            MaterialID=i["mat_id"]
+            MaterialID=i["mat_id"],
+            Count=i["count"]
         )
         engine.execute(query)
     engine.commit()
@@ -57,7 +58,8 @@ def update_prod(id1: int, data: ProdCreate):
         if i["checked"]:
             query = ProductMaterial.insert().values(
                 ProductID=id1,
-                MaterialID=i["mat_id"]
+                MaterialID=i["mat_id"],
+                Count=i["count"]
             )
         else:
             query = ProductMaterial.delete().where(

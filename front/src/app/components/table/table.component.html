@@ -18,7 +18,7 @@
                         {{item[head]}}
                     </div>
                     <div class="text" *ngIf="date_col.includes(head)">
-                        {{item[head] | date:"d.MM.yyyy HH:mm"}}
+                        {{item[head] | date:"dd.MM.yyyy HH:mm"}}
                     </div>
                     <div class="text" *ngIf="checbox_col.includes(head)">
                         <input type="checkbox" [checked]="item[head]" disabled>
