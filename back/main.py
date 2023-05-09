@@ -112,7 +112,16 @@ def protected(Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
 
     current_user = Authorize.get_jwt_subject()
-    return {"user": current_user}
+    query = select(
+        bdUser.c.Name,
+        bdUser.c.Surname,
+        bdUser.c.Patronymic,
+    ).where(bdUser.c.Login == current_user)
+    values = engine.execute(query).fetchone()
+    return_values = []
+    for i in values:
+        return_values.append(i)
+    return {"user": current_user, "info": return_values}
 
 # jwt
 

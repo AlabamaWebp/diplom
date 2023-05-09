@@ -18,19 +18,26 @@ export class AppComponent implements OnInit {
   });
   title = "продуктов";
   login = false;
+  username: any = undefined
   changeLogin() {
     this.login = false
   }
   ngOnInit(): void {
     if (localStorage.getItem("ac")) {
       this.login = false;
+      window.location.pathname == '/user' ? this.title = "пользователей" : 0;
+      window.location.pathname == '/material' ? this.title = "материалов" : 0;
+      this.cors.protect().subscribe((d) => {
+        //@ts-ignore
+        const data = d.info
+        this.username = data[0] + " " + data[1].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
+      });
+      // data1 = data[0] + " " + data[1].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
     }
     else {
       this.login = true;
       return
     }
-    window.location.pathname == '/user' ? this.title = "пользователей" : 0;
-    window.location.pathname == '/material' ? this.title = "материалов" : 0;
     // this.fetchaAll();
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }

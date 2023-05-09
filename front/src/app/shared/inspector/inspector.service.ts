@@ -54,7 +54,7 @@ export class InspectorService implements HttpInterceptor {
           }
         }
       ),
-      retry(2)
+      // retry(2)
     )
   }
 }

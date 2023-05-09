@@ -48,15 +48,7 @@ export class CorsService {
   }
   protect() {
     // protected
-    let tmp: boolean = false;
-    this.http.get(this.url + "protected").subscribe((d) => {
-      console.log(d);
-      tmp = true;
-    }, (e) => {
-      console.log(e);
-      tmp = false;
-    })
-    return tmp
+    return this.http.get(this.url + "protected")
   }
 
   url = "http://127.0.0.1:8000/"
