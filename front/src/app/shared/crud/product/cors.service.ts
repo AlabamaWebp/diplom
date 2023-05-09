@@ -13,14 +13,18 @@ export class CorsService {
 
   // headers = new HttpHeaders();
   // headers = { 'Authorization': 'Bearer ' + localStorage.getItem("ac") };
-
+  logOut() {
+    localStorage.removeItem("ac");
+    localStorage.removeItem("rf");
+    this.fetchLogin();
+  }
   login(data: { username: string, password: string }) {
     this.http.post(this.url + "login/", data).subscribe((d) => {
       //@ts-ignore
       localStorage.setItem('ac', d.access_token);
       //@ts-ignore
       localStorage.setItem('rf', d.refresh_token);
-      this.tokens = d
+
       this.fetchLogin();
     });
   }
@@ -30,14 +34,6 @@ export class CorsService {
     this.is_login$.next(undefined);
   }
 
-  private tokens: any = { access_token: localStorage.getItem("ac"), refresh_token: localStorage.getItem("rf") }
-  getTokens() {
-    return this.tokens;
-  }
-  setTokens(value: any) {
-    this.tokens = value;
-  }
-
   refresh() {
     if (localStorage.getItem('rf')) {
       this.http.post(this.url + "refresh/", undefined).subscribe((d) => {
@@ -45,7 +41,8 @@ export class CorsService {
         localStorage.setItem('ac', d.access_token);
         //@ts-ignore
         localStorage.setItem('rf', d.refresh_token);
-        location.reload()
+
+        // location.reload()
       })
     }
   }

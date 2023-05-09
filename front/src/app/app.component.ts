@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private cors: CorsService, public sel_row: RowsService) { }
+  constructor(public cors: CorsService, public sel_row: RowsService) { }
 
   private subs: Subscription = this.cors.is_login$.subscribe(() => {
     this.ngOnInit();
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.login = false
   }
   ngOnInit(): void {
-    if (!this.cors.protect()) {
+    if (localStorage.getItem("ac")) {
       this.login = false;
     }
     else {
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     }
     window.location.pathname == '/user' ? this.title = "пользователей" : 0;
     window.location.pathname == '/material' ? this.title = "материалов" : 0;
-    this.fetchaAll();
+    // this.fetchaAll();
     // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
   ngOnDestroy() {

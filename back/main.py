@@ -78,9 +78,11 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     if user.username != values.Login or user.password != values.Password:
         raise HTTPException(status_code=401, detail="Bad username or password")
 
-    query = bdUser().update().values(
+    query = bdUser.update().values(
         LoginDate=datetime.datetime.now()
     ).where(bdUser.c.Id == values.Id)
+    engine.execute(query)
+    engine.commit()
     # subject identifier for who this token is for example id or username from database
     access_token = Authorize.create_access_token(subject=user.username)
     refresh_token = Authorize.create_refresh_token(subject=user.username)

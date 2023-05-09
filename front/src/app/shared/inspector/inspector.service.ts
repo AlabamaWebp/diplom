@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, retry, tap } from 'rxjs';
 import { CorsService } from '../crud/product/cors.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class InspectorService implements HttpInterceptor {
   constructor(private cors: CorsService) { }
 
@@ -13,26 +11,24 @@ export class InspectorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const d = this.cors.getTokens();
     let authObj
-    if (d != undefined && d.access_token != undefined) {
+    if (localStorage.getItem("ac")) {
 
       if (req.url.includes("refresh")) {
         authObj = req.clone({
-          headers: req.headers.set('Authorization', 'Bearer ' + d.refresh_token)
+          headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem("rf"))
         })
         alert("refresh")
       }
       else {
         authObj = req.clone({
-          headers: req.headers.set('Authorization', 'Bearer ' + d.access_token)
+          headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem("ac"))
         })
       }
 
     }
     const authReq = authObj ? authObj : req.clone();
     return next.handle(authReq).pipe(
-      retry(3),
       // delay(1500),
       tap(
         (event) => {
@@ -51,11 +47,14 @@ export class InspectorService implements HttpInterceptor {
               this.cors.fetchLogin();
             }
             else if (err.status == 401) {
-              console.log('Unauthorized')
+              // if (localStorage.getItem("ac")) {
+              //   this.cors.fetchLogin();
+              // }
             }
           }
         }
-      )
+      ),
+      retry(2)
     )
   }
 }

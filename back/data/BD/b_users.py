@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import select
 
 from data.BD.base import User, engine, Role, UniversalModel
@@ -52,7 +54,6 @@ def get_roles() -> list[UniversalModel]:
     return out_values
 
 
-
 def create_user(data: UserCreateModel):
     query = User.insert().values(
         Name=data.name,
@@ -60,7 +61,9 @@ def create_user(data: UserCreateModel):
         Patronymic=data.patronymic,
         Login=data.login,
         Password=data.password,
-        RoleId=data.role
+        RoleId=data.role,
+        LoginDate=datetime,
+        RegistrationDate=datetime
     )
     engine.execute(query)
     engine.commit()

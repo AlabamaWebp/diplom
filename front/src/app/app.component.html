@@ -10,7 +10,11 @@
         Таблица {{title}}
       </span>
       <div class="right">
-        Елисеев Д.А.
+        <span class="name">Елисеев Д.А.</span>
+        <span class="name">|</span>
+        <span (click)="cors.protect()">Сменить пароль</span>
+        <span class="name">|</span>
+        <span (click)="cors.logOut()">Выйти</span>
       </div>
     </div>
     <div class="container">
@@ -40,10 +44,7 @@
             <button class="button1" *ngIf="sel_row.getRow()" (click)="delete()">
               Удалить
             </button>
-            <button class="button1">
-              Войти
-            </button>
-        </div>
+          </div>
         </div>
         <div class="template">
           <router-outlet></router-outlet>
@@ -61,7 +62,8 @@
         <span class="span">Пароль</span><input type="text" id="password" #password1>
       </div>
       <div class="footer">
-        <div class="button1" style="font-size: 16px;" (click)="clickLogin({username: login1.value, password: password1.value})">Войти</div>
+        <div class="button1" style="font-size: 16px;"
+          (click)="clickLogin({username: login1.value, password: password1.value})">Войти</div>
       </div>
     </div>
   </div>
@@ -76,9 +78,11 @@
 <div class="modal_wrapper" [ngSwitch]="modal" [class.load_block]="sel_row.checkLoad()" *ngIf="modal != -1">
   <create *ngSwitchCase="0" (close)="modal = -1" (mchange)="changeModal($event)"></create>
   <create-material *ngSwitchCase="1" (close)="modal = -1" (mchange)="changeModal($event)"></create-material>
-  <create-material *ngSwitchCase="2" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-material>
+  <create-material *ngSwitchCase="2" [is_edit]="true" (close)="modal = -1"
+    (mchange)="changeModal($event)"></create-material>
   <create-product *ngSwitchCase="3" (close)="modal = -1" (mchange)="changeModal($event)"></create-product>
-  <create-product *ngSwitchCase="4" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-product>
+  <create-product *ngSwitchCase="4" [is_edit]="true" (close)="modal = -1"
+    (mchange)="changeModal($event)"></create-product>
   <create-user *ngSwitchCase="5" (close)="modal = -1" (mchange)="changeModal($event)"></create-user>
   <create-user *ngSwitchCase="6" [is_edit]="true" (close)="modal = -1" (mchange)="changeModal($event)"></create-user>
 </div>
