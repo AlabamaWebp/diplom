@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.login = false
   }
   ngOnInit(): void {
-    if (localStorage.getItem('ac')) {
+    if (!this.cors.protect()) {
       this.login = false;
     }
     else {

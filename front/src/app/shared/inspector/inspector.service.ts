@@ -15,7 +15,7 @@ export class InspectorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const d = this.cors.getTokens();
     let authObj
-    if (d.access_token != undefined) {
+    if (d != undefined && d.access_token != undefined) {
 
       if (req.url.includes("refresh")) {
         authObj = req.clone({

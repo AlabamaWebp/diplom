@@ -30,9 +30,12 @@ export class CorsService {
     this.is_login$.next(undefined);
   }
 
-  tokens: any = { access_token: localStorage.getItem("ac"), refresh_token: localStorage.getItem("rf") }
+  private tokens: any = { access_token: localStorage.getItem("ac"), refresh_token: localStorage.getItem("rf") }
   getTokens() {
     return this.tokens;
+  }
+  setTokens(value: any) {
+    this.tokens = value;
   }
 
   refresh() {
@@ -45,6 +48,18 @@ export class CorsService {
         location.reload()
       })
     }
+  }
+  protect() {
+    // protected
+    let tmp: boolean = false;
+    this.http.get(this.url + "protected").subscribe((d) => {
+      console.log(d);
+      tmp = true;
+    }, (e) => {
+      console.log(e);
+      tmp = false;
+    })
+    return tmp
   }
 
   url = "http://127.0.0.1:8000/"
