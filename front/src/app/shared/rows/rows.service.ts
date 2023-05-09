@@ -29,7 +29,7 @@ export class RowsService {
   fetch() {
     this.fetchData$.next(undefined);
   }
-  private show_user = true
+  private show_user = false
   setUserRights(value: boolean) {
     this.show_user = value
   }

@@ -3,6 +3,7 @@ import { MaterialComponent } from './components/material/material.component';
 import { CorsService } from './shared/crud/product/cors.service';
 import { RowsService } from './shared/rows/rows.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  constructor(public cors: CorsService, public sel_row: RowsService) { }
+  constructor(public cors: CorsService, public sel_row: RowsService, private router: Router) { }
 
   private subs: Subscription = this.cors.is_login$.subscribe(() => {
     this.ngOnInit();
@@ -26,25 +27,27 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem("ac")) {
       this.login = false;
-      this.cors.protect().subscribe((d) => {
-        //@ts-ignore
+      this.cors.protect().subscribe((d: any) => {
         const data = d.info
         this.username = data[1] + " " + data[0].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
-        if (data[3] != 1) {
+        console.log(data[3]);
+        if (data[3] == 1) {
+          this.show_user = true;
+          this.sel_row.setUserRights(true)
+        }
+        else {
           this.show_user = false;
           this.sel_row.setUserRights(false)
         };
       });
       window.location.pathname == '/user' && this.show_user ? this.title = "пользователей" : 0;
+      window.location.pathname == '/user' && !this.show_user ? this.router.navigate(["/params"]) : 0;
       window.location.pathname == '/material' ? this.title = "материалов" : 0;
-      // data1 = data[0] + " " + data[1].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
     }
     else {
       this.login = true;
       return
     }
-    // this.fetchaAll();
-    // window.location.pathname == '/post'? this.title = "поставщиков" : 0;
   }
   ngOnDestroy() {
     this.subs.unsubscribe();
