@@ -1,3 +1,5 @@
+import datetime
+
 import uvicorn
 # from fastapi import FastAPI
 from sqlalchemy import select
@@ -68,6 +70,7 @@ def authjwt_exception_handler(request: Request, exc: AuthJWTException):
 @app.post('/login')
 def login(user: User, Authorize: AuthJWT = Depends()):
     query = select(
+        bdUser.c.Id,
         bdUser.c.Login,
         bdUser.c.Password,
     ).where(bdUser.c.Login == user.username)
@@ -75,6 +78,9 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     if user.username != values.Login or user.password != values.Password:
         raise HTTPException(status_code=401, detail="Bad username or password")
 
+    query = bdUser().update().values(
+        LoginDate=datetime.datetime.now()
+    ).where(bdUser.c.Id == values.Id)
     # subject identifier for who this token is for example id or username from database
     access_token = Authorize.create_access_token(subject=user.username)
     refresh_token = Authorize.create_refresh_token(subject=user.username)

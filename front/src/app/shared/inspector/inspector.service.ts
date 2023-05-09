@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, retry, tap } from 'rxjs';
 import { CorsService } from '../crud/product/cors.service';
 
 @Injectable({
@@ -32,10 +32,11 @@ export class InspectorService implements HttpInterceptor {
     }
     const authReq = authObj ? authObj : req.clone();
     return next.handle(authReq).pipe(
+      // retry(3),
       tap(
         (event) => {
-          if (event instanceof HttpResponse)
-            console.log('Server response')
+          // if (event instanceof HttpResponse)
+          // console.log('Server response')
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
