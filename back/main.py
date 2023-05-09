@@ -98,6 +98,7 @@ def protected(Authorize: AuthJWT = Depends()):
         bdUser.c.Name,
         bdUser.c.Surname,
         bdUser.c.Patronymic,
+        bdUser.c.RoleId,
     ).where(bdUser.c.Login == current_user)
     values = engine.execute(query).fetchone()
     return_values = []

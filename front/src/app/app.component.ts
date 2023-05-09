@@ -22,16 +22,21 @@ export class AppComponent implements OnInit {
   changeLogin() {
     this.login = false
   }
+  show_user = false;
   ngOnInit(): void {
     if (localStorage.getItem("ac")) {
       this.login = false;
-      window.location.pathname == '/user' ? this.title = "пользователей" : 0;
-      window.location.pathname == '/material' ? this.title = "материалов" : 0;
       this.cors.protect().subscribe((d) => {
         //@ts-ignore
         const data = d.info
         this.username = data[1] + " " + data[0].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
+        if (data[3] != 1) {
+          this.show_user = false;
+          this.sel_row.setUserRights(false)
+        };
       });
+      window.location.pathname == '/user' && this.show_user ? this.title = "пользователей" : 0;
+      window.location.pathname == '/material' ? this.title = "материалов" : 0;
       // data1 = data[0] + " " + data[1].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
     }
     else {
@@ -48,17 +53,17 @@ export class AppComponent implements OnInit {
     this.cors.login(data);
   }
 
-  fetchaAll() {
-    this.cors.matAll().subscribe((d) => {
-      this.sel_row.setProdMaterials(d);
-    })
-    this.cors.matTypes().subscribe((d) => {
-      this.sel_row.setMatTypes(d);
-    })
-    this.cors.getRoles().subscribe((d) => {
-      this.sel_row.setRoles(d);
-    })
-  }
+  // fetchaAll() {
+  //   this.cors.matAll().subscribe((d) => {
+  //     this.sel_row.setProdMaterials(d);
+  //   })
+  //   this.cors.matTypes().subscribe((d) => {
+  //     this.sel_row.setMatTypes(d);
+  //   })
+  //   this.cors.getRoles().subscribe((d) => {
+  //     this.sel_row.setRoles(d);
+  //   })
+  // }
   delete() {
     const data = this.sel_row.getRow()
 

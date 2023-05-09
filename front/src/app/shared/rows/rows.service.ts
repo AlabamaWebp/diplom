@@ -29,6 +29,13 @@ export class RowsService {
   fetch() {
     this.fetchData$.next(undefined);
   }
+  private show_user = true
+  setUserRights(value: boolean) {
+    this.show_user = value
+  }
+  getUserRights() {
+    return this.show_user
+  }
   // fetch data zaranee
   private only_product: any
   getProdMaterials() {

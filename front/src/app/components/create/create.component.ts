@@ -15,15 +15,15 @@ export class CreateComponent implements OnInit {
   @Output() close = new EventEmitter();
   @Output() mchange = new EventEmitter();
   ngOnInit(): void {
-
+    this.sel_row.getUserRights() ? this.actions = [
+      "Материал",
+      "Продукт",
+      "Пользователь",
+    ] : [ "Материал", "Продукт" ];
   }
 
   // osnova
-  actions = [
-    "Материал",
-    "Продукт",
-    "Пользователь",
-  ]
+  actions: string[] = []
 
   actionClick(str: string) {
     this.mchange.emit((this.actions.indexOf(str)+1)*2-1);

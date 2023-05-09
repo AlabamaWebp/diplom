@@ -27,7 +27,8 @@
             <button class="button1" routerLink="/material" (click)="title = 'материалов'">
               Материал
             </button>
-            <button class="button1" routerLink="/user" (click)="title = 'пользователей'">
+            <button class="button1" routerLink="/user" (click)="title = 'пользователей'"
+            *ngIf="show_user">
               Пользователи
             </button>
           </div>
