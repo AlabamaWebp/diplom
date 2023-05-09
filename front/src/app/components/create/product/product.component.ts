@@ -74,6 +74,7 @@ export class ProductComponent2 implements OnInit {
   selected_items: string[] = []
   data: any;
   fetchMat() {
+
     if (this.sel_row.getProdMaterials()) {
       this.data = this.sel_row.getProdMaterials();
     }
@@ -82,15 +83,19 @@ export class ProductComponent2 implements OnInit {
       this.cors.matAll().subscribe((d) => {
         this.data = d;
         this.sel_row.setProdMaterials(d);
-        this.getCheckedRows();
+        this.sel_row.loadOff();
       }, (e) => {
         console.log(e);
         this.sel_row.loadOff();
       })
     }
+    if (this.is_edit) {
+      this.getCheckedRows();
+    }
   }
 
   getCheckedRows() {
+    this.sel_row.loadOn();
     this.cors.matProd(this.sel_row.getRow()[1].id).subscribe((d2: any) => {
       for (let i = 0; i < d2.length; i++) {
         this.selected_items.push(d2[i]["mat_id"]);

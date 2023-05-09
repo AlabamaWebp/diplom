@@ -14,11 +14,14 @@
             <tr *ngFor="let item of data" [class.clickable]="clickable" (click)="clickable? clickRow(item) : 0"
                 [class.selected]="item == selected">
                 <td *ngFor="let head of header">
-                    <div class="text" *ngIf="!date_col.includes(head)">
+                    <div class="text" *ngIf="!date_col.includes(head) && !checbox_col.includes(head)">
                         {{item[head]}}
                     </div>
                     <div class="text" *ngIf="date_col.includes(head)">
                         {{item[head] | date:"d.MM.yyyy HH:mm"}}
+                    </div>
+                    <div class="text" *ngIf="checbox_col.includes(head)">
+                        <input type="checkbox" [checked]="item[head]" disabled>
                     </div>
                 </td>
             </tr>

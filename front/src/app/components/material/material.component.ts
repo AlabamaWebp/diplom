@@ -21,20 +21,21 @@ export class MaterialComponent implements OnInit {;
     this.fetchData();
   }
   data: any;
-  // header = [
-  //   // "mat_id",
-  //   "mat_name",
-  //   "mat_purchased",
-  //   "mat_count",
-  //   "mat_type",
-  // ]
-  // hname = [
-  //   // "id",
-  //   "Название материала",
-  //   "Покупной",
-  //   "Кол-во",
-  //   "Тип материала",
-  // ]
+  header = [
+    // "mat_id",
+    "mat_name",
+    "mat_purchased",
+    "mat_count",
+    "mat_type",
+  ]
+  hname = [
+    // "id",
+    "Название материала",
+    "Покупной",
+    "Кол-во",
+    "Тип материала",
+  ]
+  checbox_col = ["mat_purchased"]
   isLoad = false;
   fetchData() {
     this.isLoad = true;

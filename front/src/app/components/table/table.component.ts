@@ -15,6 +15,7 @@ export class TableComponent implements OnInit {
   @Input() title: string = "";
   @Input() clickable: boolean = false;
   @Input() date_col: string[] = []
+  @Input() checbox_col: string[] = []
   @Output() row_click = new EventEmitter()
 
   selected: any;

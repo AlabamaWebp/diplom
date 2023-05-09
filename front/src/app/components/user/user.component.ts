@@ -27,8 +27,8 @@ export class UserComponent implements OnInit {
   // "u_registration": ""
   header = [
     "id",
-    "name",
     "surname",
+    "name",
     "patronymic",
     "role",
     // "login2",
@@ -37,8 +37,8 @@ export class UserComponent implements OnInit {
   ]
   hname = [
     "id",
-    "Имя",
     "Фамилия",
+    "Имя",
     "Отчество",
     "Должность",
     // "Логин",
