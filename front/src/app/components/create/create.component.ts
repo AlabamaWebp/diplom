@@ -17,7 +17,7 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.sel_row.getUserRights());
     
-    !this.sel_row.getUserRights() ? this.actions = ["Материал","Продукт","Пользователь",] : this.actions = [ "Материал", "Продукт" ];
+    this.sel_row.getUserRights() ? this.actions = ["Материал","Продукт","Пользователь",] : this.actions = [ "Материал", "Продукт" ];
   }
 
   // osnova

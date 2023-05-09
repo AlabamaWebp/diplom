@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, delay, retry } from 'rxjs';
 import { CorsService } from 'src/app/shared/crud/product/cors.service';
 import { RowsService } from 'src/app/shared/rows/rows.service';
@@ -12,10 +13,13 @@ export class UserComponent implements OnInit {
 
   private subs: Subscription = this.sel_row.fetchData$.subscribe(() => { this.fetchData() });
 
-  constructor(private cors: CorsService, private sel_row: RowsService) { }
+  constructor(private cors: CorsService, private sel_row: RowsService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchData();
+    if (!this.sel_row.getUserRights()) {
+      this.router.navigate(["/params"])
+    }
   }
   data: any;
   // "u_id": 0,

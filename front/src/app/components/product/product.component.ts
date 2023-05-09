@@ -52,6 +52,7 @@ export class ProductComponent implements OnInit {
     "Название",
     "Кол-во"
   ]
+  checbox_col = ["mat_purchased"]
   isLoad = false;
   isLoad2 = false;
   fetchData() {
