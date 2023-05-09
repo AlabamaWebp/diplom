@@ -7,37 +7,38 @@ import { CorsService } from '../crud/product/cors.service';
 export class InspectorService implements HttpInterceptor {
   constructor(private cors: CorsService) { }
 
-  // private isRefreshing = false;
-  // private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null)
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null)
 
-  // private handleRefreshError(request: HttpRequest<any>, next: HttpHandler) {
-  //   if (!this.isRefreshing) {
-  //     this.isRefreshing = true;
-  //     this.refreshTokenSubject.next(null);
+  private handleRefreshError(request: HttpRequest<any>, next: HttpHandler) {
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
+      this.refreshTokenSubject.next(null);
 
-  //     return this.cors.refreshSub().pipe(
-  //       switchMap((token: any) => {
-  //         this.isRefreshing = false;
-  //         this.refreshTokenSubject.next(token);
-  //         return next.handle(this.addToken(request, token));
-  //       }));
+      return this.cors.refreshSub().pipe(
+        switchMap((token: any) => {
+          this.isRefreshing = false;
+          this.refreshTokenSubject.next(token);
+          return next.handle(this.addToken(request, token));
+        }));
 
-  //   } else {
-  //     return this.refreshTokenSubject.pipe(
-  //       filter(token => token != null),
-  //       take(1),
-  //       switchMap(jwt => {
-  //         return next.handle(this.addToken(request, jwt));
-  //       }));
-  //   }
-  // }
+    } else {
+      return this.refreshTokenSubject.pipe(
+        filter(token => token != null),
+        take(1),
+        switchMap(jwt => {
+          return next.handle(this.addToken(request, jwt));
+        }));
+    }
+  }
 
   private addToken(req: HttpRequest<any>, d: any) {
     localStorage.setItem('ac', d.access_token);
     localStorage.setItem('rf', d.refresh_token);
+
     return req.clone({
-      // headers: req.headers.set('Authorization', 'Bearer ' + d.access_token)
-      setHeaders: { 'Authorization': 'Bearer ' + d.access_token }
+      headers: req.headers.set('Authorization', 'Bearer ' + d.access_token)
+      // setHeaders: { 'Authorization': 'Bearer ' + d.access_token }
     })
   }
 
@@ -67,28 +68,48 @@ export class InspectorService implements HttpInterceptor {
       }
 
     }
-    return next.handle(authObj).pipe(
-      // delay(1500),
-      tap(
-        (event) => {
-          // if (event instanceof HttpResponse)
-          // console.log('Server response')
-        },
-        (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.error.detail == "Signature has expired") {
-
-              return this.cors.refreshSub().subscribe((d: any) => {
-                return this.addToken(req, d)
-              })
-            }
-            else if (err.error.detail == "Only access tokens are allowed") {
-              this.logout()
-            }
-          }
-          return throwError(err)
+    return next.handle(authObj).pipe(catchError(err => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.error.detail == "Signature has expired") {
+          return this.handleRefreshError(req, next)
         }
-      ),
-    )
+        else if (err.error.detail == "Only access tokens are allowed") {
+          this.logout()
+          return throwError(() => err)
+        }
+        else {
+          return throwError(() => err)
+        }
+      }
+      else {
+        return throwError(() => err)
+      }
+    }));
   }
 }
+
+
+
+// return next.handle(authObj).pipe(
+//   // delay(1500),
+//   tap(
+//     (event) => {
+//       // if (event instanceof HttpResponse)
+//       // console.log('Server response')
+//     },
+//     (err) => {
+//       if (err instanceof HttpErrorResponse) {
+//         if (err.error.detail == "Signature has expired") {
+//           // return this.cors.refreshSub().subscribe((d: any) => {
+//           //   return next.handle(this.addToken(req, d));
+//           // })
+//           return this.handleRefreshError(req, next)
+//         }
+//         else if (err.error.detail == "Only access tokens are allowed") {
+//           this.logout()
+//         }
+//       }
+//       return throwError(() => err)
+//     }
+//   ),
+// )
