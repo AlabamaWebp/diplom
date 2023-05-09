@@ -31,6 +31,7 @@ export class UserComponent implements OnInit {
     "surname",
     "patronymic",
     "role",
+    // "login2",
     "login",
     "registration"
   ]
@@ -40,6 +41,7 @@ export class UserComponent implements OnInit {
     "Фамилия",
     "Отчество",
     "Должность",
+    // "Логин",
     "Дата последнего входа",
     "Дата регистрации"
   ]

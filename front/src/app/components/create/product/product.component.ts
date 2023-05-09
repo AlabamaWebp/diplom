@@ -18,7 +18,7 @@ export class ProductComponent2 implements OnInit {
     if (this.is_edit) {
       this.title = "Изменение";
       const data = this.sel_row.getRow()[1];
-      
+
       //@ts-ignore
       document.getElementById("mat_name").value = data.name;
       //@ts-ignore
@@ -59,7 +59,7 @@ export class ProductComponent2 implements OnInit {
       count: document.getElementById("colvo").value,
       checked: this.checkboxes
     }
-    
+
     //@ts-ignore
     this.cors.prodUpdate(this.sel_row.getRow()[1].id, data).subscribe(() => {
       this.sel_row.loadOff();
@@ -76,7 +76,6 @@ export class ProductComponent2 implements OnInit {
   fetchMat() {
     if (this.sel_row.getProdMaterials()) {
       this.data = this.sel_row.getProdMaterials();
-      this.getCheckedRows();
     }
     else {
       this.sel_row.loadOn();
@@ -106,19 +105,21 @@ export class ProductComponent2 implements OnInit {
   checkboxes: any[] = [];
   checkBoxClick(cbox: HTMLInputElement, data: any) {
     console.log(this.checkboxes, "sel:", this.selected_items);
-    
+
     cbox.checked = !cbox.checked;
     const check = cbox.checked;
     // console.log(data); // mat_id, mat_name, cbox.checked
     for (let i = 0; i < this.checkboxes.length; i++) {
       if (this.checkboxes[i]["mat_id"] == data.mat_id) {
-        this.checkboxes.splice(i,1);
+        this.checkboxes.splice(i, 1);
         return
       }
     }
-    this.checkboxes.push({"mat_id": data.mat_id, 
-    // "mat_name": data.mat_name, 
-    "checked": check});
+    this.checkboxes.push({
+      "mat_id": data.mat_id,
+      // "mat_name": data.mat_name, 
+      "checked": check
+    });
     console.log(this.checkboxes);
-   }
+  }
 }

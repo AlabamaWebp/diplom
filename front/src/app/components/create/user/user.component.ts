@@ -30,8 +30,8 @@ export class UserComponent2 implements OnInit {
       document.getElementById("surname").value = data.surname;
       //@ts-ignore
       document.getElementById("patr").value = data.patronymic;
-      // //@ts-ignore
-      // document.getElementById("login").value = data.login;
+      //@ts-ignore
+      document.getElementById("login").value = data.login2;
       // //@ts-ignore
       // document.getElementById("password").value = data.password;
     }

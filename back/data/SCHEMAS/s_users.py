@@ -8,6 +8,7 @@ class UserModel(BaseModel):
     surname: str = ""
     patronymic: str = ""
     role: str = ""
+    login2: str = ""
     login: datetime
     registration: datetime
 

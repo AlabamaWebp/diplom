@@ -32,7 +32,8 @@ export class InspectorService implements HttpInterceptor {
     }
     const authReq = authObj ? authObj : req.clone();
     return next.handle(authReq).pipe(
-      // retry(3),
+      retry(3),
+      // delay(1500),
       tap(
         (event) => {
           // if (event instanceof HttpResponse)

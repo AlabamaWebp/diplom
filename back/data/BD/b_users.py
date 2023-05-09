@@ -12,7 +12,8 @@ def get_users() -> list[UserModel]:
         User.c.Patronymic,
         User.c.LoginDate,
         User.c.RegistrationDate,
-        select(Role.c.Name).where(Role.c.Id == User.c.RoleId).label("role")
+        select(Role.c.Name).where(Role.c.Id == User.c.RoleId).label("role"),
+        User.c.Login,
     )
     values = engine.execute(query).fetchall()
 
@@ -26,7 +27,8 @@ def get_users() -> list[UserModel]:
             patronymic=item[3],
             login=item[4],
             registration=item[5],
-            role=item[6]
+            role=item[6],
+            login2=item[7]
         )
         out_values.append(return_values)
     return out_values
