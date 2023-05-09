@@ -41,8 +41,6 @@ export class CorsService {
         localStorage.setItem('ac', d.access_token);
         //@ts-ignore
         localStorage.setItem('rf', d.refresh_token);
-
-        // location.reload()
       })
     }
   }

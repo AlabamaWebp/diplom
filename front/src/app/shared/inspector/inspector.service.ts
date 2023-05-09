@@ -18,7 +18,6 @@ export class InspectorService implements HttpInterceptor {
         authObj = req.clone({
           headers: req.headers.set('Authorization', 'Bearer ' + localStorage.getItem("rf"))
         })
-        alert("refresh")
       }
       else {
         authObj = req.clone({
