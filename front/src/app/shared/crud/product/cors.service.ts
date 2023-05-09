@@ -34,15 +34,18 @@ export class CorsService {
     this.is_login$.next(undefined);
   }
 
-  refresh() {
-    if (localStorage.getItem('rf')) {
-      this.http.post(this.url + "refresh/", undefined).subscribe((d) => {
-        //@ts-ignore
-        localStorage.setItem('ac', d.access_token);
-        //@ts-ignore
-        localStorage.setItem('rf', d.refresh_token);
-      })
-    }
+  // refresh() {
+  //   if (localStorage.getItem('rf')) {
+  //     this.http.post(this.url + "refresh/", undefined).subscribe((d) => {
+  //       //@ts-ignore
+  //       localStorage.setItem('ac', d.access_token);
+  //       //@ts-ignore
+  //       localStorage.setItem('rf', d.refresh_token);
+  //     })
+  //   }
+  // }
+  refreshSub() {
+    return this.http.post(this.url + "refresh/", undefined)
   }
   protect() {
     // protected

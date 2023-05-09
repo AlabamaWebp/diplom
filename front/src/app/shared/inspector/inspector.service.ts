@@ -1,17 +1,58 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, retry, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, filter, retry, switchMap, take, tap, throwError } from 'rxjs';
 import { CorsService } from '../crud/product/cors.service';
 
 @Injectable()
 export class InspectorService implements HttpInterceptor {
   constructor(private cors: CorsService) { }
 
+  // private isRefreshing = false;
+  // private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null)
+
+  // private handleRefreshError(request: HttpRequest<any>, next: HttpHandler) {
+  //   if (!this.isRefreshing) {
+  //     this.isRefreshing = true;
+  //     this.refreshTokenSubject.next(null);
+
+  //     return this.cors.refreshSub().pipe(
+  //       switchMap((token: any) => {
+  //         this.isRefreshing = false;
+  //         this.refreshTokenSubject.next(token);
+  //         return next.handle(this.addToken(request, token));
+  //       }));
+
+  //   } else {
+  //     return this.refreshTokenSubject.pipe(
+  //       filter(token => token != null),
+  //       take(1),
+  //       switchMap(jwt => {
+  //         return next.handle(this.addToken(request, jwt));
+  //       }));
+  //   }
+  // }
+
+  private addToken(req: HttpRequest<any>, d: any) {
+    localStorage.setItem('ac', d.access_token);
+    localStorage.setItem('rf', d.refresh_token);
+    return req.clone({
+      // headers: req.headers.set('Authorization', 'Bearer ' + d.access_token)
+      setHeaders: { 'Authorization': 'Bearer ' + d.access_token }
+    })
+  }
+
+  private logout() {
+    localStorage.removeItem("ac")
+    localStorage.removeItem("rf")
+    this.cors.fetchLogin();
+  }
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    let authObj
+
+
+    let authObj = req.clone()
     if (localStorage.getItem("ac")) {
 
       if (req.url.includes("refresh")) {
@@ -26,8 +67,7 @@ export class InspectorService implements HttpInterceptor {
       }
 
     }
-    const authReq = authObj ? authObj : req.clone();
-    return next.handle(authReq).pipe(
+    return next.handle(authObj).pipe(
       // delay(1500),
       tap(
         (event) => {
@@ -37,23 +77,18 @@ export class InspectorService implements HttpInterceptor {
         (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.error.detail == "Signature has expired") {
-              this.cors.refresh()
+
+              return this.cors.refreshSub().subscribe((d: any) => {
+                return this.addToken(req, d)
+              })
             }
             else if (err.error.detail == "Only access tokens are allowed") {
-              localStorage.removeItem("ac")
-              localStorage.removeItem("rf")
-
-              this.cors.fetchLogin();
-            }
-            else if (err.status == 401) {
-              // if (localStorage.getItem("ac")) {
-              //   this.cors.fetchLogin();
-              // }
+              this.logout()
             }
           }
+          return throwError(err)
         }
       ),
-      // retry(2)
     )
   }
 }
