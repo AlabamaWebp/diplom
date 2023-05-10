@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {
     this.fetchData();
     this.material = undefined;
-    this.prodSelectRow(this.data_select_row);
+    this.data_select_row ? this.prodSelectRow(this.data_select_row) : 0;
   });
 
   constructor(private cors: CorsService, private sel_row: RowsService) { }

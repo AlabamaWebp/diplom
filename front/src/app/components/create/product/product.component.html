@@ -1,7 +1,21 @@
 <div class="modal1">
   <div class="flex">
     
-    <div>
+    <div class="mat">
+      <h3>Добавленные материалы:</h3>
+      <div class="spisok">
+        <div class="item" *ngFor="let data of checkboxes" (click)="checkBoxClick(false)">
+          <!-- <span>
+            <input type="checkbox" style="pointer-events: none;" #inp [checked]="selected_items.includes(data.mat_id)">
+          </span> -->
+          <span>
+            {{data["mat_name"] + " " + data["count"]}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="width: 290px;">
       <h3>{{title}} продукта</h3>
       <div class="input">
         <span class="span">Название</span><input type="text" id="mat_name">
@@ -9,14 +23,22 @@
       <div class="input">
         <span class="span">Количество</span><input type="text" id="colvo">
       </div>
+      <div *ngIf="current_checkbox">
+        <h3>{{current_checkbox.mat_name}}</h3>
+        <div class="input">
+          <span class="span">Количество материала</span><input type="number" (input)="changeColvo(mat_colvo)" #mat_colvo id="mat_colvo">
+        </div>
+        <div class="input"><div class="button1" (click)="checkBoxClick(true)">Добавить</div></div>
+      </div>
     </div>
+
     <div class="mat">
-      <h3>Связанные материалы:</h3>
+      <h3>Возможные материалы:</h3>
       <div class="spisok">
-        <div class="item" *ngFor="let data of data" (click)="checkBoxClick(inp, data)">
-          <span>
+        <div class="item" *ngFor="let data of data" (click)="current_checkbox = data">
+          <!-- <span>
             <input type="checkbox" style="pointer-events: none;" #inp [checked]="selected_items.includes(data.mat_id)">
-          </span>
+          </span> -->
           <span>
             {{data["mat_name"]}}
           </span>

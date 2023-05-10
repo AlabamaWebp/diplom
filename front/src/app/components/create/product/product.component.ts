@@ -100,23 +100,31 @@ export class ProductComponent2 implements OnInit {
     })
   }
 
+  changeColvo(el: HTMLInputElement) {
+    if (el.valueAsNumber) {
+      this.mat_colvo = el.valueAsNumber;
+    }
+    else {
+      el.valueAsNumber = this.mat_colvo;
+    }
+  }
+  mat_colvo: number = 1;
+  current_checkbox: any;
   checkboxes: any[] = [];
-  checkBoxClick(cbox: HTMLInputElement, data: any) {
-    console.log(this.checkboxes, "sel:", this.selected_items);
-
-    cbox.checked = !cbox.checked;
-    const check = cbox.checked;
-    // console.log(data); // mat_id, mat_name, cbox.checked
+  checkBoxClick(cbox: boolean) {
+    
     for (let i = 0; i < this.checkboxes.length; i++) {
-      if (this.checkboxes[i]["mat_id"] == data.mat_id) {
+      if (this.checkboxes[i]["mat_id"] == this.current_checkbox.mat_id) {
         this.checkboxes.splice(i, 1);
         return
       }
     }
+    
     this.checkboxes.push({
-      "mat_id": data.mat_id,
-      // "mat_name": data.mat_name, 
-      "checked": check
+      "mat_id": this.current_checkbox.mat_id,
+      "mat_name": this.current_checkbox.mat_name, 
+      "checked": cbox,
+      "count": this.mat_colvo
     });
     console.log(this.checkboxes);
   }
