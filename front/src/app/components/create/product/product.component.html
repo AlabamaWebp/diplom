@@ -4,13 +4,14 @@
     <div class="mat">
       <h3>Добавленные материалы:</h3>
       <div class="spisok">
-        <div class="item" *ngFor="let data of checkboxes" (click)="checkBoxClick(false)">
+        <div class="item" *ngFor="let data of selected_items" (click)="checkBoxClick(false, data)">
           <!-- <span>
             <input type="checkbox" style="pointer-events: none;" #inp [checked]="selected_items.includes(data.mat_id)">
           </span> -->
           <span>
-            {{data["mat_name"] + " " + data["count"]}}
+            {{data["mat_name"]}}
           </span>
+          <span>{{data["count"]}}</span>
         </div>
       </div>
     </div>

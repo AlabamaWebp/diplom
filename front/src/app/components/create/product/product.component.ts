@@ -71,7 +71,7 @@ export class ProductComponent2 implements OnInit {
     });
   }
 
-  selected_items: string[] = []
+  selected_items: any = []
   data: any;
   fetchMat() {
     this.sel_row.loadOn();
@@ -91,7 +91,7 @@ export class ProductComponent2 implements OnInit {
     this.sel_row.loadOn();
     this.cors.matProd(this.sel_row.getRow()[1].id).subscribe((d2: any) => {
       for (let i = 0; i < d2.length; i++) {
-        this.selected_items.push(d2[i]["mat_id"]);
+        this.selected_items.push(d2[i]);
       }
       this.sel_row.loadOff();
     }, (e) => {
@@ -108,24 +108,44 @@ export class ProductComponent2 implements OnInit {
       el.valueAsNumber = this.mat_colvo;
     }
   }
+
   mat_colvo: number = 1;
   current_checkbox: any;
   checkboxes: any[] = [];
-  checkBoxClick(cbox: boolean) {
-    
+  checkBoxClick(cbox: boolean, data: any = undefined) {
+    if (data != undefined) {
+      this.checkboxPush(cbox, data)
+    }
+    else {
+      this.checkboxPush(cbox, this.current_checkbox)
+    }
+  }
+  checkboxPush(cbox: boolean, data: any) {
     for (let i = 0; i < this.checkboxes.length; i++) {
-      if (this.checkboxes[i]["mat_id"] == this.current_checkbox.mat_id) {
+      if (this.checkboxes[i]["mat_id"] == data.mat_id) {
         this.checkboxes.splice(i, 1);
-        return
       }
     }
+    for (let i = 0; i < this.selected_items.length; i++) {
+      if (this.selected_items[i]["mat_id"] == data.mat_id) {
+        this.selected_items.splice(i, 1);
+        if (!cbox) 
+          return
+      }
+    }
+
     
     this.checkboxes.push({
-      "mat_id": this.current_checkbox.mat_id,
-      "mat_name": this.current_checkbox.mat_name, 
+      "mat_id": data.mat_id,
+      "mat_name": data.mat_name, 
       "checked": cbox,
       "count": this.mat_colvo
     });
-    console.log(this.checkboxes);
+    this.selected_items.push({
+      "mat_id": data.mat_id,
+      "mat_name": data.mat_name, 
+      "checked": cbox,
+      "count": this.mat_colvo
+    });
   }
 }
