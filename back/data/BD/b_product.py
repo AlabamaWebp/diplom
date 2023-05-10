@@ -56,6 +56,7 @@ def update_prod(id1: int, data: ProdCreate):
     for i in data.checked:
         print(i["checked"])
         if i["checked"]:
+
             query = ProductMaterial.insert().values(
                 ProductID=id1,
                 MaterialID=i["mat_id"],

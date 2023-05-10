@@ -119,20 +119,21 @@ export class ProductComponent2 implements OnInit {
     else {
       this.checkboxPush(cbox, this.current_checkbox)
     }
+    console.log(this.checkboxes);
+    
   }
   checkboxPush(cbox: boolean, data: any) {
+    for (let i = 0; i < this.selected_items.length; i++) {
+      if (this.selected_items[i]["mat_id"] == data.mat_id) {
+        this.selected_items.splice(i, 1);
+      }
+    }
     for (let i = 0; i < this.checkboxes.length; i++) {
       if (this.checkboxes[i]["mat_id"] == data.mat_id) {
         this.checkboxes.splice(i, 1);
       }
     }
-    for (let i = 0; i < this.selected_items.length; i++) {
-      if (this.selected_items[i]["mat_id"] == data.mat_id) {
-        this.selected_items.splice(i, 1);
-        if (!cbox) 
-          return
-      }
-    }
+
 
     
     this.checkboxes.push({
@@ -141,6 +142,9 @@ export class ProductComponent2 implements OnInit {
       "checked": cbox,
       "count": this.mat_colvo
     });
+    if (!cbox && this.is_edit) {
+      return
+    }
     this.selected_items.push({
       "mat_id": data.mat_id,
       "mat_name": data.mat_name, 
