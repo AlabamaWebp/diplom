@@ -41,29 +41,21 @@ export class UserComponent2 implements OnInit {
   roles: any
   current_role = { id: 0, name: "Загрузка..." }
   fetchRoles() {
-    if (this.sel_row.getRoles() != undefined && this.sel_row.getRoles()) {
-      this.roles = this.sel_row.getRoles();
-      this.current_role = this.roles[0];
-    }
-    else {
-      this.sel_row.loadOn()
-      this.cors.getRoles().subscribe((data) => {
+    this.sel_row.loadOn()
+    this.cors.getRoles().subscribe((data) => {
 
-        this.roles = data;
-        if (this.is_edit) {
-          this.checkCurrentRoles();
-        }
-        else {
-          this.current_role = this.roles[0];
-        }
-        this.sel_row.loadOff()
-      }, (e) => {
-        console.log(e);
-        this.sel_row.loadOff()
-      })
-    }
-    console.log(this.roles);
-
+      this.roles = data;
+      if (this.is_edit) {
+        this.checkCurrentRoles();
+      }
+      else {
+        this.current_role = this.roles[0];
+      }
+      this.sel_row.loadOff()
+    }, (e) => {
+      console.log(e);
+      this.sel_row.loadOff()
+    })
   }
   checkCurrentRoles() {
     for (let i = 0; i < this.roles.length; i++) {

@@ -36,30 +36,5 @@ export class RowsService {
   getUserRights() {
     return this.show_user
   }
-  // fetch data zaranee
-  private only_product: any
-  getProdMaterials() {
-    return this.only_product;
-  }
-  setProdMaterials(value: any) {
-    this.only_product = value;
-  }
-
-  private only_roles: any
-  getRoles() {
-    return this.only_roles;
-  }
-  setRoles(value: any) {
-    this.only_roles = value;
-  }
-
-  private only_mat_types: any
-  getMatTypes() {
-    return this.only_mat_types;
-  }
-  setMatTypes(value: any) {
-    this.only_mat_types = value;
-  }
-  // fetch data zaranee
 
 }

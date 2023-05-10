@@ -74,21 +74,14 @@ export class ProductComponent2 implements OnInit {
   selected_items: string[] = []
   data: any;
   fetchMat() {
-
-    if (this.sel_row.getProdMaterials()) {
-      this.data = this.sel_row.getProdMaterials();
-    }
-    else {
-      this.sel_row.loadOn();
-      this.cors.matAll().subscribe((d) => {
-        this.data = d;
-        this.sel_row.setProdMaterials(d);
-        this.sel_row.loadOff();
-      }, (e) => {
-        console.log(e);
-        this.sel_row.loadOff();
-      })
-    }
+    this.sel_row.loadOn();
+    this.cors.matAll().subscribe((d) => {
+      this.data = d;
+      this.sel_row.loadOff();
+    }, (e) => {
+      console.log(e);
+      this.sel_row.loadOff();
+    })
     if (this.is_edit) {
       this.getCheckedRows();
     }

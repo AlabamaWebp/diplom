@@ -39,9 +39,9 @@ export class ProductComponent implements OnInit {
     "id",
     "Название материала",
     "Покупной",
-    "Кол-во",
+    "Количество материала",
     "Тип материала",
-    "Количество"
+    "Количество на продукт"
   ]
   product: any
   prod_header = [

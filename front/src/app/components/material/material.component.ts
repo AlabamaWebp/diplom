@@ -8,7 +8,7 @@ import { RowsService } from 'src/app/shared/rows/rows.service';
   templateUrl: './material.component.html',
   styleUrls: ['./material.component.scss']
 })
-export class MaterialComponent implements OnInit {;
+export class MaterialComponent implements OnInit {
   
   private subs: Subscription = this.sel_row.fetchData$.subscribe(() => {this.fetchData()});
 
@@ -32,7 +32,7 @@ export class MaterialComponent implements OnInit {;
     // "id",
     "Название материала",
     "Покупной",
-    "Кол-во",
+    "Количество",
     "Тип материала",
   ]
   checbox_col = ["mat_purchased"]

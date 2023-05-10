@@ -43,12 +43,6 @@ export class MaterialComponent2 implements OnInit {
   }
 
   fetchMatData(mat: any = "") {
-
-    if (this.sel_row.getMatTypes()) {
-      this.matTypes = this.sel_row.getMatTypes()
-      this.checkCurrentTypes(mat)
-    }
-
     this.sel_row.loadOn()
     this.cors.matTypes().subscribe((data) => {
       this.matTypes = data;

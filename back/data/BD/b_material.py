@@ -9,14 +9,6 @@ from data.SCHEMAS.s_material import MaterialModel, MaterialCreateModel
 
 
 def base_material(pr_id: int = -1) -> list[MaterialModel]:
-    # post = select(
-    #     ct.c.Name,
-    #     p.c.Name,
-    #     p.c.Email,
-    #     p.c.Telephone,
-    #     p.c.Address
-    # ).where(p.c.Id == m.c.PostavshikId,
-    #         p.c.Type == ct.c.Id).alias("post")
     query = select(
         m.c.Id,
         m.c.Name,
@@ -53,10 +45,6 @@ def base_material(pr_id: int = -1) -> list[MaterialModel]:
                 mat_count=item[3],
                 mat_type=item[4],
                 count=item[5]
-                # p_name=item[5] + " " + item[6],
-                # p_email=item[7],
-                # p_telephone=item[8],
-                # p_address=item[9],
             )
         else:
             return_values = MaterialModel(
