@@ -56,12 +56,23 @@ def update_prod(id1: int, data: ProdCreate):
     for i in data.checked:
         print(i["checked"])
         if i["checked"]:
-
-            query = ProductMaterial.insert().values(
-                ProductID=id1,
-                MaterialID=i["mat_id"],
-                Count=i["count"]
-            )
+            # print(len(engine.execute(ProductMaterial.select().where(ProductMaterial.c.ProductID == id1)).fetchall()))
+            if len(engine.execute(select(ProductMaterial.c.ProductID)
+                                  .where(and_(ProductMaterial.c.ProductID == id1),
+                                  and_(ProductMaterial.c.MaterialID == i["mat_id"])))
+                                  .fetchall()) == 0:
+                query = ProductMaterial.insert().values(
+                    ProductID=id1,
+                    MaterialID=i["mat_id"],
+                    Count=i["count"]
+                )
+            else:
+                query = ProductMaterial.update().values(
+                    MaterialID=i["mat_id"],
+                    Count=i["count"]
+                ).where(
+                    ProductMaterial.c.MaterialID == i["mat_id"]
+                )
         else:
             query = ProductMaterial.delete().where(
                 ProductMaterial.c.MaterialID == i["mat_id"],
@@ -69,4 +80,3 @@ def update_prod(id1: int, data: ProdCreate):
             )
         engine.execute(query)
     engine.commit()
-
