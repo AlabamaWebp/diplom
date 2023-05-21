@@ -111,9 +111,12 @@ def protected(Authorize: AuthJWT = Depends()):
     return {"user": current_user, "info": return_values}
 # jwt
 # changePass
-@app.post('/refresh')
+
+
+@app.post('/changePass')
 def refresh(user: UserChange):
     query = select(
+        bdUser.c.Id,
         bdUser.c.Login,
         bdUser.c.Password,
     ).where(bdUser.c.Login == user.username)
@@ -128,6 +131,8 @@ def refresh(user: UserChange):
     engine.commit()
     return "ok"
 # changePass
+
+
 @app.get("/")
 async def main_page():
     return RedirectResponse(url="/docs/", status_code=307)

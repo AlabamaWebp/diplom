@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
       this.login = true;
       return
     }
+    this.changePassword = false;
   }
   ngOnDestroy() {
     this.subs.unsubscribe();
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit {
     this.cors.login(data);
   }
   clickChangePassword(value: any) {
-    
+    this.cors.changePass(value);
   }
   // fetchaAll() {
   //   this.cors.matAll().subscribe((d) => {

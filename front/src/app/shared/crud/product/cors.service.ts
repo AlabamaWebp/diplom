@@ -34,7 +34,7 @@ export class CorsService {
     });
   }
   changePass(data: { username: string, password: string, new_password: string }) {
-    this.http.post(this.url + "login/", data).subscribe((d) => {
+    this.http.post(this.url + "changePass/", data).subscribe((d) => {
       this.fetchLogin();
     });
   }
