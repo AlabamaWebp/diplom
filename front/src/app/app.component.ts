@@ -87,7 +87,10 @@ export class AppComponent implements OnInit {
         })
       }
     }
-    this.sel_row.fetch()
+    this.sel_row.setRow(undefined);
+    setTimeout(() => {
+      this.sel_row.fetch();
+    }, 1);
   }
 
   edit() {

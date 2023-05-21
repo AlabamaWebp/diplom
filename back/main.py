@@ -112,9 +112,9 @@ def protected(Authorize: AuthJWT = Depends()):
 async def main_page():
     return RedirectResponse(url="/docs/", status_code=307)
 
-app.include_router(material)
-app.include_router(users)
-app.include_router(product)
+app.include_router(material, tags=["material"])
+app.include_router(users, tags=["users"])
+app.include_router(product, tags=["product"])
 
 
 # uvicorn --reload main:app --host 26.246.185.101 --port 8000

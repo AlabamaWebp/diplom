@@ -8,7 +8,6 @@ from data.SCHEMAS.s_material import MaterialModel, MaterialCreateModel
 material = APIRouter()
 material.prefix = "/mat/"
 
-
 @material.get("all/")
 async def g_all(Authorize: AuthJWT = Depends()) -> list[MaterialModel]:
     Authorize.jwt_required()
