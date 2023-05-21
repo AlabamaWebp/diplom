@@ -24,14 +24,24 @@ export class CorsService {
       localStorage.setItem('ac', d.access_token);
       //@ts-ignore
       localStorage.setItem('rf', d.refresh_token);
-
+      //@ts-ignore
+      if (d.change == 1) {
+        this.fetchLogin("change");
+      }
+      else {
+        this.fetchLogin();
+      }
+    });
+  }
+  changePass(data: { username: string, password: string, new_password: string }) {
+    this.http.post(this.url + "login/", data).subscribe((d) => {
       this.fetchLogin();
     });
   }
 
   public is_login$ = new Subject;
-  fetchLogin() {
-    this.is_login$.next(undefined);
+  fetchLogin(value: any = undefined) {
+    this.is_login$.next(value);
   }
 
   // refresh() {

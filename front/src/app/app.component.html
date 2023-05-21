@@ -55,16 +55,24 @@
   </div>
   <div class="wrapper" style="background-color: rgb(75, 75, 75);" *ngSwitchCase="true">
     <div class="login modal_wrapper modal1">
-      <h2 style="text-align: center;">Авторизация</h2>
+      <h2 style="text-align: center;"  *ngIf="!changePassword">Авторизация</h2>
+      <h2 style="text-align: center;" *ngIf="changePassword">Вам нужно придумать новый пароль</h2>
       <div class="input">
         <span class="span">Логин</span><input type="text" id="login" #login1>
       </div>
       <div class="input">
-        <span class="span">Пароль</span><input type="text" id="password" #password1>
+        <span class="span">Пароль</span><input type="password" id="password" #password1>
+      </div>
+      <div class="input" [class.displayOff]="!changePassword">
+        <span class="span">Новый пароль</span><input type="text" id="login" #password2>
       </div>
       <div class="footer">
-        <div class="button1" style="font-size: 16px;"
-          (click)="clickLogin({username: login1.value, password: password1.value})">Войти</div>
+        <div class="button1" style="font-size: 16px;" *ngIf="!changePassword"
+          (click)="clickLogin({username: login1.value, password: password1.value})">Войти
+        </div>
+        <div class="button1" style="font-size: 16px;" *ngIf="changePassword"
+          (click)="clickChangePassword({username: login1.value, password: password1.value, new_password: password2.value})">Изменить пароль
+        </div>
       </div>
     </div>
   </div>

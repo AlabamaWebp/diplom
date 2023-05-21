@@ -37,6 +37,9 @@ class User(BaseModel):
     username: str
     password: str
 
+class UserChange(User):
+    new_password: str
+
 
 class Settings(BaseModel):
     authjwt_secret_key: str = "secret1"
@@ -63,6 +66,7 @@ def login(user: User, Authorize: AuthJWT = Depends()):
         bdUser.c.Id,
         bdUser.c.Login,
         bdUser.c.Password,
+        bdUser.c.ChangePassword
     ).where(bdUser.c.Login == user.username)
     values = engine.execute(query).fetchone()
     if user.username != values.Login or user.password != values.Password:
@@ -76,7 +80,7 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     # subject identifier for who this token is for example id or username from database
     access_token = Authorize.create_access_token(subject=user.username)
     refresh_token = Authorize.create_refresh_token(subject=user.username)
-    return {"access_token": access_token, "refresh_token": refresh_token}
+    return {"access_token": access_token, "refresh_token": refresh_token, "change": values.ChangePassword}
 
 
 @app.post('/refresh')
@@ -106,8 +110,24 @@ def protected(Authorize: AuthJWT = Depends()):
         return_values.append(i)
     return {"user": current_user, "info": return_values}
 # jwt
-
-
+# changePass
+@app.post('/refresh')
+def refresh(user: UserChange):
+    query = select(
+        bdUser.c.Login,
+        bdUser.c.Password,
+    ).where(bdUser.c.Login == user.username)
+    values = engine.execute(query).fetchone()
+    if user.username != values.Login or user.password != values.Password:
+        raise HTTPException(status_code=401, detail="Неправильный логин или пароль")
+    query = bdUser.update().values(
+        Password=user.new_password,
+        ChangePassword=0
+    ).where(bdUser.c.Id == values.Id)
+    engine.execute(query)
+    engine.commit()
+    return "ok"
+# changePass
 @app.get("/")
 async def main_page():
     return RedirectResponse(url="/docs/", status_code=307)

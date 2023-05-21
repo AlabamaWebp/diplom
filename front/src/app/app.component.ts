@@ -14,12 +14,18 @@ export class AppComponent implements OnInit {
 
   constructor(public cors: CorsService, public sel_row: RowsService, private router: Router) { }
 
-  private subs: Subscription = this.cors.is_login$.subscribe(() => {
-    this.ngOnInit();
+  private subs: Subscription = this.cors.is_login$.subscribe((d) => {
+    if (d == "change") {
+      this.changePassword = true;
+    }
+    else {
+      this.ngOnInit();
+    }
   });
   title = "продуктов";
   login = false;
-  username: any = undefined
+  changePassword = false;
+  username: any = undefined;
   changeLogin() {
     this.login = false
   }
@@ -55,7 +61,9 @@ export class AppComponent implements OnInit {
   clickLogin(data: { username: string, password: string }) {
     this.cors.login(data);
   }
-
+  clickChangePassword(value: any) {
+    
+  }
   // fetchaAll() {
   //   this.cors.matAll().subscribe((d) => {
   //     this.sel_row.setProdMaterials(d);

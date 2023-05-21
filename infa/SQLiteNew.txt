@@ -69,7 +69,7 @@ create table [User]
 	RoleId INTEGER,
 	LoginDate DATETIME DEFAULT CURRENT_TIMESTAMP,
 	RegistrationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-             ChangePassword bit default 1,
+             ChangePassword boolean default True,
 	FOREIGN KEY (RoleId) REFERENCES [Role](Id) ON DELETE CASCADE
 );
 insert into [Role] ([Name]) values ('admin'),('operator');
