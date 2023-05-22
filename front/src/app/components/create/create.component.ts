@@ -15,8 +15,6 @@ export class CreateComponent implements OnInit {
   @Output() close = new EventEmitter();
   @Output() mchange = new EventEmitter();
   ngOnInit(): void {
-    console.log(this.sel_row.getUserRights());
-    
     this.sel_row.getUserRights() ? this.actions = ["Материал","Продукт","Пользователь",] : this.actions = [ "Материал", "Продукт" ];
   }
 

@@ -79,7 +79,6 @@ export class ProductComponent2 implements OnInit {
       this.data = d;
       this.sel_row.loadOff();
     }, (e) => {
-      console.log(e);
       this.sel_row.loadOff();
     })
     if (this.is_edit) {
@@ -95,7 +94,6 @@ export class ProductComponent2 implements OnInit {
       }
       this.sel_row.loadOff();
     }, (e) => {
-      console.log(e);
       this.sel_row.loadOff();
     })
   }
@@ -119,8 +117,6 @@ export class ProductComponent2 implements OnInit {
     else {
       this.checkboxPush(cbox, this.current_checkbox)
     }
-    console.log(this.checkboxes);
-    
   }
   checkboxPush(cbox: boolean, data: any) {
     for (let i = 0; i < this.selected_items.length; i++) {

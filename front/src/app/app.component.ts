@@ -36,15 +36,12 @@ export class AppComponent implements OnInit {
       this.login = false;
       this.cors.protect().subscribe((d: any) => {
         const data = d.info;
-        console.log(data);
-        
         if (data[4]) {
           this.login = true;
           this.changePassword = true;
           return
         }
         this.username = data[1] + " " + data[0].split("")[0].toUpperCase() + "." + data[2].split("")[0].toUpperCase() + ".";
-        console.log(data[3]);
         if (data[3] == 1) {
           this.show_user = true;
           this.sel_row.setUserRights(true)
