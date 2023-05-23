@@ -12,16 +12,16 @@
     </div>
   </div>
   <div class="input">
-    <span class="span">Название</span><input type="text" id="mat_name">
+    <span class="span">Название</span><input type="text" id="mat_name" #name>
   </div>
   <div class="input">
     <span class="span">Покупной</span><input type="checkbox" id="pok">
   </div>
   <div class="input">
-    <span class="span">Количество</span><input type="text" id="colvo">
+    <span class="span">Количество</span><input type="number" #colvo id="colvo" onlyNumber>
   </div>
   <div class="footer">
-    <div class="button1" *ngIf="!is_edit" (click)="create()">
+    <div class="button1" *ngIf="!is_edit && colvo.value != '' && name.value != ''" (click)="create()">
       Создать
     </div>
     <div class="button1" *ngIf="is_edit" (click)="edit()">

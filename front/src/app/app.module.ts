@@ -13,6 +13,7 @@ import { CreateComponent } from './components/create/create.component';
 import { RowsService } from './shared/rows/rows.service';
 import { MaterialComponent2 } from './components/create/material/material.component';
 import { InspectorService } from './shared/inspector/inspector.service';
+import { NumberDirective } from './shared/directives/number.directive';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { InspectorService } from './shared/inspector/inspector.service';
     MaterialComponent2,
     ProductComponent2,
     UserComponent2,
+    NumberDirective,
   ],
   imports: [
     BrowserModule,

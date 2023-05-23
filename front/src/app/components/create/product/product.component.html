@@ -19,10 +19,10 @@
     <div style="width: 290px;">
       <h3>{{title}} продукта</h3>
       <div class="input">
-        <span class="span">Название</span><input type="text" id="mat_name">
+        <span class="span">Название</span><input type="text" #name id="mat_name">
       </div>
       <div class="input">
-        <span class="span">Количество</span><input type="text" id="colvo">
+        <span class="span">Количество</span><input type="number" onlyNumber #colvo id="colvo">
       </div>
       <div *ngIf="current_checkbox">
         <h3>{{current_checkbox.mat_name}}</h3>
@@ -50,7 +50,7 @@
   </div>
 
   <div class="footer">
-    <div class="button1" *ngIf="!is_edit" (click)="create()">
+    <div class="button1" *ngIf="!is_edit && colvo.value != '' && name.value != ''" (click)="create()">
       Создать
     </div>
     <div class="button1" *ngIf="is_edit" (click)="edit()">

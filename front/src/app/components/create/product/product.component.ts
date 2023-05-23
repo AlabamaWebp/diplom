@@ -106,8 +106,8 @@ export class ProductComponent2 implements OnInit {
       el.valueAsNumber = this.mat_colvo;
     }
   }
-
   mat_colvo: number = 1;
+  
   current_checkbox: any;
   checkboxes: any[] = [];
   checkBoxClick(cbox: boolean, data: any = undefined) {
