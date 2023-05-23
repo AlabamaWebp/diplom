@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from sqlalchemy import select
+from fastapi import HTTPException
+from sqlalchemy import select, case
 
 from data.BD.base import User, engine, Role, UniversalModel
 from data.SCHEMAS.s_users import UserModel, UserCreateModel
@@ -55,6 +56,9 @@ def get_roles() -> list[UniversalModel]:
 
 
 def create_user(data: UserCreateModel):
+    if len(engine.execute(User.select().where(User.c.Login == data.login)).fetchall()) != 0:
+        raise HTTPException(status_code=401, detail="Этот логин уже используется")
+
     query = User.insert().values(
         Name=data.name,
         Surname=data.surname,

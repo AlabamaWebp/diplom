@@ -85,7 +85,7 @@ export class UserComponent2 implements OnInit {
       this.sel_row.loadOff();
       this.sel_row.fetch();
     }, (e) => {
-      alert(e);
+      alert(e.error.detail);
       this.sel_row.loadOff();
     });
   }

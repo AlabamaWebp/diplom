@@ -37,6 +37,7 @@ class User(BaseModel):
     username: str
     password: str
 
+
 class UserChange(User):
     new_password: str
 
@@ -70,7 +71,7 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     ).where(bdUser.c.Login == user.username)
     values = engine.execute(query).fetchone()
     if user.username != values.Login or user.password != values.Password:
-        raise HTTPException(status_code=401, detail="Bad username or password")
+        raise HTTPException(status_code=401, detail="Логин или пароль не верны")
 
     query = bdUser.update().values(
         LoginDate=datetime.datetime.now()
