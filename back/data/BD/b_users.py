@@ -74,7 +74,8 @@ def update_user(id: int, data: UserCreateModel):
         Patronymic=data.patronymic,
         Login=data.login,
         Password=data.password,
-        RoleId=data.role
+        RoleId=data.role,
+        ChangePassword=True
     ).where(User.c.Id == id)
     engine.execute(query)
     engine.commit()
