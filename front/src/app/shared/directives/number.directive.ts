@@ -13,7 +13,7 @@ export class NumberDirective {
   onInput(el: any) {
     console.log(this.number, el.target.valueAsNumber, el);
     const n = el.target.valueAsNumber;
-    if (n) {
+    if (!Number.isNaN(n) && n>=1) {
       this.number = n;
     }
     else if (!n && el.inputType == "deleteContentBackward") {
