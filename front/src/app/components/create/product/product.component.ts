@@ -138,7 +138,7 @@ export class ProductComponent2 implements OnInit {
       "checked": cbox,
       "count": this.mat_colvo
     });
-    if (!cbox && this.is_edit) {
+    if (!cbox ) {
       return
     }
     this.selected_items.push({
