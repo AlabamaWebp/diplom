@@ -13,7 +13,7 @@ users.prefix = "/users/"
 @users.get("")
 async def api_users(Authorize: AuthJWT = Depends()) -> list[UserModel]:
     Authorize.jwt_required()
-    if check_rights():
+    if not check_rights(Authorize.get_jwt_subject()):
         raise HTTPException(status_code=401, detail="Нет прав на выполнение операции")
     return get_users()
 
@@ -21,7 +21,7 @@ async def api_users(Authorize: AuthJWT = Depends()) -> list[UserModel]:
 @users.get("roles/")
 async def get_all_users(Authorize: AuthJWT = Depends()) -> list[UniversalModel]:
     Authorize.jwt_required()
-    if check_rights():
+    if not check_rights(Authorize.get_jwt_subject()):
         raise HTTPException(status_code=401, detail="Нет прав на выполнение операции")
     return get_roles()
 
@@ -29,7 +29,7 @@ async def get_all_users(Authorize: AuthJWT = Depends()) -> list[UniversalModel]:
 @users.post("create/")
 async def c_u(data: UserCreateModel, Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
-    if check_rights():
+    if not check_rights(Authorize.get_jwt_subject()):
         raise HTTPException(status_code=401, detail="Нет прав на выполнение операции")
     create_user(data)
     return "ok"
@@ -38,7 +38,7 @@ async def c_u(data: UserCreateModel, Authorize: AuthJWT = Depends()):
 @users.post("update/")
 async def u_u(id: int, data: UserCreateModel, Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
-    if check_rights():
+    if not check_rights(Authorize.get_jwt_subject()):
         raise HTTPException(status_code=401, detail="Нет прав на выполнение операции")
     update_user(id, data)
     return "ok"
@@ -47,14 +47,15 @@ async def u_u(id: int, data: UserCreateModel, Authorize: AuthJWT = Depends()):
 @users.post("delete/")
 async def d_u(id: int, Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
-    if check_rights():
+    if not check_rights(Authorize.get_jwt_subject()):
         raise HTTPException(status_code=401, detail="Нет прав на выполнение операции")
     del_user(id)
     return "ok"
 
 
-def check_rights(Authorize: AuthJWT = Depends()):
-    current_user = Authorize.get_jwt_subject()
+def check_rights(current_user):
+    # Authorize.jwt_required()
+    # current_user = Authorize.get_jwt_subject()
     query = select(User.c.RoleId).where(User.c.Login == current_user)
     values = engine.execute(query).fetchone()
     return_values = []
